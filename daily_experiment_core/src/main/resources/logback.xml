@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configuration>
+    <!--<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${app.log.path:-C:\\}daily_experiment.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            &lt;!&ndash; rollover daily &ndash;&gt;
+            <fileNamePattern>${app.log.path:-C:\\}daily_experiment.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %5p %-40logger{40}:%L[%t] - %m%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>-->
+
+    <appender name='CONSOLE' class='ch.qos.logback.core.ConsoleAppender'>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %5p %-40logger{40}:%L[%t] - %m%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value='DEBUG'/>
+        <appender-ref ref='CONSOLE'/>
+    </root>
+</configuration>

@@ -11,7 +11,7 @@
     <modules>
         <module>daily_experiment_core</module>
     </modules>
-
+    <name>daily_experiment</name>
 
     <properties>
         <jdk-version>1.8</jdk-version>
