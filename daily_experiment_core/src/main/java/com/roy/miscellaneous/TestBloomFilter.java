@@ -12,7 +12,7 @@ import java.util.List;
  * Created by apple on 2018/12/7.
  */
 public class TestBloomFilter {
-    public static int size = 000000000;
+    public static int size = 10000000;
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestBloomFilter.class);
 
 
