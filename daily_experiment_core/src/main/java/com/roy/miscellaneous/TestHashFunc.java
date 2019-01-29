@@ -1,0 +1,51 @@
+package com.roy.miscellaneous;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Created by apple on 2019/1/29.
+ */
+public class TestHashFunc {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestHashFunc.class);
+    public void test1() {
+        int k =-12;
+        logger.debug(Integer.toBinaryString(k));
+        logger.debug(Integer.toBinaryString(k >> 1));
+        logger.debug(Integer.toBinaryString(k >> 16));
+        logger.debug(Integer.toBinaryString(k >>> 16));
+        logger.debug(String.valueOf(Integer.MAX_VALUE));
+        logger.debug(Integer.toBinaryString(Integer.MAX_VALUE).length() + "");
+        logger.debug(Integer.toBinaryString(Integer.MAX_VALUE));
+
+        int a = 3;
+        int b = 10;
+        logger.debug(String.format("a=%s\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" , a, StringUtils.leftPad(Integer.toBinaryString(a), 32, "0")));
+        logger.debug(String.format("b=%s\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" , b, StringUtils.leftPad(Integer.toBinaryString(b), 32, "0")));
+        //抑或运算，相同为0,不同为1
+        logger.debug(String.format("抑或运算:  a ^ b=\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" , StringUtils.leftPad(Integer.toBinaryString(a ^ b), 32, "0")));
+        //与运算
+        logger.debug(String.format("与运算:  a & b=\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" , StringUtils.leftPad(Integer.toBinaryString(a & b), 32, "0")));
+        //或运算
+        logger.debug(String.format("或运算:  a | b=\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" , StringUtils.leftPad(Integer.toBinaryString(a | b), 32, "0")));
+        //取反运算
+        logger.debug(String.format("取反运算: ～ b=\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" ,
+                StringUtils.leftPad(Integer.toBinaryString( ~b), 32, "0")));
+
+        int h;
+        a = Integer.MAX_VALUE /2;
+        logger.debug(String.format("a=%s\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" , a,
+                StringUtils.leftPad(Integer.toBinaryString(a), 32, "0")));
+        logger.debug(String.format("hashMap的hash运算: h >>> 16\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" ,
+                StringUtils.leftPad(Integer.toBinaryString( (Integer.valueOf(a).hashCode() >>> 16)), 32, "0")));
+        logger.debug(String.format("hashMap的hash运算: (h = Integer.valueOf(a).hashCode()) ^ (h >>> 16))=\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" ,
+                StringUtils.leftPad(Integer.toBinaryString( (h = Integer.valueOf(a).hashCode()) ^ (h >>> 16)), 32, "0")));
+        logger.debug(Integer.valueOf((h = Integer.valueOf(a).hashCode()) ^ (h >>> 16)).toString());
+
+        /*int h;
+        Integer key = 123;
+        int result = (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);*/
+
+
+    }
+}

@@ -1,6 +1,6 @@
 package com.roy.maintest;
 
-import com.roy.miscellaneous.TestBloomFilter;
+import com.roy.miscellaneous.TestHashFunc;
 import org.testng.annotations.Test;
 
 /**
@@ -10,7 +10,8 @@ public class MainTest {
 
     @Test
     public void test1() {
-        new TestBloomFilter().bloomFilter();
+//        new TestBloomFilter().bloomFilter();
+        new TestHashFunc().test1();
     }
 
 
