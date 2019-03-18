@@ -2,7 +2,6 @@ package com.roy.miscellaneous;
 
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
-import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
