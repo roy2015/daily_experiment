@@ -1,10 +1,8 @@
 package com.roy.maintest;
 
-import com.roy.miscellaneous.TestBloomFilter;
-import com.roy.miscellaneous.TestHashFunc;
-import com.roy.miscellaneous.TestSessionIdGenarate;
+import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestMergeSort;
-import com.roy.miscellaneous.targetObject.SessionIdUtil;
+import com.roy.miscellaneous.targetObject.TestString;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
 
@@ -46,6 +44,26 @@ public class MainTest {
         for (int i = 0; i < 5; i++) {
             new TestSessionIdGenarate().test();
         }
+    }
+
+    @Test
+    public void testsUnsafe() throws Exception {
+        new TestUnSafe().testUnsafe();
+    }
+
+    @Test
+    public void testStringEqual() {
+        new TestString().testStringEqual();
+    }
+
+    @Test
+    public void testDouble() {
+        new TestDigitalArithmetic().testDouble();
+    }
+
+    @Test
+    public void testBigdecimal() {
+        new TestDigitalArithmetic().testBigDecimal();
     }
 
 
