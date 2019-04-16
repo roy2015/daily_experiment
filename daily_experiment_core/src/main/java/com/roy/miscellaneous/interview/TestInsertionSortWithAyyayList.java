@@ -1,7 +1,5 @@
 package com.roy.miscellaneous.interview;
 
-import com.roy.miscellaneous.TestBloomFilter;
-import org.apache.commons.lang3.ClassUtils;
 import org.slf4j.LoggerFactory;
 
 import javax.naming.OperationNotSupportedException;
@@ -67,8 +65,8 @@ public class TestInsertionSortWithAyyayList<T extends Number> {
                     }
                 } else {
                     try {
-                        throw new OperationNotSupportedException("不支持的类型");
-                    } catch (OperationNotSupportedException e) {
+                        throw new UnsupportedOperationException("不支持的类型");
+                    } catch (UnsupportedOperationException e) {
                         logger.error("不支持的类型", e);
                     }
                 }

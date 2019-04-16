@@ -94,6 +94,15 @@ public class MainTest {
     }
 
     @Test
+    public void testInsertionSortUseArrayListFloat() throws OperationNotSupportedException {
+        Float[] floatArrays = new Float[]{41f, 0f, 0f} ;
+
+        TestInsertionSortWithAyyayList<Float> testInsertionSortWithAyyayList = new TestInsertionSortWithAyyayList<>();
+        testInsertionSortWithAyyayList.printArray(floatArrays);//元素数据
+        testInsertionSortWithAyyayList.testInsertionSortUseArrayList(floatArrays);//process排序
+    }
+
+    @Test
     public void testSessionIdGenerate() {
         for (int i = 0; i < 5; i++) {
             new TestSessionIdGenarate().test();
