@@ -4,6 +4,12 @@ import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
 import com.roy.miscellaneous.arithmetic.TestMergeSort;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
+import com.roy.miscellaneous.pattern.factory.CpuType;
+import com.roy.miscellaneous.pattern.factory.MainBoardType;
+import com.roy.miscellaneous.pattern.factory.abstractFactory.CaliforniaFactory;
+import com.roy.miscellaneous.pattern.factory.ComputerEngineer;
+import com.roy.miscellaneous.pattern.factory.abstractFactory.NewYorkFactory;
+import com.roy.miscellaneous.pattern.factory.simpleFactory.SimpleFactory;
 import com.roy.miscellaneous.targetObject.TestString;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
@@ -129,5 +135,24 @@ public class MainTest {
         new TestDigitalArithmetic().testBigDecimal();
     }
 
+    @Test
+    /**
+     * 抽象工厂
+     */
+    public void testAbstractFactory() {
+        ComputerEngineer engineer = new ComputerEngineer();
+        engineer.makeComputer(new CaliforniaFactory());
+        engineer.makeComputer(new NewYorkFactory());
+    }
+
+    @Test
+    /**
+     * 简单工厂
+     */
+    public void testSimpleFactory(){
+        ComputerEngineer engineer = new ComputerEngineer();
+        engineer.makeComputer(new SimpleFactory(), CpuType.INTEL, MainBoardType.MSI);
+
+    }
 
 }
