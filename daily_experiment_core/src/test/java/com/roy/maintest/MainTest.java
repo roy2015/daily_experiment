@@ -10,6 +10,7 @@ import com.roy.miscellaneous.pattern.factory.abstractFactory.CaliforniaFactory;
 import com.roy.miscellaneous.pattern.factory.ComputerEngineer;
 import com.roy.miscellaneous.pattern.factory.abstractFactory.NewYorkFactory;
 import com.roy.miscellaneous.pattern.factory.simpleFactory.SimpleFactory;
+import com.roy.miscellaneous.spi.TestJdkSpi;
 import com.roy.miscellaneous.targetObject.TestString;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
@@ -152,6 +153,16 @@ public class MainTest {
     public void testSimpleFactory(){
         ComputerEngineer engineer = new ComputerEngineer();
         engineer.makeComputer(new SimpleFactory(), CpuType.INTEL, MainBoardType.MSI);
+
+    }
+
+    @Test
+    /**
+     * 测试spi
+     */
+    public void testJdkSpi() {
+        new TestJdkSpi().testJdkSpi();
+
 
     }
 
