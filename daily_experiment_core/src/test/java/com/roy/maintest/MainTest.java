@@ -166,4 +166,10 @@ public class MainTest {
 
     }
 
+    @Test
+    public void testGenicFastJson() {
+        new TestGenicFastJson().testGenicFastJson();
+        new TestGenicFastJson().testGenicFastJsonStrToObj();
+    }
+
 }
