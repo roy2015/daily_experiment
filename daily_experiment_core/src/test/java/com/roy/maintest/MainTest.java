@@ -4,6 +4,7 @@ import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
 import com.roy.miscellaneous.arithmetic.TestMergeSort;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
+import com.roy.miscellaneous.javassist.TestJavassist;
 import com.roy.miscellaneous.pattern.factory.CpuType;
 import com.roy.miscellaneous.pattern.factory.MainBoardType;
 import com.roy.miscellaneous.pattern.factory.abstractFactory.CaliforniaFactory;
@@ -170,6 +171,11 @@ public class MainTest {
     public void testGenicFastJson() {
         new TestGenicFastJson().testGenicFastJson();
         new TestGenicFastJson().testGenicFastJsonStrToObj();
+    }
+
+    @Test
+    public void testJavassist(){
+        new TestJavassist().testJavassist();
     }
 
 }
