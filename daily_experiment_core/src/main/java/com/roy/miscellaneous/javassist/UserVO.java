@@ -16,7 +16,7 @@ public abstract class UserVO {
         this.userSex = userSex;
     }
 
-    abstract public int invokeMethod ();
+    abstract public int invokeMethod (int x, int y);
 
     public int getUserId() {
         return userId;

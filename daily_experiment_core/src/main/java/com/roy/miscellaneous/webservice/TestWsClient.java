@@ -14,7 +14,7 @@ public class TestWsClient {
 
             UpdateAccessoryOaApplicationLinkTbpmServiceImplServiceSoapBindingStub stub =
                     new UpdateAccessoryOaApplicationLinkTbpmServiceImplServiceSoapBindingStub(
-                            new java.net.URL("http://localhost:8081/services/updateAccessoryOaApplicationLinkTbmpService?wsdl"), service
+                            new java.net.URL("http://10.2.7.71:8081/scowebservice/services/updateAccessoryOaApplicationLinkTbmpService?wsdl"), service
                     );
             stub.updateAccessoryOaApplicationLinkTbmp("1","2","3");
 
