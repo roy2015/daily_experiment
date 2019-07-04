@@ -9,6 +9,12 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created by apple on 2019/5/26.
+ *
+ *
+ * 测试fastjson对泛型对象的支持
+ * 总结：TypeRefeence实际上是个抽象类（构造方式是protected）,因为获取泛型的T需要有父类，所有用的时候要
+ * 弄个匿名实现，参考TypeReference
+ *
  */
 public class TestGenicFastJson {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestGenicFastJson.class);
