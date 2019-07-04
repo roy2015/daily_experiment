@@ -4,7 +4,9 @@ import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
 import com.roy.miscellaneous.arithmetic.TestMergeSort;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
+import com.roy.miscellaneous.interview.TestOddEvenPrint;
 import com.roy.miscellaneous.javassist.TestJavassist;
+import com.roy.miscellaneous.juc.TestSemaphore;
 import com.roy.miscellaneous.pattern.factory.CpuType;
 import com.roy.miscellaneous.pattern.factory.MainBoardType;
 import com.roy.miscellaneous.pattern.factory.abstractFactory.CaliforniaFactory;
@@ -17,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
 
 import javax.naming.OperationNotSupportedException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -176,6 +179,16 @@ public class MainTest {
     @Test
     public void testJavassist(){
         new TestJavassist().testJavassist();
+    }
+
+    @Test
+    public void testOddEvenPrint () throws IOException {
+        new TestOddEvenPrint(10).testOddEvenPrin();
+    }
+
+    @Test
+    public void testSemaphore () throws IOException {
+        TestSemaphore.main();
     }
 
 }
