@@ -15,9 +15,9 @@ import java.util.concurrent.locks.LockSupport;
  * 2. Thread的属性 ThreadLocal.ThreadLocalMap threadLocals，ThreadLocalMap的key是ThreadLocal对象本身，
  *    value是你要设置的值（所以一个线程里可以用多个ThreadLocal）
  * 3. createMap(t, value); t为currentThead, 会为每个线程创建单独的ThreadLocalMap, 这就做到了线程隔离
- * 4. 看起来好像“ThreadLocal存在与多个线程”，实际上只是用了他的hashCOde，在第一次赋值的时候
+ * 4. 看起来好像“ThreadLocal存在与多个线程”，实际上只是用了他的hashCode(第一次赋值的时候)
  * 问题：
- * ThreadLocal.ThreadLocalMap的Entry[]的扩容问题
+ * 1. Entry是weakReference的内存泄漏
  */
 public class TestThreadLocal {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(TestThreadLocal.class);
