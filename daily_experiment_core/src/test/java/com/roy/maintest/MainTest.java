@@ -6,7 +6,9 @@ import com.roy.miscellaneous.arithmetic.TestMergeSort;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
 import com.roy.miscellaneous.interview.TestOddEvenPrint;
 import com.roy.miscellaneous.javassist.TestJavassist;
+import com.roy.miscellaneous.juc.TestCasAqs;
 import com.roy.miscellaneous.juc.TestSemaphore;
+import com.roy.miscellaneous.juc.TestThreadLocal;
 import com.roy.miscellaneous.pattern.factory.CpuType;
 import com.roy.miscellaneous.pattern.factory.MainBoardType;
 import com.roy.miscellaneous.pattern.factory.abstractFactory.CaliforniaFactory;
@@ -189,6 +191,16 @@ public class MainTest {
     @Test
     public void testSemaphore () throws IOException {
         TestSemaphore.main();
+    }
+
+    @Test
+    public void testCasAqs () throws Exception {
+        TestCasAqs.main(null);
+    }
+
+    @Test
+    public void TestThreadLocal() throws Exception {
+        TestThreadLocal.testThreadLocal();
     }
 
 }
