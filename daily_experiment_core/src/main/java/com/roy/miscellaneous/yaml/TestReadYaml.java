@@ -1,4 +1,4 @@
-package com.roy.miscellaneous;
+package com.roy.miscellaneous.yaml;
 
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.DumperOptions;
@@ -34,7 +34,7 @@ public class TestReadYaml {
         Yaml yaml = new Yaml(constructor, representer, dumperOptions, loaderOptions, resolver);
 
 //        FileInputStream inputStream = new FileInputStream();
-        Reader reader = new UnicodeReader(TestReadYaml.class.getClassLoader().getResourceAsStream("application.yml"));
+        Reader reader = new UnicodeReader(TestReadYaml.class.getClassLoader().getResourceAsStream("com.roy.miscellaneous.yaml/application.yml"));
         Iterable<Object> objects = yaml.loadAll(reader);
         for (Object obj : objects) {
             int k=0;
@@ -49,6 +49,8 @@ public class TestReadYaml {
 
 
     }
+
+
 
 
 }
