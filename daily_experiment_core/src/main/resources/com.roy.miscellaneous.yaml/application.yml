@@ -1,14 +1,17 @@
 #1，YAML大小写敏感；
 #2，使用缩进代表层级关系；
 #3，缩进只能使用空格，不能使用TAB，不要求空格个数，只需要相同层级左对齐（一般2个或4个空格
-#即表示url属性值；
-url: http://www.wolfcode.cn
-#数组，即表示server为[a,b,c]
-server:
-  -  120.168.117.21
-  -  120.168.117.22
-  - 120.168.117.23
-#常量
-pi: 3.14   #定义一个数值3.14
+
+environments:
+  dev:
+    url: http://dev.bar.com
+    name: Developer Setup
+  prod:
+    url: http://foo.bar.com
+    name: My Cool App
+my:
+  servers:
+  - dev.bar.com
+  - foo.bar.com
 hasChild: true  #定义一个boolean值
 name: '你好YAML'   #定义一个字符串

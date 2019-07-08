@@ -39,7 +39,7 @@ public class TestReadYaml {
         for (Object obj : objects) {
             int k=0;
             Map<String, Object> map = (Map<String, Object>) obj;
-            List<String> serverList = (List<String>) map.get("server");
+            List<String> serverList = (List<String>) ((Map) (map.get("my"))).get("servers");
             for (String s : serverList) {
                 LOGGER.info("key:{},  value: {}", "server" ,s);
             }
