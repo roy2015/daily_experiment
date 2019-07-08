@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
 
 import javax.naming.OperationNotSupportedException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -201,6 +202,11 @@ public class MainTest {
     @Test
     public void TestThreadLocal() throws Exception {
         TestThreadLocal.testThreadLocal();
+    }
+
+    @Test
+    public void testReadYaml() throws FileNotFoundException {
+        new TestReadYaml().testReadYaml();
     }
 
 }
