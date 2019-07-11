@@ -3,10 +3,11 @@ package com.roy.maintest;
 import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
 import com.roy.miscellaneous.arithmetic.TestMergeSort;
+import com.roy.miscellaneous.executors.TestScheduledThreadPoolExecutor;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
 import com.roy.miscellaneous.interview.TestOddEvenPrint;
 import com.roy.miscellaneous.javassist.TestJavassist;
-import com.roy.miscellaneous.juc.TestCasAqs;
+import com.roy.miscellaneous.juc.TestThread;
 import com.roy.miscellaneous.juc.TestSemaphore;
 import com.roy.miscellaneous.juc.TestThreadLocal;
 import com.roy.miscellaneous.pattern.factory.CpuType;
@@ -195,19 +196,57 @@ public class MainTest {
         TestSemaphore.main();
     }
 
+    /**
+     * 测试下 LockSupport
+     * @throws Exception
+     */
     @Test
-    public void testCasAqs () throws Exception {
-        TestCasAqs.main(null);
+    public void testLockSupport () throws Exception {
+        TestThread.testLockSupport (null);
     }
 
+
+    @Test
+    public void testLockSupportInterrupt () throws Exception {
+        TestThread.testLockSupportInterrupt();
+    }
+
+    @Test
+    public void testLockSleepInterrupt () throws Exception {
+        TestThread.testLockSleepInterrupt();
+    }
+
+    @Test
+    public void testLoopInterrupt () throws Exception {
+        TestThread.testLoopInterrupt();
+    }
+
+    /**
+     * 测试 threadLocal
+     * @throws Exception
+     */
     @Test
     public void TestThreadLocal() throws Exception {
         TestThreadLocal.testThreadLocal();
     }
 
+    /**
+     * 测试yml文件的解析
+     * @throws FileNotFoundException
+     */
     @Test
     public void testReadYaml() throws FileNotFoundException {
         new TestReadYaml().testReadYaml();
+    }
+
+    @Test
+    public void testDelayScheduledThreadPoolExecutor() throws InterruptedException {
+        new TestScheduledThreadPoolExecutor().testScheduledThreadPoolExecutor_1();
+    }
+
+    @Test
+    public void testDelayFixRateScheduledThreadPoolExecutor() throws InterruptedException {
+        new TestScheduledThreadPoolExecutor().testScheduledThreadPoolExecutor_2();
     }
 
 }
