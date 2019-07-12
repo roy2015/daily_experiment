@@ -10,6 +10,7 @@ import com.roy.miscellaneous.javassist.TestJavassist;
 import com.roy.miscellaneous.juc.TestThread;
 import com.roy.miscellaneous.juc.TestSemaphore;
 import com.roy.miscellaneous.juc.TestThreadLocal;
+import com.roy.miscellaneous.juc.TestUnsafeCas;
 import com.roy.miscellaneous.pattern.factory.CpuType;
 import com.roy.miscellaneous.pattern.factory.MainBoardType;
 import com.roy.miscellaneous.pattern.factory.abstractFactory.CaliforniaFactory;
@@ -247,6 +248,16 @@ public class MainTest {
     @Test
     public void testDelayFixRateScheduledThreadPoolExecutor() throws InterruptedException {
         new TestScheduledThreadPoolExecutor().testScheduledThreadPoolExecutor_2();
+    }
+
+    @Test
+    public void testWithoutUnsafe() throws InterruptedException {
+        TestUnsafeCas.testWithoutUnsafe();
+    }
+
+    @Test
+    public void testUnsafe() throws InterruptedException {
+        TestUnsafeCas.testUnsafe();
     }
 
 }
