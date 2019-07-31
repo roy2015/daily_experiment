@@ -19,6 +19,7 @@ import com.roy.miscellaneous.pattern.factory.abstractFactory.NewYorkFactory;
 import com.roy.miscellaneous.pattern.factory.simpleFactory.SimpleFactory;
 import com.roy.miscellaneous.spi.TestJdkSpi;
 import com.roy.miscellaneous.targetObject.TestString;
+import com.roy.miscellaneous.targetObject.UserVO;
 import com.roy.miscellaneous.yaml.TestReadYaml;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
@@ -258,6 +259,20 @@ public class MainTest {
     @Test
     public void testUnsafe() throws InterruptedException {
         TestUnsafeCas.testUnsafe();
+    }
+
+    /**
+     * 测试下testCompareAndSwapInt
+     */
+    @Test
+    public void testCompareAndSwapInt() {
+        TestUnsafeCas.testCompareAndSwapInt();
+    }
+
+    @Test
+    public void testObjRefClass() {
+        Object obj = new UserVO();
+        System.out.println(obj.getClass());
     }
 
 }

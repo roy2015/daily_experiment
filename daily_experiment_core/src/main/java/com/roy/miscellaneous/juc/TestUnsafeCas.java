@@ -98,5 +98,12 @@ public class TestUnsafeCas {
         LOGGER.info("counter=[{}]", testUnsafeCas.getCounter());
     }
 
+    public static void testCompareAndSwapInt() {
+        TestUnsafeCas testUnsafeCas = new TestUnsafeCas();
+        testUnsafeCas.counter = 10;
+        boolean b = TestUnsafeCas.unsafe.compareAndSwapInt(testUnsafeCas, TestUnsafeCas.counterOffset, 10, 4);
+        LOGGER.info("{}" , b);
+    }
+
 
 }
