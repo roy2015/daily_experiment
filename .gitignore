@@ -25,6 +25,3 @@ hs_err_pid*
 .idea/
 target
 *.iml
-
-#里面有公司地址所以不要传到公网
-src/main/resources/environment.properties
