@@ -1,8 +1,13 @@
 package com.roy.maintest;
 
 import com.roy.miscellaneous.*;
+import com.roy.miscellaneous.arithmetic.TestBase64Codec;
 import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
 import com.roy.miscellaneous.arithmetic.TestMergeSort;
+import com.roy.miscellaneous.arithmetic.cipher.TestDES3;
+import com.roy.miscellaneous.arithmetic.cipher.TestMac;
+import com.roy.miscellaneous.arithmetic.cipher.TestRSAEncryptDecrypt;
+import com.roy.miscellaneous.arithmetic.cipher.TestRsaSignature;
 import com.roy.miscellaneous.executors.TestScheduledThreadPoolExecutor;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
 import com.roy.miscellaneous.interview.TestOddEvenPrint;
@@ -27,9 +32,11 @@ import org.testng.annotations.Test;
 import javax.naming.OperationNotSupportedException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 /**
@@ -275,4 +282,49 @@ public class MainTest {
         System.out.println(obj.getClass());
     }
 
+    /**
+     * 测试Base64加解密
+     * @throws UnsupportedEncodingException
+     */
+    @Test
+    public void testBase64() throws UnsupportedEncodingException {
+        TestBase64Codec.testBase64Encode("123456");
+        TestBase64Codec.testBase64Decode("MTIzNDU2cm92");
+    }
+
+    /**
+     * RSA 非对策加密解密
+     * @throws Exception
+     */
+    @Test
+    public void testRSADecryptAndEncrypt() throws Exception {
+        TestRSAEncryptDecrypt.testRSAEncryptDecrypt("guoj2989");
+    }
+
+    /**
+     * 测试消息验证码
+     * @throws Exception
+     */
+    @Test
+    public void testMac() throws Exception{
+        TestMac.testMac("page=1?username=guoj&size=3");;
+    }
+
+    /**
+     * 测试签名
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
+     */
+    @Test
+    public void testSignature() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        TestRsaSignature.testRsaSignature("123royguojungdy");
+    }
+
+    /**
+     * 测试对称加密解密
+     */
+    @Test
+    public void testDes3() throws UnsupportedEncodingException {
+        TestDES3.testDES3("071366666qwertyuiopasdfghjklzxcvbnm,./1234567890");
+    }
 }

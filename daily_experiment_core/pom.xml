@@ -193,6 +193,17 @@
             <artifactId>axis-wsdl4j</artifactId>
             <version>1.5.1</version>
         </dependency>
+        <!--  httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.6</version>
+        </dependency>
     </dependencies>
 
     <build>
