@@ -16,7 +16,7 @@ import java.security.SecureRandom;
  * 对称加密
  * 三重des算法（DESede）
  *
- * key可以指定但必须是24位，也可以走KeyGenerator生成, intSecretKey就是后面一种
+ * SecretKeySpec key可以指定但必须是24位，也可以走KeyGenerator生成, intSecretKey就是后面一种
  */
 public class TestDES3 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestDES3.class);

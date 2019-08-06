@@ -23,7 +23,9 @@ import java.util.Set;
 public class TestMac {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestRSAEncryptDecrypt.class);
-    private static String SECRET_KEY = "tlnvzhbGN08G4pAGVbTLoPxxkY/1H1xX++L5q2ekU+RK3ZDI7jjMXEv6qpsxDoC0CjElT80yARM0Pl5Q/x0eXw==";
+    private static String SECRET_KEY = "tlnvzhbGN08G4pAGVbTLoPxxkY/1H1xX++L5q2ekU+RK3eXw==";
+
+    private static final String KEY_ALGORITHM = "DESede";
 
     /**
      *
@@ -37,7 +39,8 @@ public class TestMac {
     public static byte[] mac(String algorithm, byte[] data) throws NoSuchAlgorithmException,
             UnsupportedEncodingException, InvalidKeyException {
         Mac mac = Mac.getInstance(algorithm);
-        SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes("utf-8"), "");
+//        SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes("utf-8"), "");
+        SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes("utf-8"), KEY_ALGORITHM);
         mac.init(key);///这里是关键，需要一个key（这里就是和普通的消息摘要的区别点）
         byte[] result = mac.doFinal(data);
         return result;
