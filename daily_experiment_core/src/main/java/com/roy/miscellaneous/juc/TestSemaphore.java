@@ -36,7 +36,7 @@ public class TestSemaphore implements Runnable {
         }
     }
 
-    public static void main() throws IOException {
+    public static void main(String[] args) throws IOException {
         Semaphore semaphore = new Semaphore(6);
 
         for (int i = 0; i < 10; i++) {

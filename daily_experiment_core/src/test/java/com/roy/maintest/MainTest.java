@@ -10,6 +10,7 @@ import com.roy.miscellaneous.arithmetic.cipher.TestRSAEncryptDecrypt;
 import com.roy.miscellaneous.arithmetic.cipher.TestRsaSignature;
 import com.roy.miscellaneous.executors.TestScheduledThreadPoolExecutor;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
+import com.roy.miscellaneous.interview.TestJdkIOs;
 import com.roy.miscellaneous.interview.TestOddEvenPrint;
 import com.roy.miscellaneous.javassist.TestJavassist;
 import com.roy.miscellaneous.juc.TestThread;
@@ -202,7 +203,7 @@ public class MainTest {
 
     @Test
     public void testSemaphore () throws IOException {
-        TestSemaphore.main();
+        TestSemaphore.main(null);
     }
 
     /**
@@ -326,5 +327,10 @@ public class MainTest {
     @Test
     public void testDes3() throws UnsupportedEncodingException {
         TestDES3.testDES3("071366666qwertyuiopasdfghjklzxcvbnm,./1234567890");
+    }
+
+    @Test
+    public void testJkdIo1() {
+        TestJdkIOs.testIO1();
     }
 }
