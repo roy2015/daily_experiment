@@ -22,7 +22,7 @@ public class TestNiZhiLinkedList {
     }
 
     /**
-     * 逆序 处理 node.next属性  A -> B -> C -> D   <=>    A <- B <- C <- D
+     * 逆序 处理 node.next属性  A -> B -> C -> D -> null   <=>   null <- A <- B <- C <- D
      * @param node
      * @return
      */
