@@ -65,7 +65,7 @@
          -->
         <Logger name="org.hibernate" level="debug" additivity="true"/>
         <!-- 这个root是配置全局日志级别和输出端功能和老版的log4j中根的配置是一样的 -->
-        <Root level="info">
+        <Root level="debug">
             <!-- 这里引用上面定义的输出端，千万不要漏了。 -->
             <AppenderRef ref="Console"/>
             <!--<AppenderRef ref="RollingFileInfo"/>-->
