@@ -3,7 +3,9 @@ package com.roy.miscellaneous.targetObject;
 /**
  * Created by apple on 2019/4/8.
  */
-public class UserVO {
+public class UserVO implements java.io.Serializable {
+
+    private static final long serialVersionUID = -6729433024891051984L;
     private int userId;
     private String userName;
     private String userSex;//male, female;

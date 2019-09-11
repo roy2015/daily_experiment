@@ -11,6 +11,7 @@ import com.roy.miscellaneous.arithmetic.cipher.TestRsaSignature;
 import com.roy.miscellaneous.executors.TestScheduledThreadPoolExecutor;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
 import com.roy.miscellaneous.interview.TestJdkIOs;
+import com.roy.miscellaneous.interview.TestObjectSerializeFile;
 import com.roy.miscellaneous.interview.TestOddEvenPrint;
 import com.roy.miscellaneous.javassist.TestJavassist;
 import com.roy.miscellaneous.juc.*;
@@ -329,5 +330,21 @@ public class MainTest {
     @Test
     public void testJkdIo1() {
         TestJdkIOs.testIO1();
+    }
+
+    @Test
+    /**
+     * 对象序列号到文件
+     */
+    public void testWriteObjecctToFile() {
+        TestObjectSerializeFile.testWriteObjecctToFile();;
+    }
+
+    @Test
+    /**
+     * 从文件读取对象
+     */
+    public void testReadObjectFromFIle() {
+        TestObjectSerializeFile.testReadObjectFromFIle();;
     }
 }
