@@ -1,6 +1,12 @@
 package com.roy.miscellaneous.leetcode;
 
+import com.sun.jmx.remote.internal.ArrayQueue;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by apple on 2019/9/10.
@@ -39,10 +45,51 @@ public class TestSolution104 {
     }
 
     static class Solution {
+        /**
+         * 深度优先搜索 DFS
+         * @param root
+         * @return
+         */
         public int maxDepth(TreeNode root) {
             return Math.max(root.left == null ? 1: maxDepth(root.left) +1,
                     root.right == null ? 1: maxDepth(root.right) +1);
         }
+
+        /**
+         * 广度优先搜索 BFS
+         * @param root
+         * @return
+         */
+        public int maxDepth_1(TreeNode root) {
+            Queue queue = new LinkedList<Integer>();
+            int depth =0, curI =0, nextI=0;
+            queue.offer(root);
+            curI =1;
+
+            while (queue.peek() != null) {//3  9(3) 20(3)  15(20) 7(20) 8(7)
+                TreeNode treeNode = (TreeNode) queue.poll();
+                curI --;
+
+                if (treeNode.left != null) {
+                    queue.offer(treeNode.left);
+                    nextI ++;
+                }
+                if (treeNode.right != null) {
+                    queue.offer(treeNode.right);
+                    nextI ++;
+                }
+
+                if (curI == 0) {
+                    depth++;
+                    curI = nextI;
+                    nextI =0;
+                }
+            }
+
+
+            return depth;
+        }
+
     }
 
     public static void main(String[] args) {
@@ -52,7 +99,7 @@ public class TestSolution104 {
         rootNode.right.left = new TreeNode(15);
         rootNode.right.right = new TreeNode(7);
         rootNode.right.right.right = new TreeNode(8);
-        int i = new Solution().maxDepth(rootNode);
+        int i = new Solution().maxDepth_1(rootNode);
         logger.info("{}", i);
     }
 
