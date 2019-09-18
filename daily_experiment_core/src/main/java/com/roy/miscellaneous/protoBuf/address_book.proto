@@ -1,0 +1,35 @@
+syntax = "proto2";
+
+package com.roy.miscellaneous.protoBuf;
+
+//option java_package = "com.example.tutorial";
+option java_outer_classname = "AddressBookProtos";
+
+// How to generate
+// ===============
+// $ cd example
+// $ protoc src/main/java/com/roy/miscellaneous/protoBuf/address_book.proto \
+//          --java_out=src/main/java
+
+message Person {
+    required string name = 1;
+    required int32 id = 2;
+    optional string email = 3;
+
+    enum PhoneType {
+        MOBILE = 0;
+        HOME = 1;
+        WORK = 2;
+    }
+
+    message PhoneNumber {
+        required string number = 1;
+        optional PhoneType type = 2 [default = HOME];
+    }
+
+    repeated PhoneNumber phones = 4;
+}
+
+message AddressBook {
+    repeated Person people = 1;
+}
