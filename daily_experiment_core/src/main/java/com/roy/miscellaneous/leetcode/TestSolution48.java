@@ -32,8 +32,8 @@ import org.slf4j.LoggerFactory;
  *
  *  采用 洋葱循环，像剥洋葱一层层处理
  */
-public class TestRotate {
-    public static Logger LOGGER = LoggerFactory.getLogger(TestRotate.class);
+public class TestSolution48 {
+    public static Logger LOGGER = LoggerFactory.getLogger(TestSolution48.class);
 
     public void rotate(int[][] matrix) {
         int size = matrix.length;
@@ -79,13 +79,13 @@ public class TestRotate {
             }
         }
 
-        TestRotate testRotate = new TestRotate();
+        TestSolution48 testSolution48 = new TestSolution48();
         LOGGER.info("======旋转前========");
-        testRotate.printMatrix(ints);
+        testSolution48.printMatrix(ints);
         LOGGER.info("======开始旋转========");
-        testRotate.rotate(ints);
+        testSolution48.rotate(ints);
         LOGGER.info("======旋转后========");
-        testRotate.printMatrix(ints);
+        testSolution48.printMatrix(ints);
     }
 
 
