@@ -10,6 +10,7 @@ import java.nio.charset.Charset;
  * Created by apple on 2019/8/6.
  *
  *
+ *  Base64编码后的长度不固定, 和原文长度成线性增长
  *
  */
 public class TestBase64Codec {

@@ -28,7 +28,7 @@ import java.security.spec.X509EncodedKeySpec;
  *
  *
  *
- * RSA 签名
+ * RSA 签名  私钥签名，公钥验签
  */
 public class TestRsaSignature {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestRsaSignature.class);

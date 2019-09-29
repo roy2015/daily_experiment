@@ -19,10 +19,11 @@ import java.util.Set;
  * 消息认证码
  * MAC，全称 Message Authentication Code，也称为消息认证码（带密钥的Hash函数），
  * 通信实体双方使用的一种验证机制，保证消息数据完整性的一种工具
+ * HMACMD5/HMACSHA256
  */
 public class TestMac {
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestRSAEncryptDecrypt.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestRSAEncrypt.class);
     private static String SECRET_KEY = "tlnvzhbGN08G4pAGVbTLoPxxkY/1H1xX++L5q2ekU+RK3eXw==";
 
     private static final String KEY_ALGORITHM = "DESede";

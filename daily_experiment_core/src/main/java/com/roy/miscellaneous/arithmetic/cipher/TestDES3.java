@@ -14,20 +14,23 @@ import java.security.SecureRandom;
 /**
  * Created by apple on 2019/8/6.
  * 对称加密
+ * AES、3DES
+ *
  * 三重des算法（DESede）
  *
- * SecretKeySpec key可以指定但必须是24位，也可以走KeyGenerator生成, intSecretKey就是后面一种
+ * SecretKeySpec key可以指定但必须是24位，也可以走KeyGenerator生成, initSecretKey就是后面一种
  */
 public class TestDES3 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestDES3.class);
-    //SECRET_KEY必须是24位
-    private static String SECRET_KEY = "tlnvzhbGN08G4pAGVbTLoPxx";
-    private static final String KEY_ALGORITHM = "DESede";
-    private static final String DEFAULT_CIPHER_ALGORITHM = "DESede/ECB/PKCS5Padding";// 默认的加密算法
+    //SECRET_KEY: 对称秘钥  DESede必须是24位字节数组, AES必须是16位字节数组，这里被编码成String了!!注意下
+    private static String SECRET_KEY = "ZgYRBq5D1MArTx9cU/n4Ig/pQCz/LkCvc9cEj9NNHLQ=" ;
+
+    private static final String KEY_ALGORITHM = "DESede";//key 算法  AES or DESede
+    private static final String DEFAULT_CIPHER_ALGORITHM = "DESede/ECB/PKCS5Padding";// 默认的加密算法 含义：算法/工作模式/填充
 
     private SecretKeySpec key ;
 
-    private  void intSecretKey( String keyStr) {
+    private  void initSecretKey(String keyStr) {
         //返回生成指定算法密钥生成器的KeyGenerator 对象
         KeyGenerator kg = null;
         try {
@@ -35,8 +38,9 @@ public class TestDES3 {
             kg.init(new SecureRandom(keyStr.getBytes("utf-8")));
             //生成一个密钥
             SecretKey secretKey = kg.generateKey();
-            key = new SecretKeySpec(secretKey.getEncoded(), KEY_ALGORITHM);
-            // 转换为DESede专用密钥
+            SECRET_KEY = Base64.encodeBase64String (secretKey.getEncoded());
+            logger.info("对称秘钥:{}", SECRET_KEY);
+//             转换为DESede专用密钥
         } catch (NoSuchAlgorithmException e) {
             logger.error(e.getMessage(), e);
         } catch (UnsupportedEncodingException e) {
@@ -45,15 +49,15 @@ public class TestDES3 {
     }
 
     /**
-     *
-     * @param srcStr
+     *  加密
+     * @param srcStr 需要加密的字符串
      * @return
      */
     public byte[] doEncrypt(String srcStr) {
         Cipher cipher = null;
         try {
             cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
-            SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes("utf-8"), KEY_ALGORITHM);
+            SecretKeySpec key = new SecretKeySpec(Base64.decodeBase64(SECRET_KEY) , KEY_ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE, key);
             return cipher.doFinal(srcStr.getBytes("utf-8"));
         } catch (NoSuchAlgorithmException e) {
@@ -76,7 +80,7 @@ public class TestDES3 {
         Cipher cipher = null;
         try {
             cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
-            SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes("utf-8"), KEY_ALGORITHM);
+            SecretKeySpec key = new SecretKeySpec(Base64.decodeBase64(SECRET_KEY), KEY_ALGORITHM);
             cipher.init(Cipher.DECRYPT_MODE, key);
             byte[] bytes = cipher.doFinal(srcbytes);
             return new String(bytes, "utf-8");
@@ -99,7 +103,7 @@ public class TestDES3 {
     public static void testDES3(String srcStr) throws UnsupportedEncodingException {
         logger.info("源字符串为：{} ", srcStr );
         TestDES3 des3 = new TestDES3();
-//        des3.intSecretKey("tlnvzhbGN08G4");
+//        des3.initSecretKey("bg244210");
 
         byte[] encryptBytes = des3.doEncrypt(srcStr);
         logger.info("加密后：{} ", new String(encryptBytes, "utf-8") );

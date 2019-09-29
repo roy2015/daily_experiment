@@ -6,7 +6,7 @@ import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
 import com.roy.miscellaneous.arithmetic.TestMergeSort;
 import com.roy.miscellaneous.arithmetic.cipher.TestDES3;
 import com.roy.miscellaneous.arithmetic.cipher.TestMac;
-import com.roy.miscellaneous.arithmetic.cipher.TestRSAEncryptDecrypt;
+import com.roy.miscellaneous.arithmetic.cipher.TestRSAEncrypt;
 import com.roy.miscellaneous.arithmetic.cipher.TestRsaSignature;
 import com.roy.miscellaneous.executors.TestScheduledThreadPoolExecutor;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
@@ -288,7 +288,7 @@ public class MainTest {
     @Test
     public void testBase64() throws UnsupportedEncodingException {
         TestBase64Codec.testBase64Encode("123456");
-        TestBase64Codec.testBase64Decode("MTIzNDU2cm92");
+        TestBase64Codec.testBase64Decode("MTIzNDU2");
     }
 
     /**
@@ -297,7 +297,7 @@ public class MainTest {
      */
     @Test
     public void testRSADecryptAndEncrypt() throws Exception {
-        TestRSAEncryptDecrypt.testRSAEncryptDecrypt("guoj2989");
+        TestRSAEncrypt.testRSAEncryptDecrypt("guoj2989");
     }
 
     /**
