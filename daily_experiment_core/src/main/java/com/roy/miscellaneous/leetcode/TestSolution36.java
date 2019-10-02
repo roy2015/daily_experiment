@@ -44,11 +44,12 @@ public class TestSolution36 {
                         list.add(0);
                     }
                 }
-                if (!isValidRowCheck || list.size() < 9) {
+                if (!isValidRowCheck) {
                     return false;
                 }
             }
 
+            //2
             for (int i = 0; i < 9; i++) {
                 list.clear();
                 isValidColoumCheck = true;
@@ -56,21 +57,22 @@ public class TestSolution36 {
                     if (board[j][i] != '.') {
                         if ( ! list.isEmpty() && list.contains(board[j][i] - '0')) {
                             isValidColoumCheck = isValidColoumCheck && false;
-                            logger.info("列重复, ({},{}):[]", i,j ,board[j][i] - '0');
+                            logger.info("列重复, ({},{}):[]", j,i ,board[j][i] - '0');
                             break;
                         } else {
-                            list.add(board[j][i] + 0);
+                            list.add(board[j][i] - '0');
                         }
                     } else {
                         list.add(0);
                     }
                 }
-                if (!isValidColoumCheck || list.size() < 9) {
+                if (!isValidColoumCheck) {
                     return false;
                 }
             }
 
-            /*00 03 06
+            /* 3
+              00 03 06
               30 33 36
               60 63 66
              */
@@ -100,7 +102,7 @@ public class TestSolution36 {
                             break;
                         }
                     }
-                    if (!isValid33Check || list.size() < 9) {
+                    if (!isValid33Check) {
                         return false;
                     }
                 }
@@ -114,17 +116,17 @@ public class TestSolution36 {
 
     public static void main(String[] args) {
         char[][] chars = {
-                {'5', '3', '.',   '.', '7', '.',   '.', '.', '.'},
-                {'6', '.', '.',   '1', '9', '5',   '.', '.', '.'},
-                {'.', '9', '8',   '.', '.', '.',   '.', '6', '.'},
+                {'.','.','4',  '.','.','.',  '6','3','.'},
+                {'.','.','.',  '.','.','.',  '.','.','.'},
+                {'5','.','.',  '.','.','.',  '.','9','.'},
 
-                {'8', '.', '.',   '.', '6', '.',   '.', '.', '3'},
-                {'4', '.', '.',   '8', '.', '3',   '.', '.', '1'},
-                {'7', '.', '.',   '.', '2', '.',   '.', '.', '6'},
+                {'.','.','.',  '5','6','.',  '.','.','.'},
+                {'4','.','3',  '.','.','.',  '.','.','1'},
+                {'.','.','.',  '7','.','.',  '.','.','.'},
 
-                {'.', '6', '.',   '.', '.', '.',   '2', '8', '.'},
-                {'.', '.', '.',   '4', '1', '9',   '.', '.', '5'},
-                {'.', '.', '.',   '.', '8', '.',   '.', '7', '9'}
+                {'.','.','.',  '5','.','.',  '.','.','.'},
+                {'.','.','.',  '.','.','.',  '.','.','.'},
+                {'.','.','.',  '.','.','.',  '.','.','.'}
 
         };
         boolean validSudoku = new Solution().isValidSudoku(chars);
