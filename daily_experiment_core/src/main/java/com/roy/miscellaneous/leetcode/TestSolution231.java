@@ -61,7 +61,16 @@ public class TestSolution231 {
     }
 
     public static void main(String[] args) {
+        HashMap<Integer, Integer> integerIntegerHashMap = new HashMap<>(4, 1);
+        integerIntegerHashMap.put(1, 1);
+        integerIntegerHashMap.put(2, 2);
+        integerIntegerHashMap.put(3, 3);
+        integerIntegerHashMap.put(4, 4);
+        integerIntegerHashMap.put(5, 5);
+        integerIntegerHashMap.put(6, 6);
         logger.info("{}", new Solution().isPowerOfTwo(14));
+
+
     }
 
 }

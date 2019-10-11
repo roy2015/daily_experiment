@@ -50,7 +50,7 @@ public class MainTest {
 
     @Test
     public void test2() {
-        new TestHashFunc().test1();
+        new TestBitOps().test1();
     }
 
     @Test

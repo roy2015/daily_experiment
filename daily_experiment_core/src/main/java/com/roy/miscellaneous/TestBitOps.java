@@ -5,15 +5,22 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created by apple on 2019/1/29.
+ *
+ * 位运算测试
+ *
  */
-public class TestHashFunc {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestHashFunc.class);
+public class TestBitOps {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestBitOps.class);
     public void test1() {
         int k =-12;
+        int k1 = Integer.parseInt("-1111111111111111111111111110100",2);
+        logger.debug(Integer.toBinaryString(k1));
+        logger.debug(Integer.toBinaryString(k1 >>> 1));
+        logger.debug(Integer.toBinaryString(k1 >> 1));
         logger.debug(Integer.toBinaryString(k));
+        logger.debug(Integer.toBinaryString(k >>> 1));
         logger.debug(Integer.toBinaryString(k >> 1));
         logger.debug(Integer.toBinaryString(k >> 16));
-        logger.debug(Integer.toBinaryString(k >>> 16));
         logger.debug(String.valueOf(Integer.MAX_VALUE));
         logger.debug(Integer.toBinaryString(Integer.MAX_VALUE).length() + "");
         logger.debug(Integer.toBinaryString(Integer.MAX_VALUE));
