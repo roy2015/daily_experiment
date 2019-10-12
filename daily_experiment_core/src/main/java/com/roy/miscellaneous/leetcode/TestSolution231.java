@@ -58,17 +58,23 @@ public class TestSolution231 {
                 }
             }
         }
+
+        /**
+         * 最简单的方法
+         * @param n
+         * @return
+         */
+        public boolean isPowerOfTwo1(int n) {
+            if (n <=0) {
+                return false;
+            }
+
+            return (n & (n-1)) == 0;
+        }
     }
 
     public static void main(String[] args) {
-        HashMap<Integer, Integer> integerIntegerHashMap = new HashMap<>(4, 1);
-        integerIntegerHashMap.put(1, 1);
-        integerIntegerHashMap.put(2, 2);
-        integerIntegerHashMap.put(3, 3);
-        integerIntegerHashMap.put(4, 4);
-        integerIntegerHashMap.put(5, 5);
-        integerIntegerHashMap.put(6, 6);
-        logger.info("{}", new Solution().isPowerOfTwo(14));
+        logger.info("{}", new Solution().isPowerOfTwo1(1));
 
 
     }

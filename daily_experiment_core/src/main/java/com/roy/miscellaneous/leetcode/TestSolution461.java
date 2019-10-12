@@ -36,6 +36,13 @@ public class TestSolution461 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution461.class);
 
     static class Solution {
+        /**
+         * 执行用时 :1 ms, 在所有 Java 提交中击败了89.71%的用户
+         内存消耗 :33.3 MB, 在所有 Java 提交中击败了77.38%的用户
+         * @param x
+         * @param y
+         * @return
+         */
         public int hammingDistance(int x, int y) {
             int k = x ^y;
             String s = Integer.toBinaryString(k);
@@ -47,6 +54,25 @@ public class TestSolution461 {
             }
 
             return i;
+        }
+
+        /**
+         * 执行用时 :0 ms, 在所有 Java 提交中击败了100.00%的用户
+         内存消耗 :33.1 MB, 在所有 Java 提交中击败了77.77%的用户
+         * @param x
+         * @param y
+         * @return
+         */
+        public int hammingDistance1(int x, int y) {
+            int z = x^y;
+            int count =0;
+            while(z != 0) {
+                if ((z &1) !=0) {
+                    count++;
+                }
+                z = z >>1;
+            }
+            return count;
         }
     }
 
