@@ -170,7 +170,7 @@ public class TestSolution98 {
 
         /**
          * 上界下界法
-         *
+         *执行用时 :1 ms, 在所有 java 提交中击败了99.41%的用户
          * @param root
          * @return
          */
@@ -220,6 +220,7 @@ public class TestSolution98 {
 
         /**
          * 遍历法
+         * 执行用时 :2 ms, 在所有 java 提交中击败了68.97%的用户
          * @param root
          * @return
          */
