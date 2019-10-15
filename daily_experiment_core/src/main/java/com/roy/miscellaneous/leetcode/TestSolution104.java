@@ -51,6 +51,9 @@ public class TestSolution104 {
          * @return
          */
         public int maxDepth(TreeNode root) {
+            if(root == null) {
+                return 0;
+            }
             return Math.max(root.left == null ? 1: maxDepth(root.left) +1,
                     root.right == null ? 1: maxDepth(root.right) +1);
         }
