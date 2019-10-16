@@ -112,7 +112,7 @@ public class TestSolution637 {
             int curLayout = 1; // 当前层node计数
             int nextLayout =0; // 下一层node计数
             int curNodeCnt = 1;//当前层node 数目
-            long curNodeValSum = 0L;////当前层node val的和
+            double curNodeValSum = 0d;////当前层node val的和
 
             ArrayList<Double> ret = new ArrayList<>();
             LinkedList<TreeNode> queue = new LinkedList<>();//queue
@@ -131,10 +131,10 @@ public class TestSolution637 {
                 curNodeValSum += node.val;
                 curLayout --;
                 if (curLayout == 0) {//一层的结束
-                    ret.add(curNodeValSum / Double.valueOf(curNodeCnt));
+                    ret.add(curNodeValSum / curNodeCnt);
                     curLayout = nextLayout;
                     curNodeCnt = nextLayout;
-                    curNodeValSum = 0L;
+                    curNodeValSum = 0d;
                     nextLayout = 0;
                 }
             }
