@@ -30,7 +30,8 @@ public class TestSolution26 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution26.class);
 
     /**
-     * [0,0,1,1,1,2,2,3,3,4]
+     * 执行用时 :1 ms, 在所有 java 提交中击败了100.00%的用户
+     * 内存消耗 :41.5 MB, 在所有 java 提交中击败了89.73%的用户
      */
     static class Solution {
         public int removeDuplicates(int[] nums) {
@@ -45,7 +46,7 @@ public class TestSolution26 {
                 }
             }
 
-            return i;
+            return i + 1;
         }
     }
 
