@@ -30,6 +30,10 @@ import java.util.PriorityQueue;
 public class TestSolution704 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution704.class);
 
+    /**
+     * 执行用时 :1 ms, 在所有 java 提交中击败了54.86%的用户
+     内存消耗 :39.4 MB, 在所有 java 提交中击败了93.01%的用户
+     */
     static class Solution {
         public int search(int[] nums, int target) {
             int k = nums[nums.length /2];

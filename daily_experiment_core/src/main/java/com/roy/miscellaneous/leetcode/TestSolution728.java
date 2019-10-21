@@ -28,6 +28,10 @@ public class TestSolution728 {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution728.class);
 
+    /**
+     * 执行用时 :3 ms, 在所有 java 提交中击败了86.97%的用户
+     内存消耗 :33.8 MB, 在所有 java 提交中击败了75.43%的用户
+     */
     static class Solution {
         public List<Integer> selfDividingNumbers(int left, int right) {
             ArrayList<Integer> list = new ArrayList<>();

@@ -12,6 +12,10 @@ import org.slf4j.LoggerFactory;
 public class TestSolution709 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution709.class);
 
+    /**
+     * 执行用时 :0 ms, 在所有 java 提交中击败了100.00%的用户
+     内存消耗 :34.2 MB, 在所有 java 提交中击败了59.86%的用户
+     */
     static class Solution {
         public String toLowerCase(String str) {
             char[] chars = new char[str.length()];

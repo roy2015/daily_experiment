@@ -35,6 +35,11 @@ import java.util.PriorityQueue;
 public class TestSolution703 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution703.class);
 
+
+    /**
+     * 执行用时 :97 ms, 在所有 java 提交中击败了75.62%的用户
+     内存消耗 :49.1 MB, 在所有 java 提交中击败了91.14%的用户
+     */
     static class KthLargest {
         private PriorityQueue<Integer> priorityQueue;
         private int k;
