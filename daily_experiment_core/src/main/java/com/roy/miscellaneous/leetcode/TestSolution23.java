@@ -40,8 +40,18 @@ public class TestSolution23 {
           ListNode(int x) { val = x; }
     }
 
+    /**
+     *
+     * 执行用时 :6 ms, 在所有 java 提交中击败了76.95%的用户
+     * 内存消耗 :39.3 MB, 在所有 java 提交中击败了91.68%的用户
+     *
+     */
     static class Solution {
         public ListNode mergeKLists(ListNode[] lists) {
+            if (lists == null || lists.length ==0) {
+                return null;
+            }
+
             PriorityQueue<Integer> pQueue = new PriorityQueue<>();
             for (ListNode node : lists) {
                 if (node == null) {
@@ -57,6 +67,9 @@ public class TestSolution23 {
             ListNode retNode, headNode;
             Integer top ;
             top = pQueue.poll();
+            if (top == null) {
+                return null;
+            }
             retNode = new ListNode(top);//头结点
             headNode = retNode;
 

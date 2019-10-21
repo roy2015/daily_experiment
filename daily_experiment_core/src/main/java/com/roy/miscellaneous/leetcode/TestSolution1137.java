@@ -3,30 +3,35 @@ package com.roy.miscellaneous.leetcode;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by apple on 2019/9/16.
- *
- *泰波那契序列 Tn 定义如下： 
+ * 给定一个正整数，检查他是否为交替位二进制数：换句话说，就是他的二进制数相邻的两个位数永不相等。
 
- T0 = 0, T1 = 1, T2 = 1, 且在 n >= 0 的条件下 Tn+3 = Tn + Tn+1 + Tn+2
+ 示例 1:
 
- 给你整数 n，请返回第 n 个泰波那契数 Tn 的值。
+ 输入: 5
+ 输出: True
+ 解释:
+ 5的二进制数是: 101
+ 示例 2:
 
-  
+ 输入: 7
+ 输出: False
+ 解释:
+ 7的二进制数是: 111
+ 示例 3:
 
- 示例 1：
+ 输入: 11
+ 输出: False
+ 解释:
+ 11的二进制数是: 1011
+  示例 4:
 
- 输入：n = 4
- 输出：4
- 解释：
- T_3 = 0 + 1 + 1 = 2
- T_4 = 1 + 1 + 2 = 4
- 示例 2：
-
- 输入：n = 25
- 输出：1389537
+ 输入: 10
+ 输出: True
+ 解释:
+ 10的二进制数是: 1010
 
  来源：力扣（LeetCode）
- 链接：https://leetcode-cn.com/problems/n-th-tribonacci-number
+ 链接：https://leetcode-cn.com/problems/binary-number-with-alternating-bits
  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class TestSolution1137 {
@@ -36,6 +41,8 @@ public class TestSolution1137 {
      */
     static class Solution {
         /**
+         * 超出时间限制
+         *
          * 递归法
          * @param n
          * @return
@@ -53,6 +60,10 @@ public class TestSolution1137 {
         }
 
         /**
+         *
+         * 执行用时 :0 ms, 在所有 java 提交中击败了100.00%的用户
+         内存消耗 :33.1 MB, 在所有 java 提交中击败了100.00%的用户
+         *
          * 循环法
          * @param n
          * @return

@@ -37,6 +37,12 @@ import java.util.Stack;
  */
 public class TestSolution155 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution155.class);
+
+
+    /**
+     * 执行用时 :66 ms, 在所有 java 提交中击败了85.28%的用户
+     * 内存消耗 :39.9 MB, 在所有 java 提交中击败了95.99%的用户
+     */
     static class MinStack {
         private Stack<Integer> targetStack ;
         private Stack<Integer> assistStack;
@@ -52,7 +58,7 @@ public class TestSolution155 {
             if (assistStack.isEmpty()) {
                 assistStack.push(x);
             } else {
-                if ( x < assistStack.peek() ) {
+                if ( x <= assistStack.peek() ) {
                     assistStack.push(x);
                 }
             }
@@ -61,7 +67,7 @@ public class TestSolution155 {
         public void pop() {
             Integer stackTop = targetStack.pop();
             Integer min = assistStack.peek();
-            if (stackTop == min) {
+            if (stackTop.equals(min)) {
                 assistStack.pop();
             }
         }
@@ -76,6 +82,10 @@ public class TestSolution155 {
 
     }
 
+    /**
+     * 执行用时 :64 ms, 在所有 java 提交中击败了88.01%的用户
+     * 内存消耗 :40.3 MB, 在所有 java 提交中击败了95.44%的用户
+     */
     static class MinStack1 {
         private Stack<Integer> targetStack ;
 
@@ -91,7 +101,7 @@ public class TestSolution155 {
             } else {
                 Integer min = targetStack.peek();
                 targetStack.push(x);
-                if (x < min) {
+                if (x <= min) {
                     targetStack.push(x);
                 } else {
                     targetStack.push(min);
@@ -119,20 +129,21 @@ public class TestSolution155 {
 
     public static void main(String[] args) {
 //        MinStack minStack = new MinStack();
-        MinStack1 minStack = new MinStack1();
-        minStack.push(-2);
-        minStack.push(0);
-        minStack.push(-3);
-        int min = minStack.getMin();// 返回 -3.
-        logger.info("{}", min);
+        MinStack minStack = new MinStack();
+//        logger.info("{}", minStack.getMin());
+        minStack.push(512);
+        minStack.push(-1024);
+        minStack.push(-1024);
+        minStack.push(512);
+
         minStack.pop();
-        int top = minStack.top();// 返回 0.
-        logger.info("{}", top);
-        min = minStack.getMin();// 返回 -2.
-        logger.info("{}", min);
+        logger.info("{}", minStack.getMin());
+        minStack.pop();
+        logger.info("{}", minStack.getMin());
+        minStack.pop();
+        logger.info("{}", minStack.getMin());
 
 
-        PriorityQueue<Integer> integers = new PriorityQueue<>();
 
 
     }
