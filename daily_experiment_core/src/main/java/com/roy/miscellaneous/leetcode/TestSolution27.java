@@ -28,6 +28,10 @@ import org.slf4j.LoggerFactory;
 public class TestSolution27 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution27.class);
 
+    /**
+     * 执行用时 :0 ms, 在所有 java 提交中击败了100.00%的用户
+     内存消耗 :36.1 MB, 在所有 java 提交中击败了84.18%的用户
+     */
     static class Solution {
         public int removeElement(int[] nums, int val) {
             int i = 0;

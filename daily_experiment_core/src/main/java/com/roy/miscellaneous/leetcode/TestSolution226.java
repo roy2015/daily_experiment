@@ -41,6 +41,13 @@ public class TestSolution226 {
     }
 
     static class Solution {
+        /**
+         * 执行用时 :0 ms, 在所有 java 提交中击败了100.00%的用户
+         内存消耗 :34.1 MB, 在所有 java 提交中击败了40.02%的用户
+         *
+         * @param root
+         * @return
+         */
         public TreeNode invertTree(TreeNode root) {
             if ( root == null ) {
                 return null;

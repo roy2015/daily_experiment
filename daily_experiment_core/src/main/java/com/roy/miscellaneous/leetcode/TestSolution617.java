@@ -23,6 +23,15 @@ public class TestSolution617 {
      * }
      */
     static class Solution {
+
+        /**
+         * 执行用时 :2 ms, 在所有 java 提交中击败了59.72%的用户
+         内存消耗 :38.8 MB, 在所有 java 提交中击败了97.45%的用户
+         *
+         * @param t1
+         * @param t2
+         * @return
+         */
         public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
             TreeNode node = new TreeNode(0);
             int val = 0;

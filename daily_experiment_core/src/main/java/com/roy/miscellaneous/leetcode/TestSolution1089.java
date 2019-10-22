@@ -40,6 +40,12 @@ public class TestSolution1089 {
     /**
      */
     static class Solution {
+        /**
+         * 执行用时 :19 ms, 在所有 java 提交中击败了32.21%的用户
+         * 内存消耗 :37.4 MB, 在所有 java 提交中击败了100.00%的用户
+         *
+         * @param arr
+         */
         public void duplicateZeros(int[] arr) {
             int i = 0;
             while (i < arr.length) {
