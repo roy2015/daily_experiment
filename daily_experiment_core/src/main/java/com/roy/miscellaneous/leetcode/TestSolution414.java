@@ -155,7 +155,10 @@ public class TestSolution414 {
         }
 
         /**
-         *  aaa aac acc abc
+         *  aaa 1
+         *  aac 2
+         *  acc 3
+         *  abc 4
          *
          * @param p1 最小
          * @param p2 次之
@@ -163,17 +166,19 @@ public class TestSolution414 {
          * @return
          */
         private int getPointerShape(int p1, int p2, int p3) {
-            if (p1 == p2 && p2 == p3) {
-                return 1;
-            }
-            if (p1 == p2 && p2 != p3) {
-                return 2;
-            }
-            if (p1 != p2 && p2 == p3) {
-                return 3;
-            }
-            if (p1 != p2 && p2 != p3 && p1 != p3) {
-                return 4;
+            if (p1 == p2) {
+                if (p2 == p3) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+
+            } else{
+                if ( p2 == p3) {
+                    return 3;
+                } else if ( p1 != p3) {
+                    return 4;
+                }
             }
             return 0;
         }
