@@ -7,6 +7,10 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * 交替输出奇偶
+ *
+ */
 public class TestOddEvenPrint {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestOddEvenPrint.class);
 
