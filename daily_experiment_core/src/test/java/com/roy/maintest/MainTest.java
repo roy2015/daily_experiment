@@ -12,7 +12,7 @@ import com.roy.miscellaneous.executors.TestScheduledThreadPoolExecutor;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
 import com.roy.miscellaneous.interview.TestJdkIOs;
 import com.roy.miscellaneous.io.TestObjectSerializeFile;
-import com.roy.miscellaneous.interview.TestOddEvenPrint;
+import com.roy.miscellaneous.juc.multiThread.TestOddEvenPrint;
 import com.roy.miscellaneous.javassist.TestJavassist;
 import com.roy.miscellaneous.juc.*;
 import com.roy.miscellaneous.pattern.factory.CpuType;

@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.interview;
+package com.roy.miscellaneous.juc.multiThread;
 
 import org.slf4j.LoggerFactory;
 

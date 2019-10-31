@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.interview;
+package com.roy.miscellaneous.juc.multiThread;
 
 import org.slf4j.LoggerFactory;
 
@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 交替输出12, t1 1， t2 2 t1 1 t2 2
