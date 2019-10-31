@@ -43,7 +43,7 @@ public class TestSolution258 {
     }
 
     public static void main(String[] args) {
-        logger.info("{}", new Solution().addDigits(0));
+        logger.info("{}", new Solution().addDigits(18));
     }
 
 }
