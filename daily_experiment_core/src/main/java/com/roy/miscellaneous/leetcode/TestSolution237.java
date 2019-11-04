@@ -10,9 +10,18 @@ import org.slf4j.LoggerFactory;
 
  现有一个链表 -- head = [4,5,1,9]，它可以表示为:
 
+ 示例 1:
+
  输入: head = [4,5,1,9], node = 5
  输出: [4,1,9]
  解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -> 1 -> 9.
+
+ 示例 2:
+
+ 输入: head = [4,5,1,9], node = 1
+ 输出: [4,5,9]
+ 解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -> 5 -> 9.
+  
 
  说明:
 
@@ -20,7 +29,6 @@ import org.slf4j.LoggerFactory;
  链表中所有节点的值都是唯一的。
  给定的节点为非末尾节点并且一定是链表中的一个有效节点。
  不要从你的函数中返回任何结果。
-
 
  来源：力扣（LeetCode）
  链接：https://leetcode-cn.com/problems/delete-node-in-a-linked-list
@@ -36,21 +44,15 @@ public class TestSolution237 {
     }
 
     static class Solution {
-        public void deleteNode(ListNode node, int x) {
-            ListNode preNode = node;
-            ListNode curNode = node.next;
-
-            if (preNode.val == x) {
-                node.val = curNode.val;
-                node.next = curNode.next;
-                return;
-            }
-
-            while ( curNode.val != x ) {//给定的节点为非末尾节点并且一定是链表中的一个有效节点
-                preNode = curNode;
-                curNode = curNode.next;
-            }
-            preNode.next = curNode.next;
+        /**
+         *
+         * 执行用时 :0 ms, 在所有 java 提交中击败了100.00%的用户
+         内存消耗 :36 MB, 在所有 java 提交中击败了69.54%的用户
+         * @param node
+         */
+        public void DeleteNode(ListNode node) {
+            node.val = node.next.val;
+            node.next = node.next.next;
         }
     }
 
@@ -60,7 +62,7 @@ public class TestSolution237 {
         listNode.next = new ListNode(5);
         listNode.next.next = new ListNode(1);
         listNode.next.next.next = new ListNode(9);
-        solution.deleteNode(listNode, 1);
+        solution.DeleteNode(listNode.next);
         logger.info("123");
     }
 
