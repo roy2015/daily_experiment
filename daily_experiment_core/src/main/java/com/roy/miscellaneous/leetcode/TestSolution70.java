@@ -45,8 +45,7 @@ public class TestSolution70 {
     static class Solution {
         /**
          *
-         * 实际上就是个斐波那契数列
-         * 二叉树结构
+         * 实际上就是个斐波那契数列二叉树结构
          *
          * 执行用时 :0 ms, 在所有 java 提交中击败了100.00%的用户
          内存消耗 :33.1 MB, 在所有 java 提交中击败了71.44%的用户
