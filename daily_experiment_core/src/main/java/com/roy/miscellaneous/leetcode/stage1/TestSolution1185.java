@@ -42,6 +42,11 @@ public class TestSolution1185 {
 
         }
 
+        /**
+         * 判定是否闰年
+         * @param year
+         * @return
+         */
         private boolean isLeapYear (int year) {
             if (year % 4 !=0) {
                 return false;
