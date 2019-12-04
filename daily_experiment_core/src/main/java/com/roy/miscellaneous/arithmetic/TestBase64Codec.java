@@ -22,7 +22,7 @@ public class TestBase64Codec {
      */
     public static void testBase64Encode(String src) throws UnsupportedEncodingException {
         byte[] bytes = Base64.encodeBase64(src.getBytes("utf-8"));
-        logger.info("base64编码前：{}", src);
+        logger.info("base64编码前 ：{}", src);
         logger.info("base64编码后：{}", new String(bytes, "utf-8"));
     }
 
