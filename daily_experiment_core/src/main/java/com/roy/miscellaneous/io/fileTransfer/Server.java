@@ -1,6 +1,7 @@
 package com.roy.miscellaneous.io.fileTransfer;
 
 import java.io.DataInputStream;
+import java.io.FileOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -24,23 +25,29 @@ public class Server {
     public static void main(String[] args) throws Exception {
         ServerSocket serverSocket = new ServerSocket(1111);
 
-        while (true) {
+        long startTime = System.currentTimeMillis();
             Socket socket = serverSocket.accept();
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 
             try {
                 byte[] byteArray = new byte[4096];
+                String path = "D:\\test\\456.log";
+                FileOutputStream fos=new FileOutputStream(path, false);
+
 
                 while (true) {
                     int readCount = dataInputStream.read(byteArray, 0, byteArray.length);
-
                     if (-1 == readCount) {
                         break;
+                    } else {
+                        fos.write(byteArray, 0 , readCount);
                     }
                 }
+                fos.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        }
+        System.out.println("1耗时： " + (System.currentTimeMillis() - startTime));
+
     }
 }

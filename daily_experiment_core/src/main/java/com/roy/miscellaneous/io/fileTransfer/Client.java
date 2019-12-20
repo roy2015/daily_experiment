@@ -11,12 +11,13 @@ public class Client {
     public static void main(String[] args) throws Exception {
         Socket socket = new Socket("localhost", 1111);
 
-        String fileName = "D:\\personal\\code\\github\\demo\\order-application.log";
+//        String fileName = "D:\\personal\\code\\github\\demo\\order-application.log";
+        String fileName = "D:\\test\\123.log";
         InputStream inputStream = new FileInputStream(fileName);
 
         DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
-        byte[] buffer = new byte[4096];
+        byte[] buffer = new byte[1000*1000*1000];
         long readCount;
         long total = 0;
 
@@ -27,10 +28,11 @@ public class Client {
             dataOutputStream.write(buffer);
         }
 
-        System.out.println("大小： " + total + ", 耗时： " + (System.currentTimeMillis() - startTime));
+        System.out.println("1大小： " + total + ", 耗时： " + (System.currentTimeMillis() - startTime));
 
-        dataOutputStream.close();
-        socket.close();
+        //顺序不能乱
         inputStream.close();
+        socket.close();
+        dataOutputStream.close();
     }
 }
