@@ -44,7 +44,7 @@ public class Server2 {
             } else if (written == 0) {
                 return position;
             }
-            System.out.println(String.format("此次读取数据大小，【%s】,已传输【%s】", written ,position / 1024d / 1024d));
+            System.out.println(String.format("此次读取数据大小，【%s】,已传输【%s】", written / 1024d / 1024d ,position / 1024d / 1024d));
         }
     }
 
