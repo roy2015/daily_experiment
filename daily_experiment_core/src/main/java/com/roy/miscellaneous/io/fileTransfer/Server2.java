@@ -83,7 +83,7 @@ public class Server2 {
                         SocketChannel client = server.accept();
                         System.out.println(String.format("Accepted connection from {%s}，时间 [%s]", client, new Date()));
                         client.configureBlocking(false);
-                        client.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024 * 1024 * 1024));
+                        client.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024 * 1024 * 100 * 3));
                     } else if (key.isReadable()) {//读数据
                         if (!isStart) {
                             SocketChannel clientChannel = (SocketChannel) key.channel();
