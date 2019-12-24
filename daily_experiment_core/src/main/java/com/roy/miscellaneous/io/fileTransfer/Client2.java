@@ -111,7 +111,7 @@ public class Client2 {
                     System.out.println(String.format("本轮写入channel数据大小[%s]M", transferred / 1024d / 1024d));
                     return 0L;
                 } else {
-                    long written = fileChannel.transferTo(transferred, fileChannel.size(), target);
+                    long written = fileChannel.transferTo(transferred, len, target);
                     if (written > 0L) {
                         transferred += written;
                     }

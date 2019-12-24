@@ -34,12 +34,12 @@ public class Server2 {
      * @return
      * @throws IOException
      */
-    public static long transferFrom(FileChannel fileChannel, ReadableByteChannel source, long originPos)
+    public static long transferFrom(FileChannel fileChannel, ReadableByteChannel source, long originPos, long fileLen)
             throws IOException {
         long written = 0L;
         long position = originPos;
         while (true) {
-            written = fileChannel.transferFrom(source, position, 1024 * 1024 * 100);
+            written = fileChannel.transferFrom(source, position, fileLen);
             if (written > 0L) {
                 position += written;
             } else if (written == 0) {
@@ -108,7 +108,7 @@ public class Server2 {
                             SocketChannel socketChannel = (SocketChannel) key.channel();
                             System.out.println(String.format("开始接收文件，开始时间[%s], 距离开始时间[%s]", new Date(),
                                     System.currentTimeMillis() - startTime));
-                            position = transferFrom(fileChannel, socketChannel, position);
+                            position = transferFrom(fileChannel, socketChannel, position, fileLen);
                             if (position >= fileLen) {
                                 System.out.println(String.format("接收文件完毕，结束时间[%s], 距离开始时间耗时 [%s]",
                                         new Date(), System.currentTimeMillis() - startTime));
