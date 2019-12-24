@@ -38,13 +38,13 @@ public class Server2 {
             throws IOException {
         long written = 0L;
         while (true) {
-            written = fileChannel.transferFrom(source, position, 1000 * 1000 * 1000);
+            written = fileChannel.transferFrom(source, position, 1024 * 1024 * 100);
             if (written > 0L) {
                 position += written;
             } else if (written == 0) {
                 return position;
             }
-            System.out.println(String.format("此次读取数据大小，【%s】", position));
+            System.out.println(String.format("此次读取数据大小，【%s】,已传输【%s】", written ,position / 1024d / 1024d));
         }
     }
 
@@ -83,7 +83,7 @@ public class Server2 {
                         SocketChannel client = server.accept();
                         System.out.println(String.format("Accepted connection from {%s}，时间 [%s]", client, new Date()));
                         client.configureBlocking(false);
-                        client.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1000 * 1000 * 1000));
+                        client.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024 * 1024 * 1024));
                     } else if (key.isReadable()) {//读数据
                         if (!isStart) {
                             SocketChannel clientChannel = (SocketChannel) key.channel();
@@ -106,7 +106,7 @@ public class Server2 {
                             System.out.println(String.format("开始接收文件，开始时间[%s], 距离开始时间[%s]", new Date(),
                                     System.currentTimeMillis() - startTime));
                             position = transferFrom(fileChannel, socketChannel, position);
-                            if (position == fileLen) {
+                            if (position >= fileLen) {
                                 System.out.println(String.format("接收文件完毕，结束时间[%s], 距离开始时间耗时 [%s]",
                                         new Date(), System.currentTimeMillis() - startTime));
                                 fileChannel.close();
@@ -127,7 +127,8 @@ public class Server2 {
     // java 的服务器
     public static void main(String[] args) throws Exception {
         try {
-            String path = "D:\\test\\456.log";
+//            String path = "D:\\test\\456.log";
+            String path = "/Users/apple/guojun/test/456.log";
             new Server2().serve(1111, new File(path));
         } catch (Exception ex) {
             ex.printStackTrace();
