@@ -10,7 +10,7 @@ import java.util.Set;
  * Created by BG244210 on 27/04/2017.
  */
 public class Client2 {
-    public void client(String fileName, int port) {
+    public void client(String fileName, String ip , int port) {
         try {
             /*发送数据缓冲区*/
             ByteBuffer sendBuffer = ByteBuffer.allocate(8);
@@ -24,7 +24,7 @@ public class Client2 {
             String start = "start";
 
             file = new File(fileName);
-            ipPort = new InetSocketAddress("localhost", port);
+            ipPort = new InetSocketAddress(ip, port);
 
             long fileLen = file.length();
             /*
@@ -33,7 +33,7 @@ public class Client2 {
             SocketChannel socketChannel = SocketChannel.open();
             socketChannel.configureBlocking(false);
             selector = Selector.open();
-            socketChannel.register(selector, SelectionKey.OP_CONNECT);
+            socketChannel.register(selector, SelectionKey.OP_CONNECT, ByteBuffer.allocate(1024 * 1024 * 1024));
             socketChannel.connect(ipPort);
             /*
              * 轮询监听客户端上注册事件的发生
@@ -58,7 +58,7 @@ public class Client2 {
                                 sendBuffer.putLong(fileLen);
                                 sendBuffer.flip();
                                 clientChannel.write(sendBuffer);
-                                clientChannel.register(selector, SelectionKey.OP_READ);
+                                clientChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024 * 1024 * 1024));
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 break;
@@ -109,11 +109,12 @@ public class Client2 {
                 if (left == 0L) {
                     return 0L;
                 } else {
-                    long written = fileChannel.transferTo(transferred, 1000 * 1000 * 1000, target);
+                    long written = fileChannel.transferTo(transferred, 1024 * 1024 * 1024, target);
                     if (written > 0L) {
                         transferred += written;
                     }
                     left -= written;
+                    System.out.println(String.format("传输数据大小[%s]", written / 1024d / 1024d));
                 }
             } else {
                 throw new IllegalArgumentException("");
@@ -122,6 +123,8 @@ public class Client2 {
     }
 
     public static void main(String[] args) throws IOException {
-        new Client2().client("D:\\test\\order-application.log", 1111);
+        String path = "D:\\test\\order-application.log";
+//        String path = "D:\\test\\123.log";
+        new Client2().client(path, "172.16.244.94", 1111);
     }
 }
