@@ -53,13 +53,16 @@ public class Client1 {
                             channel.finishConnect();
                             System.out.println("connect success !");
 
-                            String fileName = "D:\\test\\123.log";
-//                            String fileName = "D:\\test\\order-application.log";
+//                            String fileName = "D:\\test\\123.log";
+                            String fileName = "D:\\test\\order-application.log";
 
                             long startTime = System.currentTimeMillis();
                             File file = new File(fileName);
                             //写入channel
                             transferTo(file, channel);
+                            /*ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+                            byteBuffer.putInt(1);
+                            channel.write(byteBuffer);*/
                             System.out.println("大小： " + file.length() + ", 耗时： " + (System.currentTimeMillis() - startTime));
                             channel.close();
                         }
@@ -74,17 +77,17 @@ public class Client1 {
 
 
     public static long transferTo(File f, WritableByteChannel target) throws IOException {
-        FileChannel file;
+        FileChannel fileChannel;
         long len = f.length();//文件长度
         long left = len;//剩余字节
         long transferred = 0;//已传输
-        file = (new RandomAccessFile(f, "r")).getChannel();
+        fileChannel = (new RandomAccessFile(f, "r")).getChannel();
         while (true) {
             if (left >= 0L) {
                 if (left == 0L) {
                     return 0L;
                 } else {
-                    long written = file.transferTo(transferred, 1000*1000*1000, target);
+                    long written = fileChannel.transferTo(transferred, 1000*1000*1000, target);
                     if (written > 0L) {
                         transferred += written;
                     }
@@ -94,9 +97,7 @@ public class Client1 {
                 throw new IllegalArgumentException("");
             }
         }
-
     }
-
 
     public static void main(String[] args) throws IOException {
         Client1 client = new Client1(1111);
