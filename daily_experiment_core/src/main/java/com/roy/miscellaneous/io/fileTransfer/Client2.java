@@ -33,7 +33,7 @@ public class Client2 {
             SocketChannel socketChannel = SocketChannel.open();
             socketChannel.configureBlocking(false);
             selector = Selector.open();
-            socketChannel.register(selector, SelectionKey.OP_CONNECT, ByteBuffer.allocate(1024 * 1024 * 1024));
+            socketChannel.register(selector, SelectionKey.OP_CONNECT);
             socketChannel.connect(ipPort);
             /*
              * 轮询监听客户端上注册事件的发生
@@ -58,7 +58,7 @@ public class Client2 {
                                 sendBuffer.putLong(fileLen);
                                 sendBuffer.flip();
                                 clientChannel.write(sendBuffer);
-                                clientChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024 * 1024 * 1024));
+                                clientChannel.register(selector, SelectionKey.OP_READ);
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 break;
@@ -104,17 +104,19 @@ public class Client2 {
         long left = len;//剩余字节
         long transferred = 0;//已传输
         fileChannel = (new RandomAccessFile(f, "r")).getChannel();
+//        System.out.println(String.format("channel size :%s", fileChannel.size()));
         while (true) {
             if (left >= 0L) {
                 if (left == 0L) {
+                    System.out.println(String.format("本轮写入channel数据大小[%s]M", transferred / 1024d / 1024d));
                     return 0L;
                 } else {
-                    long written = fileChannel.transferTo(transferred, 1024 * 1024 * 1024, target);
+                    long written = fileChannel.transferTo(transferred, fileChannel.size(), target);
                     if (written > 0L) {
                         transferred += written;
                     }
                     left -= written;
-                    System.out.println(String.format("传输数据大小[%s]", written / 1024d / 1024d));
+                    System.out.println(String.format("本次写入channel数据大小[%s]K", written / 1024d));
                 }
             } else {
                 throw new IllegalArgumentException("");
@@ -125,6 +127,6 @@ public class Client2 {
     public static void main(String[] args) throws IOException {
         String path = "D:\\test\\order-application.log";
 //        String path = "D:\\test\\123.log";
-        new Client2().client(path, "172.16.244.94", 1111);
+        new Client2().client(path, "127.0.0.1", 1111);
     }
 }

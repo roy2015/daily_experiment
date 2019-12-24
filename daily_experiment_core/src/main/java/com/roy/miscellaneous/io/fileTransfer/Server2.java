@@ -27,24 +27,27 @@ import java.util.Set;
  */
 public class Server2 {
     /**
-     * 接收文件
+     * socketChannel -> fileChannel
      * @param fileChannel
      * @param source
-     * @param position
+     * @param originPos
      * @return
      * @throws IOException
      */
-    public static long transferFrom(FileChannel fileChannel, ReadableByteChannel source, long position)
+    public static long transferFrom(FileChannel fileChannel, ReadableByteChannel source, long originPos)
             throws IOException {
         long written = 0L;
+        long position = originPos;
         while (true) {
             written = fileChannel.transferFrom(source, position, 1024 * 1024 * 100);
             if (written > 0L) {
                 position += written;
             } else if (written == 0) {
+                System.out.println(String.format("本轮接收数据【%s】K,已接收【%s】M", (position - originPos)/1024d ,
+                        position / 1024d / 1024d));
                 return position;
             }
-            System.out.println(String.format("此次读取数据大小，【%s】,已传输【%s】", written ,position / 1024d / 1024d));
+            System.out.println(String.format("此次接收数据【%s】K,已接收【%s】M", written/1024d ,position / 1024d / 1024d));
         }
     }
 
@@ -53,7 +56,7 @@ public class Server2 {
         ByteBuffer rBuffer = ByteBuffer.allocate(20);
         FileChannel fileChannel = (new RandomAccessFile(file, "rw")).getChannel();
         boolean isStart = false;//开始接收文件
-        System.out.println("Listening for connections on port " + port);
+        System.out.println(String.format("监听连接，端口 %s ", port));
         ServerSocketChannel serverChannel = ServerSocketChannel.open();
         ServerSocket ss = serverChannel.socket();
         InetSocketAddress address = new InetSocketAddress(port);
@@ -83,7 +86,7 @@ public class Server2 {
                         SocketChannel client = server.accept();
                         System.out.println(String.format("Accepted connection from {%s}，时间 [%s]", client, new Date()));
                         client.configureBlocking(false);
-                        client.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024 * 1024 * 100 * 3));
+                        client.register(selector, SelectionKey.OP_READ);
                     } else if (key.isReadable()) {//读数据
                         if (!isStart) {
                             SocketChannel clientChannel = (SocketChannel) key.channel();
@@ -127,8 +130,8 @@ public class Server2 {
     // java 的服务器
     public static void main(String[] args) throws Exception {
         try {
-//            String path = "D:\\test\\456.log";
-            String path = "/Users/apple/guojun/test/456.log";
+            String path = "D:\\test\\456.log";
+//            String path = "/Users/apple/guojun/test/456.log";
             new Server2().serve(1111, new File(path));
         } catch (Exception ex) {
             ex.printStackTrace();
