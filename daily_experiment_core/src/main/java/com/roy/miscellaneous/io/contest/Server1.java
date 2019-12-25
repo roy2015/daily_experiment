@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.io.fileTransfer;
+package com.roy.miscellaneous.io.contest;
 
 import java.io.File;
 import java.io.IOException;

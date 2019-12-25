@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.io.fileTransfer;
+package com.roy.miscellaneous.io.contest.official;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import java.util.Set;
  * 6.  可以自定义压缩，不限制压缩算法，但需要实现解压
  * 7.  评判标准传输时间最短
  */
-public class Server2 {
+public class Server {
     /**
      * socketChannel -> fileChannel
      * @param fileChannel
@@ -132,7 +132,7 @@ public class Server2 {
         try {
             String path = "D:\\test\\456.log";
 //            String path = "/Users/apple/guojun/test/456.log";
-            new Server2().serve(1111, new File(path));
+            new Server().serve(1111, new File(path));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

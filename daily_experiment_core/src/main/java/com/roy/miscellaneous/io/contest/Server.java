@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.io.fileTransfer;
+package com.roy.miscellaneous.io.contest;
 
 import java.io.DataInputStream;
 import java.io.FileOutputStream;

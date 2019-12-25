@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.io.fileTransfer;
+package com.roy.miscellaneous.io.contest.official;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by BG244210 on 27/04/2017.
  */
-public class Client2 {
+public class Client {
     public void client(String fileName, String ip , int port) {
         try {
             /*发送数据缓冲区*/
@@ -127,6 +127,6 @@ public class Client2 {
     public static void main(String[] args) throws IOException {
         String path = "D:\\test\\order-application.log";
 //        String path = "D:\\test\\123.log";
-        new Client2().client(path, "127.0.0.1", 1111);
+        new Client().client(path, "127.0.0.1", 1111);
     }
 }
