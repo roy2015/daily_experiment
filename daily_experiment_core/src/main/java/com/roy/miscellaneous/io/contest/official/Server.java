@@ -27,21 +27,24 @@ import java.util.Set;
  */
 public class Server {
     /**
-     * 接收文件
+     * socketChannel -> fileChannel
      * @param fileChannel
      * @param source
-     * @param position
+     * @param originPos
      * @return
      * @throws IOException
      */
-    public static long transferFrom(FileChannel fileChannel, ReadableByteChannel source, long position)
+    public static long transferFrom(FileChannel fileChannel, ReadableByteChannel source, long originPos, long fileLen)
             throws IOException {
         long written = 0L;
+        long position = originPos;
         while (true) {
-            written = fileChannel.transferFrom(source, position, 1024 * 1024 * 100);
+            written = fileChannel.transferFrom(source, position, fileLen);
             if (written > 0L) {
                 position += written;
             } else if (written == 0) {
+                System.out.println(String.format("本轮接收数据【%s】K,已接收【%s】M", (position - originPos)/1024d ,
+                        position / 1024d / 1024d));
                 return position;
             }
             System.out.println(String.format("此次接收数据【%s】K,已接收【%s】M", written/1024d ,position / 1024d / 1024d));
@@ -53,7 +56,7 @@ public class Server {
         ByteBuffer rBuffer = ByteBuffer.allocate(20);
         FileChannel fileChannel = (new RandomAccessFile(file, "rw")).getChannel();
         boolean isStart = false;//开始接收文件
-        System.out.println("Listening for connections on port " + port);
+        System.out.println(String.format("监听连接，端口 %s ", port));
         ServerSocketChannel serverChannel = ServerSocketChannel.open();
         ServerSocket ss = serverChannel.socket();
         InetSocketAddress address = new InetSocketAddress(port);
@@ -83,7 +86,7 @@ public class Server {
                         SocketChannel client = server.accept();
                         System.out.println(String.format("Accepted connection from {%s}，时间 [%s]", client, new Date()));
                         client.configureBlocking(false);
-                        client.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024 * 1024 * 100 * 3));
+                        client.register(selector, SelectionKey.OP_READ);
                     } else if (key.isReadable()) {//读数据
                         if (!isStart) {
                             SocketChannel clientChannel = (SocketChannel) key.channel();
@@ -105,7 +108,7 @@ public class Server {
                             SocketChannel socketChannel = (SocketChannel) key.channel();
                             System.out.println(String.format("开始接收文件，开始时间[%s], 距离开始时间[%s]", new Date(),
                                     System.currentTimeMillis() - startTime));
-                            position = transferFrom(fileChannel, socketChannel, position);
+                            position = transferFrom(fileChannel, socketChannel, position, fileLen);
                             if (position >= fileLen) {
                                 System.out.println(String.format("接收文件完毕，结束时间[%s], 距离开始时间耗时 [%s]",
                                         new Date(), System.currentTimeMillis() - startTime));
