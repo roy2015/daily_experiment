@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.io.fileTransfer;
+package com.roy.miscellaneous.io.contest.official;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -9,8 +9,8 @@ import java.util.Set;
 /**
  * Created by BG244210 on 27/04/2017.
  */
-public class Client2 {
-    public void client(String fileName, int port) {
+public class Client {
+    public void client(String fileName, String ip , int port) {
         try {
             /*发送数据缓冲区*/
             ByteBuffer sendBuffer = ByteBuffer.allocate(8);
@@ -24,7 +24,7 @@ public class Client2 {
             String start = "start";
 
             file = new File(fileName);
-            ipPort = new InetSocketAddress("localhost", port);
+            ipPort = new InetSocketAddress(ip, port);
 
             long fileLen = file.length();
             /*
@@ -104,16 +104,19 @@ public class Client2 {
         long left = len;//剩余字节
         long transferred = 0;//已传输
         fileChannel = (new RandomAccessFile(f, "r")).getChannel();
+//        System.out.println(String.format("channel size :%s", fileChannel.size()));
         while (true) {
             if (left >= 0L) {
                 if (left == 0L) {
+                    System.out.println(String.format("本轮写入channel数据大小[%s]M", transferred / 1024d / 1024d));
                     return 0L;
                 } else {
-                    long written = fileChannel.transferTo(transferred, 1000 * 1000 * 1000, target);
+                    long written = fileChannel.transferTo(transferred, len, target);
                     if (written > 0L) {
                         transferred += written;
                     }
                     left -= written;
+                    System.out.println(String.format("本次写入channel数据大小[%s]K", written / 1024d));
                 }
             } else {
                 throw new IllegalArgumentException("");
@@ -122,6 +125,8 @@ public class Client2 {
     }
 
     public static void main(String[] args) throws IOException {
-        new Client2().client("D:\\test\\order-application.log", 1111);
+        String path = "D:\\test\\order-application.log";
+//        String path = "D:\\test\\123.log";
+        new Client().client(path, "127.0.0.1", 1111);
     }
 }
