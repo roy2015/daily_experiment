@@ -59,8 +59,8 @@ public class TestDruidDeEncrypt {
 
 
     public static void main(String[] args) {
-        String password = "It7jmzilkrGqaG71TPP0DwTQBaYP2GZhNcE6gn/E+S8T2aH6mq+4XNWynYhdLYfumOsFhCkT1l/0Kl4l0QwYKg==";
-        String publickey = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMeygUXFTBb7n/jjcWT8GRwPY/0xSQKW1owPEDIH89MHGpf+728eogbGcU4jPwCND9LwnINY9cJju+xGzEJFHLMCAwEAAQ==";
+        String password = "SLmXm/H1Qc+xAsk9APKwwAyOLw0qfgfqY2Su3Jy6puPiWHGHqwc3SIhoyEnhi5aS4jOmRecBm6AKr0Mq1ID6dw==";
+        String publickey = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMDycjz3GgA3AQdVMSym2C+yLJdjiQmqUW2w2/Mtn3QQLU5YXWrGaLITbXDCXvrV1SO29LbWqsWMRKm9pVgKs8sCAwEAAQ==";
         String s = new Solution().doDecrypt(publickey, password);
         logger.debug(s);
 //        new Solution().doEncrypt("Itsme@999");
