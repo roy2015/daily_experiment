@@ -3,6 +3,7 @@ package com.roy.miscellaneous.leetcode.stage2;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -57,8 +58,8 @@ public class TestInterview08_09 {
                 for (int i=0; i< size; i++) {
                     strI = subList.get(i);
                     processListBaseOnSubListItem(list, strI);
+//                    processListBaseOnSubListItem1(list, strI);
                 }
-
             }
             return list;
         }
@@ -72,9 +73,9 @@ public class TestInterview08_09 {
          * @param subStr
          */
         public void processListBaseOnSubListItem(List<String> retList, String subStr) {
-            char[] chars = subStr.toCharArray();
-            for (int i = 0; i < chars.length; i++) {
-                for (int j = i -1 ; j < chars.length; j++) {
+            int length = subStr.length();
+            for (int i = 0; i < length; i++) {
+                for (int j = i -1 ; j < length; j++) {
                     if (j == i -1) {//括号加到前面，单独处理
                         String candidateStr = subStr.substring(0, j+ 1)   + "(" + ")" + subStr.substring(i);
                         if (checkKuohao(candidateStr)) {
@@ -86,14 +87,65 @@ public class TestInterview08_09 {
                         String candidateStr = subStr.substring(0, i) + "(" + subStr.substring(i, j + 1) +
                                  ")" +
                                 subStr.substring(j);
-                        if (checkKuohao(candidateStr)) {
-                            if (!retList.contains(candidateStr)) {
-                                retList.add(candidateStr);
-                            }
+                        if (!retList.contains(candidateStr) && checkKuohao(candidateStr)) {
+                           retList.add(candidateStr);
                         }
                     }
                 }
             }
+        }
+
+        /**
+         * 同上，用的纯数组实现的
+         * @param retList
+         * @param subStr
+         */
+        public void processListBaseOnSubListItem1(List<String> retList, String subStr) {
+            int length = subStr.length();
+            char[] chars = subStr.toCharArray();
+            char[] opChars = new char[length +2];
+            Arrays.fill(opChars, '.');
+            for (int i = 0; i < length; i++) {
+                for (int j = i -1 ; j < length; j++) {
+                    if (j == i -1) {//括号加到前面，单独处理
+                        System.arraycopy(chars, 0, opChars,  0, j+1 );
+                        opChars[j+1] = '(';
+                        opChars[j+2] = ')';
+                        System.arraycopy(chars, i, opChars,  j+3, length -i );
+                    } else {
+                        System.arraycopy(chars, 0, opChars,  0, i );
+                        opChars[i] = '(';
+                        System.arraycopy(chars, i, opChars,  i, j+1-i );
+                        opChars[j+1] = ')';
+                        System.arraycopy(chars, j, opChars,  j+2, length -j );
+                    }
+
+                    String s = new String(opChars);
+                    if (!retList.contains(s) && checkKuohao(opChars)) {
+                        retList.add(s);
+                    }
+                }
+            }
+        }
+
+        /**
+         * 校验括号的正确性
+         * @return
+         */
+        public boolean checkKuohao (char[] chars) {
+//            char[] chars = str.toCharArray();
+            Stack<String> stack = new Stack();
+            for (char aChar : chars) {
+                if (aChar == '(') {
+                    stack.push("(");
+                } else {
+                    if (stack.empty()) {
+                        return false;
+                    }
+                    stack.pop();
+                }
+            }
+            return stack.empty();
         }
 
         /**
@@ -127,6 +179,6 @@ public class TestInterview08_09 {
 //        logger.info("123".substring(0,0));
 
         List<String> list = solution.generateParenthesis(4);
-        logger.info("{}", list);
+        logger.info("size:{}, {}", list.size(), list);
     }
 }
