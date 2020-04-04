@@ -347,4 +347,15 @@ public class MainTest {
     public void testReadObjectFromFIle() {
         TestObjectSerializeFile.testReadObjectFromFIle();;
     }
+
+    @Test
+    /**
+     * 测试BigDecimal的0
+     */
+    public void testZero() {
+        System.out.println(new BigDecimal("0.17").intValue() == 0);
+        System.out.println(new BigDecimal("0.17").equals("0"));
+        System.out.println(new BigDecimal("0.00").equals("0"));
+        System.out.println(new BigDecimal("0.00").compareTo(BigDecimal.ZERO));
+    }
 }
