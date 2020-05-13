@@ -15,6 +15,6 @@ public class TestSolutionTemplate {
     }
 
     public static void main(String[] args) {
-
+        logger.info("{}", new Solution());
     }
 }
