@@ -68,6 +68,8 @@ public class TestSolution219 {
     }
 
     public static void main(String[] args) {
+        int max = (int) Math.floor(Math.sqrt(123));
+
         logger.info("{}", new Solution().containsNearbyDuplicate(new int[]{1,2,3,1,0,1}, 1));//false
         logger.info("{}", new Solution().containsNearbyDuplicate(new int[]{1,2,3,1,0,1}, 2));//false
     }
