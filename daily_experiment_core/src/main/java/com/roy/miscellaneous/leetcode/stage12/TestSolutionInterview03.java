@@ -29,8 +29,6 @@ public class TestSolutionInterview03 {
 
     static class Solution {
         /**
-         * 
-         *
          *
          * 执行结果：
          通过
