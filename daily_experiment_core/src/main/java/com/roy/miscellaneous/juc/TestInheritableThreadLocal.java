@@ -17,19 +17,9 @@ public class TestInheritableThreadLocal {
         InheritableThreadLocal<String> threadLocal = new InheritableThreadLocal<>();
         threadLocal.set("parent");
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                LOGGER.debug("{}", threadLocal.get());
-            }
-        }).start();
+        new Thread(() -> LOGGER.debug("{}", threadLocal.get())).start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                LOGGER.debug("{}", threadLocal.get());
-            }
-        }).start();
+        new Thread(() -> LOGGER.debug("{}", threadLocal.get())).start();
 
         System.in.read();
 
