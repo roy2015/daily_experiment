@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.leetcode.stage1.stage10;
+package com.roy.miscellaneous.leetcode.stage3;
 
 import org.slf4j.LoggerFactory;
 
