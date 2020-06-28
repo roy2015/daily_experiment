@@ -36,7 +36,11 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
-import java.util.Random;
+import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by apple on 2018/12/7.
@@ -404,5 +408,78 @@ public class MainTest {
         System.out.println(new BigDecimal("0.17").equals("0"));
         System.out.println(new BigDecimal("0.00").equals("0"));
         System.out.println(new BigDecimal("0.00").compareTo(BigDecimal.ZERO));
+    }
+
+    @Test
+    public void testFlatMap() {
+        UserVO userVO1 = new UserVO(1, "guo1,guo2", "f");
+        UserVO userVO2 = new UserVO(2, "guo2", "f");
+        UserVO userVO3 = new UserVO(3, "guo1,guoj3", "f");
+
+        List<UserVO> userVOS = new ArrayList<>();
+        userVOS.add(userVO1);
+        userVOS.add(userVO2);
+        userVOS.add(userVO3);
+
+        List<String> names = userVOS.stream().flatMap((Function<UserVO, Stream<String>>) userVO -> {
+            String userName = userVO.getUserName();
+            String[] name = userName.split(",");
+            List<String> nameList = Arrays.asList(name);
+            return nameList.stream();
+        }).collect(Collectors.toList());
+
+        System.out.println(names);
+        int k = 3;
+
+    }
+
+    @Test
+    public void testCollectorToMap() {
+        UserVO userVO1 = new UserVO(1, "guo", "f");
+        UserVO userVO2 = new UserVO(2, "guo2", "f");
+        UserVO userVO3 = new UserVO(3, "guo3", "f");
+        UserVO userVO4 = new UserVO(1, "guo1", "f");
+
+        List<UserVO> userVOS = new ArrayList<>();
+        userVOS.add(userVO1);
+        userVOS.add(userVO2);
+        userVOS.add(userVO3);
+        userVOS.add(userVO4);
+
+        Map<Integer, String> userMap1 = userVOS.stream().collect(HashMap::new,
+                (integerStringHashMap, userVO) -> integerStringHashMap.put(userVO.getUserId(), userVO.getUserName()), HashMap::putAll);
+
+        Map<Integer, String> userMap = userVOS.stream().collect(Collectors.toMap(
+                userVO -> userVO.getUserId(),
+                userVO -> userVO.getUserName()));
+        int k =3;
+
+    }
+
+    @Test(expectedExceptions = {java.lang.NullPointerException.class})
+    public void testCollectorToMapThrow() {
+        UserVO userVO1 = new UserVO(1, "guo", "f");
+        UserVO userVO2 = new UserVO(2, null, "f");
+        UserVO userVO3 = new UserVO(3, "guo", "f");
+
+        List<UserVO> userVOS = new ArrayList<>();
+        userVOS.add(userVO1);
+        userVOS.add(userVO2);
+        userVOS.add(userVO3);
+
+        //抛异常，map.merge（）的 value不为空
+        Map<Integer, String> userMap = userVOS.stream().collect(Collectors.toMap(new Function<UserVO, Integer>() {
+            @Override
+            public Integer apply(UserVO userVO) {
+                return userVO.getUserId();
+            }
+        }, new Function<UserVO, String>() {
+            @Override
+            public String apply(UserVO userVO) {
+                return userVO.getUserName();
+            }
+        }));
+        int k =3;
+
     }
 }
