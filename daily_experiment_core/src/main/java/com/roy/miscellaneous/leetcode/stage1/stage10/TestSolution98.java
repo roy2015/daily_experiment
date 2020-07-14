@@ -85,6 +85,11 @@ public class TestSolution98 {
         }
 
 
+        /**
+         * 数组转树
+         * @param list
+         * @return
+         */
         public TreeNode transformToBST(List<Integer> list) {
             TreeNode root = null;
             root = new TreeNode(list.get(0));
@@ -95,6 +100,11 @@ public class TestSolution98 {
         }
 
 
+        /**
+         * 树转数组表示
+         * @param root
+         * @return
+         */
         public List<Integer> transformToList(TreeNode root) {
             if (root == null) {
                 return null;
