@@ -165,7 +165,7 @@ public class TestSolution34 {
 
 
         /**
-         * targe第一次出现的位置(多个相等的情况下)
+         * 二分查找第一次(左边)出现的位置(多个相等的情况下)
          * @param nums
          * @param idx 二分查找时候的第一个
          * @param target
@@ -191,7 +191,7 @@ public class TestSolution34 {
 
         /**
          *
-         * targe最后一次出现的位置(多个相等的情况下)
+         * 二分查找最后一次(右边)出现的位置(多个相等的情况下)
          *
          * @param nums
          * @param idx
