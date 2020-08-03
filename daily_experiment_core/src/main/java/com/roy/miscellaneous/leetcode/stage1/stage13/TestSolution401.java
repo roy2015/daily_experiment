@@ -137,6 +137,11 @@ public class TestSolution401 {
         /**
          *
          *  计算数学中组合(permutation and combination)的所有排列or组合
+         *   example:
+         *   List<List<Integer>> storeList = new ArrayList<>();
+         *   getCombination(3, 1, Arrays.asList(8,4,2,1), new ArrayList<>(), storeList);
+         *   返回的数据在storeList
+         *
          * @param k  选几个
          * @param level  传 1
          * @param calList 选择范围
