@@ -95,7 +95,7 @@ public class TestSolution541 {
 
         /**
          *
-         * 对上面的优化，去掉了StringBuilder, 原样输出的不做任何操作，这个和上面的本质区别 {@link TestSolution541.Solution#reverseStr(String, int)} 直接原地
+         * 对上面的优化，去掉了StringBuilder, 原样输出的不做任何操作，这是和上面的本质区别 {@link TestSolution541.Solution#reverseStr(String, int)} 直接原地
          *
          * 执行结果：
          * 通过
