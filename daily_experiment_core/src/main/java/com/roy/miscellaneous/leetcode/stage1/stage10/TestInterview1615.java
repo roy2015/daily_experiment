@@ -39,7 +39,7 @@ public class TestInterview1615 {
 
     static class Solution {
         /**
-         *
+         *这个题目不好理解，只有不断的testCase才弄清楚细节
          * 可以实现0ms，但还是写个通用的吧，要不然很多变量和swithc不可扩展
          *
          *执行结果：
