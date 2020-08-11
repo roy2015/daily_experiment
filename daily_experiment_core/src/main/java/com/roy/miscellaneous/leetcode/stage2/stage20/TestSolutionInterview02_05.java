@@ -2,11 +2,6 @@ package com.roy.miscellaneous.leetcode.stage2.stage20;
 
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
-
 /**
  * @author guojun
  * @date 2020/6/18
@@ -32,8 +27,8 @@ import java.util.Stack;
  * 输出：9 -> 1 -> 2，即912
  *
  */
-public class TestInterview02_05 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview02_05.class);
+public class TestSolutionInterview02_05 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview02_05.class);
 
     static class ListNode {
         int val;

@@ -34,8 +34,8 @@ import java.util.Map;
  *
  *
  */
-public class TestInterview1615 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview1615.class);
+public class TestSolutionInterview1615 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview1615.class);
 
     static class Solution {
         /**

@@ -2,11 +2,6 @@ package com.roy.miscellaneous.leetcode.stage2.stage20;
 
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
-
 /**
  * @author guojun
  * @date 2020/1/21 10:40
@@ -28,8 +23,8 @@ import java.util.Stack;
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
  */
-public class TestInterview16_01 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview16_01.class);
+public class TestSolutionInterview16_01 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview16_01.class);
 
 
     static class Solution {

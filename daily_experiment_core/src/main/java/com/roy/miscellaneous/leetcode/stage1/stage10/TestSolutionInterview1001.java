@@ -22,8 +22,8 @@ import org.slf4j.LoggerFactory;
  * <p>
  * A.length == n + m
  */
-public class TestInterview1001 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview1001.class);
+public class TestSolutionInterview1001 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview1001.class);
 
 
     static class Solution {

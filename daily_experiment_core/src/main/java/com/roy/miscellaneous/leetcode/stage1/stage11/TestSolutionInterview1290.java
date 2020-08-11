@@ -44,8 +44,8 @@ import org.slf4j.LoggerFactory;
 链表的结点总数不超过 30。
 每个结点的值不是 0 就是 1。
  */
-public class TestInterview1290 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview1290.class);
+public class TestSolutionInterview1290 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview1290.class);
 
 
     static class ListNode {

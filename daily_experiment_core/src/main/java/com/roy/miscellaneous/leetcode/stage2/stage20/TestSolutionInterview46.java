@@ -2,11 +2,6 @@ package com.roy.miscellaneous.leetcode.stage2.stage20;
 
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
-
 /**
  * @author guojun
  * @date 2020/6/18 10:40
@@ -28,8 +23,8 @@ import java.util.Stack;
  * 0 <= num < 231
  *
  */
-public class TestInterview46 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview46.class);
+public class TestSolutionInterview46 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview46.class);
 
 
     static class Solution {

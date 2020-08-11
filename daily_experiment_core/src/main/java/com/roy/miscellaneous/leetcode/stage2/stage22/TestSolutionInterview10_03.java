@@ -23,8 +23,8 @@ import org.slf4j.LoggerFactory;
  * arr 长度范围在[1, 1000000]之间
  *
  */
-public class TestInterview10_03 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview10_03.class);
+public class TestSolutionInterview10_03 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview10_03.class);
 
 
 

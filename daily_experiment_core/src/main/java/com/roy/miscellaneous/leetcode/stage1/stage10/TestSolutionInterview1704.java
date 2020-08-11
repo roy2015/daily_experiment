@@ -2,10 +2,6 @@ package com.roy.miscellaneous.leetcode.stage1.stage10;
 
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author guojun
  * @date 2020/8/8
@@ -29,8 +25,8 @@ import java.util.Map;
  *
  *
  */
-public class TestInterview1704 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview1704.class);
+public class TestSolutionInterview1704 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview1704.class);
 
     static class Solution {
 

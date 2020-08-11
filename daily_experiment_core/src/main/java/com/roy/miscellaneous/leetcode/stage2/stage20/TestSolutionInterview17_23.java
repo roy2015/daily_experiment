@@ -35,8 +35,8 @@ import org.slf4j.LoggerFactory;
  * matrix.length == matrix[0].length <= 200
  *
  */
-public class TestInterview17_23 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview17_23.class);
+public class TestSolutionInterview17_23 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview17_23.class);
 
     /**
      * matrix.length == matrix[0].length <= 200, 正方形矩阵

@@ -26,8 +26,8 @@ import org.slf4j.LoggerFactory;
 1 <= n <= 10000
  *
  */
-public class TestInterview64 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview64.class);
+public class TestSolutionInterview64 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview64.class);
 
 
     static class Solution {

@@ -30,8 +30,8 @@ import java.util.Stack;
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
  */
-public class TestInterview08_09 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview08_09.class);
+public class TestSolutionInterview08_09 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview08_09.class);
 
 
     static class Solution {

@@ -20,8 +20,8 @@ import org.slf4j.LoggerFactory;
  * 给定的 k 保证是有效的。
  *
  */
-public class TestInterview0202 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview0202.class);
+public class TestSolutionInterview0202 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview0202.class);
 
     static class ListNode {
         int val;

@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 
 返回链表 4->5.
  */
-public class TestInterview22 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestInterview22.class);
+public class TestSolutionInterview22 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionInterview22.class);
 
 
     static class ListNode {
