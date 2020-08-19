@@ -51,7 +51,7 @@ public class TestSolutionJZoffer06 {
          */
         public int[] reversePrint(ListNode head) {
             ListNode node = head;
-            ListNode preNode = null;//给下一个准备的node
+            ListNode preNode = null;//给下一个迭代准备的node
             ListNode nextNode =null;
             int i = 0;//记录节点长度
 
