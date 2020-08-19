@@ -106,8 +106,9 @@ public class TestSolution1128 {
         }
 
         /**
+         * 组合（combination）公式  C(n, k) =  n!/((n-k)!k!)
+         * 只计算值没有详情
          *
-         * 排列组合公式 , C(n, k) =  n!/((n-k)!k!)     p(n,k) = n!/(n-k)!
          * @param n
          * @param k
          * @return

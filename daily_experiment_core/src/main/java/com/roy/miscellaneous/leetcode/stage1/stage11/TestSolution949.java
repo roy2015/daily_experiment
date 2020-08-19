@@ -155,6 +155,7 @@ public class TestSolution949 {
          *   getPermutation(3, 1, Arrays.asList(8,4,2,1), new ArrayList<>(), storeList);
          * 返回的数据在storeList
          *
+         * 排列公式 p(n,k)= n!(n-k)!，返回所有的排列详情
          *  计算数学中排列(permutation and combination)的所有排列
          * @param k  选几个
          * @param level  传 1

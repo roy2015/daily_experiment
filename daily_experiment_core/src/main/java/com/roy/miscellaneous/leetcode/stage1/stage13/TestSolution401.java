@@ -136,7 +136,7 @@ public class TestSolution401 {
 
         /**
          *
-         *  计算数学中组合(permutation and combination)的所有排列or组合
+         *  计算数学中组合(combination)的所有组合详情
          *   example:
          *   List<List<Integer>> storeList = new ArrayList<>();
          *   getCombination(3, 1, Arrays.asList(8,4,2,1), new ArrayList<>(), storeList);
