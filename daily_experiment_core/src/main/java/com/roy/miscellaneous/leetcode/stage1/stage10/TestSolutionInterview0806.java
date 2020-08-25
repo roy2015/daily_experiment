@@ -91,7 +91,7 @@ public class TestSolutionInterview0806 {
 
     public static void main(String[] args) {
         List<Integer> A = new ArrayList<>();
-        int len = 2;
+        int len = 14;
         for (int i = len; i >= 1; i--) {
             A.add(i);
         }
