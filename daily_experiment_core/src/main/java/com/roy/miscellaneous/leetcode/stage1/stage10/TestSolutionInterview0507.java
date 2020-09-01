@@ -72,12 +72,33 @@ public class TestSolutionInterview0507 {
             }
             return retSum;
         }
+
+        /**
+         *  借鉴的思路比较巧妙，直接一次性求奇数位和偶数位，再错位拼接起来
+         *
+         *  执行结果：
+         *  通过
+         *  显示详情
+         *  执行用时：0 ms,
+         *  在所有 Java
+         *  提交中击败了100.00%的用户
+         *  内存消耗：36.5 MB,
+         *  在所有 Java
+         *  提交中击败了34.54%的用户
+         * @param num
+         * @return
+         */
+        public int exchangeBits1(int num) {
+            int jiPadding = 0x15555555;
+            int ouPadding = 0x2AAAAAAA;
+            return (num & jiPadding) << 1 | (num & ouPadding) >> 1;
+        }
     }
 
     public static void main(String[] args) {
-        logger.info("{}", new Solution().exchangeBits(3));//3
-        logger.info("{}", new Solution().exchangeBits(13));//14
-        logger.info("{}", new Solution().exchangeBits(2));//1
+        logger.info("{}", new Solution().exchangeBits1(3));//3
+        logger.info("{}", new Solution().exchangeBits1(13));//14
+        logger.info("{}", new Solution().exchangeBits1(2));//1
 
     }
 }
