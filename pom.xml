@@ -18,6 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework-version>4.3.1.RELEASE</org.springframework-version>
         <curator-version>2.11.0</curator-version>
+        <hutool.version>5.3.10</hutool.version>
     </properties>
 
     <dependencyManagement>

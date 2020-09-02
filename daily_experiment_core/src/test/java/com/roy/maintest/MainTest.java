@@ -1,5 +1,9 @@
 package com.roy.maintest;
 
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.CircleCaptcha;
+import cn.hutool.captcha.LineCaptcha;
+import cn.hutool.captcha.ShearCaptcha;
 import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestBase64Codec;
 import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
@@ -25,11 +29,16 @@ import com.roy.miscellaneous.spi.TestJdkSpi;
 import com.roy.miscellaneous.targetObject.TestString;
 import com.roy.miscellaneous.targetObject.UserVO;
 import com.roy.miscellaneous.yaml.TestReadYaml;
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
 
 import javax.naming.OperationNotSupportedException;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -37,6 +46,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -59,8 +69,8 @@ public class MainTest {
 
     @Test
     public void test3() {
-        int len =8;
-        int[] initArra = new int[len] ;
+        int len = 8;
+        int[] initArra = new int[len];
         for (int i = 0; i < len; i++) {
             initArra[i] = new Random().nextInt(100);
         }
@@ -69,15 +79,15 @@ public class MainTest {
 //        int[] ints = new TestMergeSort().mergeSort(new int[]{76, 91, 68});
         System.out.println("数据长度: " + ints.length);
         for (int i = 0; i < ints.length; i++) {
-            System.out.println(StringUtils.leftPad(i+"", 8, " ") + "\t" + StringUtils.leftPad(ints[i] +"" ,8," "));
+            System.out.println(StringUtils.leftPad(i + "", 8, " ") + "\t" + StringUtils.leftPad(ints[i] + "", 8, " "));
         }
     }
 
     @Test
     //插入排序
     public void testInsertionSort() {
-        int len =10;
-        int[] initArra = new int[len] ;
+        int len = 10;
+        int[] initArra = new int[len];
         for (int i = 0; i < len; i++) {
             initArra[i] = new Random().nextInt(100);
         }
@@ -91,8 +101,8 @@ public class MainTest {
     @Test
     //面试提，依次add 4,6,1到 arrayList，arrayList是 1，4，6， 用到是是add(index, value)，插入排序
     public void testInsertionSortUseArrayList() throws OperationNotSupportedException {
-        int len =7;
-        Long[] longArra = new Long[len] ;
+        int len = 7;
+        Long[] longArra = new Long[len];
         for (int i = 0; i < len; i++) {
             longArra[i] = Long.valueOf(new Random().nextInt(100));
         }
@@ -108,10 +118,10 @@ public class MainTest {
     @Test
     //同上，不过用的是Double
     public void testInsertionSortUseArrayListDouble() throws OperationNotSupportedException {
-        int len =7;
-        Double[] doubleArra = new Double[len] ;
+        int len = 7;
+        Double[] doubleArra = new Double[len];
         for (int i = 0; i < len; i++) {
-            doubleArra[i] = new BigDecimal( new Random().nextDouble()).
+            doubleArra[i] = new BigDecimal(new Random().nextDouble()).
                     multiply(new BigDecimal(100d), new MathContext(5, RoundingMode.HALF_UP)).doubleValue();
         }
 
@@ -123,7 +133,7 @@ public class MainTest {
 
     @Test
     public void testInsertionSortUseArrayListFloat() throws OperationNotSupportedException {
-        Float[] floatArrays = new Float[]{41f, 0f, 0f} ;
+        Float[] floatArrays = new Float[]{41f, 0f, 0f};
 
         TestInsertionSortWithAyyayList<Float> testInsertionSortWithAyyayList = new TestInsertionSortWithAyyayList<>();
         testInsertionSortWithAyyayList.printArray(floatArrays);//元素数据
@@ -171,7 +181,7 @@ public class MainTest {
     /**
      * 简单工厂
      */
-    public void testSimpleFactory(){
+    public void testSimpleFactory() {
         ComputerEngineer engineer = new ComputerEngineer();
         engineer.makeComputer(new SimpleFactory(), CpuType.INTEL, MainBoardType.MSI);
 
@@ -194,47 +204,49 @@ public class MainTest {
     }
 
     @Test
-    public void testJavassist(){
+    public void testJavassist() {
         new TestJavassist().testJavassist();
     }
 
     @Test
-    public void testOddEvenPrint () throws IOException {
+    public void testOddEvenPrint() throws IOException {
         new TestOddEvenPrint(10).testOddEvenPrin();
     }
 
     @Test
-    public void testSemaphore () throws IOException {
+    public void testSemaphore() throws IOException {
         TestSemaphore.main(null);
     }
 
     /**
      * 测试下 LockSupport
+     *
      * @throws Exception
      */
     @Test
-    public void testLockSupport () throws Exception {
-        TestThread.testLockSupport (null);
+    public void testLockSupport() throws Exception {
+        TestThread.testLockSupport(null);
     }
 
 
     @Test
-    public void testLockSupportInterrupt () throws Exception {
+    public void testLockSupportInterrupt() throws Exception {
         TestThread.testLockSupportInterrupt();
     }
 
     @Test
-    public void testLockSleepInterrupt () throws Exception {
+    public void testLockSleepInterrupt() throws Exception {
         TestThread.testLockSleepInterrupt();
     }
 
     @Test
-    public void testLoopInterrupt () throws Exception {
+    public void testLoopInterrupt() throws Exception {
         TestThread.testLoopInterrupt();
     }
 
     /**
      * 测试 threadLocal
+     *
      * @throws Exception
      */
     @Test
@@ -244,6 +256,7 @@ public class MainTest {
 
     /**
      * 测试yml文件的解析
+     *
      * @throws FileNotFoundException
      */
     @Test
@@ -287,6 +300,7 @@ public class MainTest {
 
     /**
      * 测试Base64加解密
+     *
      * @throws UnsupportedEncodingException
      */
     @Test
@@ -297,6 +311,7 @@ public class MainTest {
 
     /**
      * RSA 非对策加密解密
+     *
      * @throws Exception
      */
     @Test
@@ -306,15 +321,18 @@ public class MainTest {
 
     /**
      * 测试消息验证码
+     *
      * @throws Exception
      */
     @Test
-    public void testMac() throws Exception{
-        TestMac.testMac("page=1?username=guoj&size=3");;
+    public void testMac() throws Exception {
+        TestMac.testMac("page=1?username=guoj&size=3");
+        ;
     }
 
     /**
      * 测试签名
+     *
      * @throws UnsupportedEncodingException
      * @throws NoSuchAlgorithmException
      */
@@ -341,7 +359,8 @@ public class MainTest {
      * 对象序列号到文件
      */
     public void testWriteObjecctToFile() {
-        TestObjectSerializeFile.testWriteObjecctToFile();;
+        TestObjectSerializeFile.testWriteObjecctToFile();
+        ;
     }
 
     @Test
@@ -349,12 +368,13 @@ public class MainTest {
      * 从文件读取对象
      */
     public void testReadObjectFromFIle() {
-        TestObjectSerializeFile.testReadObjectFromFIle();;
+        TestObjectSerializeFile.testReadObjectFromFIle();
+        ;
     }
 
     @Test
     public void testAddBigDecimalLoop() {
-        for (int i = 0; i < 1000; i ++) {
+        for (int i = 0; i < 1000; i++) {
             testAddBigDecimal();
         }
     }
@@ -452,7 +472,7 @@ public class MainTest {
         Map<Integer, String> userMap = userVOS.stream().collect(Collectors.toMap(
                 userVO -> userVO.getUserId(),
                 userVO -> userVO.getUserName()));
-        int k =3;
+        int k = 3;
 
     }
 
@@ -479,7 +499,22 @@ public class MainTest {
                 return userVO.getUserName();
             }
         }));
-        int k =3;
+        int k = 3;
 
+    }
+
+    @Test
+    //测试hutool的验证码
+    public void testHutool() {
+        LineCaptcha captcha = CaptchaUtil.createLineCaptcha(250, 250, 4, 2000);
+        Image image = captcha.createImage("2345");
+        try (FileOutputStream fos = new FileOutputStream("/Users/apple/logs/img.jpg")) {
+            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(fos);
+            encoder.encode((BufferedImage) image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(123);
     }
 }
