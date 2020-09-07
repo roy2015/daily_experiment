@@ -45,7 +45,7 @@ public class TestSolutionInterview0207 {
 
 
         /**
-         * 
+         *
          * 最简单扣友的骚思路，如此简洁，不解释
          * （c,d分别是链表A,B中头结点到相交节点的距离, a,b代码A，B的长度），有a-c= b-d =>  a +d = b +c A走完就走B, A走完就走A, 没有没有焦点，
          * 会走到对方末尾 满足null == null
