@@ -37,7 +37,7 @@ public class TestSolutionInterview0402 {
 
         /**
          *
-         * 二分+递归 思路没错，但写法比较乱，完全靠debug，总会有考虑不全的地方
+         * 二分+递归 思路没错，但写法比较乱，完全靠debug，总会有考虑不全的地方，导致有些case不过
          *
          * @param nums
          * @return
