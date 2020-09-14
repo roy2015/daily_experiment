@@ -67,7 +67,7 @@ public class TestSolution107 {
 
             ArrayList<List<Integer>> lists = new ArrayList<>();
             Deque<TreeNode> queue = new ArrayDeque<>();
-            queue.add(root);
+            queue.add(root);//放入root，之后所有操作交给queue
             test(queue, lists);
             //反转
             Collections.reverse(lists);
