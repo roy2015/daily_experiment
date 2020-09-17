@@ -36,8 +36,8 @@ answer的长度 = 3
 guess的元素取值为 {1, 2, 3} 之一。
 answer的元素取值为 {1, 2, 3} 之一。
  */
-public class TestSolutionLcp01 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionLcp01.class);
+public class TestSolutionLCP01 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionLCP01.class);
 
 
     static class Solution {
