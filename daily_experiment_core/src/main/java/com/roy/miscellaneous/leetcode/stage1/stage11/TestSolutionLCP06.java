@@ -38,7 +38,7 @@ public class TestSolutionLCP06 {
     static class Solution {
 
         /**
-         * 
+         *
          * LCP: Leetcode cup?
          *
          * 执行结果：
