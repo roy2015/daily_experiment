@@ -52,6 +52,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.lang.Math.*;
+
 /**
  * Created by apple on 2018/12/7.
  */
@@ -516,5 +518,47 @@ public class MainTest {
         }
 
         System.out.println(123);
+    }
+
+    @Test
+    public void testjwd() {
+        System.out.println(algorithm(30.51347276318229d, 114.41989512786928d,
+                30.19368660754606d, 120.19886377719692d));
+    }
+
+    //公式中的经纬度均用弧度表示，计算两点距离
+
+    double algorithm(double longitude1, double latitude1, double longitude2, double latitude2) {
+
+        double Lat1 = rad(latitude1); // 纬度
+
+        double Lat2 = rad(latitude2);
+
+        double a = Lat1 - Lat2;//两点纬度之差
+
+        double b = rad(longitude1) - rad(longitude2); //经度之差
+
+//    double s = 2 * Math.asin(Math
+
+//                         .sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(Lat1) * Math.cos(Lat2) * Math.pow(Math.sin(b / 2), 2)));//计算两点距离的公式
+
+        double s = 2 *  asin( sqrt( pow( sin(a / 2), 2) +  cos(Lat1) *  cos(Lat2) *  pow( sin(b / 2), 2)));//计算两点距离的公式
+
+        s = s * 6378137.0;//弧长乘地球半径（半径为米）
+
+//        s = round(s * 10000) / 10000;//精确距离的数值
+
+        return s;
+
+    }
+
+
+
+    double rad(double d) {
+
+        return d * PI / 180.00; //角度转换成弧度
+
+
+
     }
 }

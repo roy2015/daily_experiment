@@ -17,6 +17,7 @@ public class TestSolution538 {
     }
 
     static class Solution {
+        private int current = 0;
 
         /**
          *
@@ -33,7 +34,7 @@ public class TestSolution538 {
          * @param root
          * @return
          */
-        public TreeNode convertBST(TreeNode root) {
+        public TreeNode convertBST1(TreeNode root) {
             if (root == null) {
                 return null;
             }
@@ -52,6 +53,7 @@ public class TestSolution538 {
 
             return root;
         }
+
 
         private int test(int baseVal, TreeNode node, int from) {
             TreeNode left = node.left;
@@ -86,22 +88,51 @@ public class TestSolution538 {
             }
             return retVal;
         }
+
+        /**
+         *
+         * 标准的官方解法， 用了类变量
+         * 执行用时：
+         * 1 ms
+         * , 在所有 Java 提交中击败了
+         * 98.38%
+         * 的用户
+         * 内存消耗：
+         * 39.3 MB
+         * , 在所有 Java 提交中击败了
+         * 10.65%
+         * 的用户
+         *
+         * @param root
+         * @return
+         */
+        public TreeNode convertBST(TreeNode root) {
+            if (root == null) {
+                return null;
+            }
+
+            convertBST(root.right);
+            root.val = current + root.val;
+            current = root.val;
+            convertBST(root.left);
+            return root;
+        }
     }
 
     public static void main(String[] args) {
         TreeNode root = null;
 
-        root = new TreeNode(5);
+        /*root = new TreeNode(5);
         root.left = new TreeNode(2);
         root.right = new TreeNode(13);
-        root.right.left = new TreeNode(10);
+        root.right.left = new TreeNode(10);*/
 
 
-        /*root = new TreeNode(2);
+        root = new TreeNode(2);
         root.left = new TreeNode(0);
         root.right = new TreeNode(3);
         root.left.left = new TreeNode(-4);
-        root.left.right = new TreeNode(1);*/
+        root.left.right = new TreeNode(1);
 
 
         /*root = new TreeNode(0);
@@ -110,6 +141,7 @@ public class TestSolution538 {
         root.left.left = new TreeNode(-3);
         root.right.right = new TreeNode(4);*/
 
-        logger.info("{}", new Solution().convertBST(root));
+        new Solution().convertBST(root);
+        logger.info("{}", new Solution());
     }
 }
