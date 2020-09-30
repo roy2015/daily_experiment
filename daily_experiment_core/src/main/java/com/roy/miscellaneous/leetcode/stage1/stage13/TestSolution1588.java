@@ -53,6 +53,13 @@ public class TestSolution1588 {
 
     static class Solution {
 
+        /**
+         *
+         * 执行用时：4 ms, 在所有 Java 提交中击败了24.88%的用户
+         * 内存消耗：36.8 MB, 在所有 Java 提交中击败了33.23%的用户
+         * @param arr
+         * @return
+         */
         public int sumOddLengthSubarrays(int[] arr) {
             if (arr == null || arr.length == 0) {
                 return 0;
