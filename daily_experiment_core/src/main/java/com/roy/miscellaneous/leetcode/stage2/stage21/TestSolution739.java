@@ -64,7 +64,7 @@ public class TestSolution739 {
         /**
          *
          *
-         * 下面两种方法都是用的单调栈 （ 底->顶 递减）
+         * 下面两种方法都是用的单调栈 （ 底->顶 递减， ）
          *
          *
          * stack用的是LinkedList类
@@ -89,7 +89,7 @@ public class TestSolution739 {
                 } else {
                     while (stack.isEmpty() == false) {
                         Integer peek = stack.peek();
-                        if (iVal > T[peek]) {
+                        if (iVal > T[peek]) {//栈顶比数组元素i小
                             Integer pop = stack.pop();
                             ret[pop] = i - pop;
                         } else {
@@ -97,7 +97,7 @@ public class TestSolution739 {
                             break;
                         }
                     }
-                    if (stack.isEmpty()) {//全部比他小而跳出while
+                    if (stack.isEmpty()) {//栈里全部比数组元素i小而跳出while
                         stack.push(i);
                     }
                 }
@@ -109,6 +109,8 @@ public class TestSolution739 {
         /**
          *
          * 和上面一样的代码，只不过的stack用的是stack类
+         *
+         *
          *
          * 执行结果：
          * 通过
@@ -133,7 +135,7 @@ public class TestSolution739 {
                 } else {
                     while (stack.isEmpty() == false) {
                         Integer peek = stack.peek();
-                        if (iVal > T[peek]) {
+                        if (iVal > T[peek]) {//栈顶比数组元素i小
                             Integer pop = stack.pop();
                             ret[pop] = i - pop;
                         } else {
@@ -141,7 +143,7 @@ public class TestSolution739 {
                             break;
                         }
                     }
-                    if (stack.isEmpty()) {//全部比他小而跳出while
+                    if (stack.isEmpty()) {//栈里全部比数组元素i小而跳出while
                         stack.push(i);
                     }
                 }
