@@ -38,66 +38,99 @@ public class TestSolution108 {
     /**
      */
     static class Solution {
+
+
         /**
          *
-         * todo: 解答错误，平衡二叉树怎么构建？？
+         * 用递归用到脑子里能跑递归代码了
+         *
+         * 执行结果：
+         * 通过
+         * 显示详情
+         * 执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
+         * 内存消耗：38.7 MB, 在所有 Java 提交中击败了76.39%的用户
          *
          * @param nums
          * @return
          */
         public TreeNode sortedArrayToBST(int[] nums) {
-            if (nums == null || nums.length == 0) {
-                return null;
-            }
+            int startIdx = 0;
+            int endIdx = nums.length - 1;
 
+            //特殊情况先排除掉
             int length = nums.length;
-            int mid = (length -1)/2;
-            TreeNode root = new TreeNode(nums[mid]);
-            int left = mid -1;
-            int right = mid +1;
-            boolean rightShift = true;
-            while (left >=0 || right < length) {
-                if (left >=0 && !rightShift) {
-                    insertNode(root, nums[left]);
-                    rightShift = true;
-                    left --;
-                }
-                if (right < length && rightShift) {
-                    insertNode(root, nums[right]);
-                    rightShift = false;
-                    right ++;
-                }
-            }
-            return root;
+            if (length == 0) {
+                return null;
+            } else if (length ==1) {
+                return new TreeNode(nums[0]);
+            } else if (length == 2) {
+                TreeNode rootNode1 = new TreeNode(nums[0]);
+                rootNode1.right = new TreeNode(nums[1]);
+                return rootNode1;
+            } else {};
+
+            //正常情况,3个元素或以上
+            int parentIdx = (startIdx + endIdx) / 2;
+            TreeNode rootNode = new TreeNode(nums[parentIdx]);
+            int leftParentIdx = (startIdx + parentIdx -1) /2;
+            TreeNode leftNode = new TreeNode(nums[leftParentIdx]);
+            rootNode.left = leftNode;
+            test(nums, leftNode, leftParentIdx, startIdx, parentIdx -1);
+
+            int rightParentIdx = (parentIdx + 1 + endIdx) /2;
+            TreeNode rightNode = new TreeNode(nums[rightParentIdx]);
+            rootNode.right = rightNode;
+            test(nums, rightNode, rightParentIdx, parentIdx + 1, endIdx);
+            return rootNode;
         }
 
         /**
-         * 找插入节点
-         * @param node
-         * @param val
-         * @return
+         *
+         * @param nums
+         * @param parentNode 这段区间的中间节点（已挂到tree上，主要是避免递归里不知道挂到左边还是右边，所以上层调用提前挂好）
+         * @param parentIdx 这段区间的中间节点在数组里的index
+         * @param startIdx 这段区间的startIdx
+         * @param endIdx  这段区间的endIdx
          */
-        public void insertNode(TreeNode node, int val) {
-            if (val < node.val) {
-                if (node.left == null) {
-                    node.left = new TreeNode(val);
-                    return;
-                } else {
-                    insertNode(node.left, val);
-                }
-            } else {
-                if (node.right == null) {
-                    node.right = new TreeNode(val);
-                    return ;
-                } else {
-                    insertNode(node.right, val);
-                }
+        private void test(int[] nums, TreeNode parentNode, int parentIdx, int startIdx, int endIdx) {
+            //区间大小1
+            if (startIdx == endIdx) {
+                return ;
             }
+
+            //区间大小2， 一边挂一个到parentNode
+            if (endIdx == startIdx + 1) {
+                parentNode.right = new TreeNode(nums[endIdx]);
+                return;
+            }
+
+            //区间大小>=3,拆分成两个区间
+            int leftParentIdx = (startIdx + parentIdx -1) /2;
+            TreeNode leftNode = new TreeNode(nums[leftParentIdx]);
+            parentNode.left = leftNode;
+            test(nums, leftNode, leftParentIdx, startIdx, parentIdx -1);
+
+            int rightParentIdx = (parentIdx + 1 + endIdx) /2;
+            TreeNode rightNode = new TreeNode(nums[rightParentIdx]);
+            parentNode.right = rightNode;
+            test(nums, rightNode, rightParentIdx, parentIdx + 1, endIdx);
+
         }
+
     }
 
     public static void main(String[] args) {
-        TreeNode treeNode = new Solution().sortedArrayToBST(new int[]{
+        TreeNode treeNode;
+
+        treeNode = new Solution().sortedArrayToBST(new int[]{
+                0,1,2,3,4,5
+        });
+
+        treeNode = new Solution().sortedArrayToBST(new int[]{
+                -10,-3,0,5,9
+        });
+
+        treeNode = new Solution().sortedArrayToBST(new int[]{
                 1,3
         });
         logger.info("{}");
