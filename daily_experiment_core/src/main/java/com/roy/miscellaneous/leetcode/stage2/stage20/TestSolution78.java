@@ -36,7 +36,10 @@ import java.util.List;
 public class TestSolution78 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution78.class);
 
-
+    /**
+     * 两种方法，一种传统的排列组合（回溯），一种迭代，第二种参考官方的思路
+     * 这种元素全不相同的迭代比回溯快，如果可以相同的话，只有用通用的回溯了
+     */
     static class Solution {
         private List<List<Integer>> sortListList;
         private int srcLen;
@@ -117,9 +120,46 @@ public class TestSolution78 {
             }
         }
 
+
+        /**
+         *
+         * 位运算迭代法
+         * 借鉴了点思路，代码自行手写
+         * 又用到数学，n个树的所有子集个数是 2^n,范围 0 到 2^n-1
+         *
+         * 执行结果：
+         * 通过
+         * 显示详情
+         * 执行用时：1 ms, 在所有 Java 提交中击败了99.42%的用户
+         * 内存消耗：38.6 MB, 在所有 Java 提交中击败了97.73%的用户
+         *
+         * @param nums
+         * @return
+         */
+        public List<List<Integer>> subsets1(int[] nums) {
+            List<List<Integer>> retLists = new ArrayList<>();
+            int length = nums.length;
+            int max = 1 << length;
+            retLists.add(Collections.EMPTY_LIST);
+            for (int i = 1; i < max; i++) {
+                List<Integer> subList = new ArrayList<>();
+                retLists.add(subList);
+                int k = i;
+                int idx =0;
+                //解析每一个元素
+                while (k != 0) {
+                    if ((k & 0x1) == 1) {
+                        subList.add(nums[idx]);
+                    }
+                    idx ++;
+                    k = k >> 1;
+                }
+            }
+            return retLists;
+        }
     }
 
     public static void main(String[] args) {
-        logger.info("{}", new Solution().subsets(new int[]{1,2,3}));
+        logger.info("{}", new Solution().subsets1(new int[]{1,2,3}));
     }
 }
