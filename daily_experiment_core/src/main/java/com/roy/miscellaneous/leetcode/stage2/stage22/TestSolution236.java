@@ -197,6 +197,8 @@ public class TestSolution236 {
          *
          * 扩展TreeNode类TreeNodeExt，加了parent属性，BFS 轮询渲染TreeNodeExt，最后直接向上循环查询出公共节点
          *
+         * todo: 采用DFS来做会是另外一片开阔地
+         *
          * 执行结果：
          * 通过
          * 显示详情
