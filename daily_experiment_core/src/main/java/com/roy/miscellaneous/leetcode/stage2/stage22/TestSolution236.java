@@ -53,6 +53,9 @@ public class TestSolution236 {
 
 
     static class Solution {
+
+         private TreeNode retNode;//用于lowestCommonAncestor3
+
          private  int treeDepth;
          private TreeNodeExt pNode;
          private TreeNodeExt qNode;
@@ -197,7 +200,7 @@ public class TestSolution236 {
          *
          * 扩展TreeNode类TreeNodeExt，加了parent属性，BFS 轮询渲染TreeNodeExt，最后直接向上循环查询出公共节点
          *
-         * todo: 采用DFS来做会是另外一片开阔地
+         * 采用DFS来做会是另外一片开阔地 {@link #lowestCommonAncestor3}
          *
          * 执行结果：
          * 通过
@@ -313,6 +316,72 @@ public class TestSolution236 {
             traverseTree(rightExt);
         }
 
+
+        /**
+         *
+         * 借鉴了点提示 用 DFS, 代码实现自己写的，就用了几个类变量，时刻检测是否找点pq  ，99，91%
+         * pq分居左右子树 返回current node
+         * 左右子树里只有p,q里面一个，另一个在current node 返回current node
+         *
+         * 执行结果：
+         * 通过
+         * 显示详情
+         * 执行用时：
+         * 7 ms
+         * , 在所有 Java 提交中击败了
+         * 99.91%的用户
+         * 内存消耗：40.8 MB,
+         * 在所有 Java 提交中击败了
+         * 78.72%的用户
+         *
+         * @param root
+         * @param p
+         * @param q
+         * @return
+         */
+        public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
+
+            lowestCommonAncestorSub(root, p, q);
+            return this.retNode;
+        }
+
+        private int lowestCommonAncestorSub(TreeNode node, TreeNode p, TreeNode q) {
+            if (node == null) {
+                return 0;
+            }
+
+            int retFlag = 0;
+            if (node == p) {
+                retFlag =1;
+            } else if (node == q) {
+                retFlag =2;
+            } else {}
+
+            int leftRet = lowestCommonAncestorSub(node.left, p, q);
+            if (retNode != null) {
+                return 0;
+            }
+            retFlag |= leftRet;
+            if (retFlag == 0x3) {
+                this.retNode = node;
+                return 3;
+            }
+
+            int rightRet = lowestCommonAncestorSub(node.right, p, q);
+            if (retNode != null) {
+                return 0;
+            }
+            retFlag |= rightRet;
+            if (retFlag == 0x3) {
+                this.retNode = node;
+                return 3;
+            }
+
+            return retFlag;
+        }
+
+
+
         public static void printArray (List<TreeNode> nodes) {
             StringBuffer sb = new StringBuffer();
             for (TreeNode node : nodes) {
@@ -329,19 +398,6 @@ public class TestSolution236 {
         TreeNode head = null;
         TreeNode node ;
 
-        //测试1 1000个点的单边树
-        head = new TreeNode(-1);
-        node = head;
-        TreeNode node9998 = null, node9999 = null;
-        for (int i = 0; i < 10000; i++) {
-            node.left = new TreeNode(i);
-            if (i== 9998) node9998 = node.left;
-            if (i== 9999) node9999 = node.left;
-            node = node.left;
-        }
-        node = new Solution().lowestCommonAncestor1(head, node9998,  node9999);//9998
-        logger.info("{}", node.val);
-
         //测试2
         head = new TreeNode(-1);
         head.left = new TreeNode(-2);
@@ -349,8 +405,23 @@ public class TestSolution236 {
         head.left.left.left = new TreeNode(-4);
         head.left.left.left.left = new TreeNode(-5);
 
-        node = new Solution().lowestCommonAncestor1(head, head.left.left.left,  head.left.left.left.left);//-4
+        node = new Solution().lowestCommonAncestor3(head, head.left.left.left,  head.left.left.left.left);//-4
         logger.info("{}", node.val);
+
+        //测试1 1000个点的单边树
+        head = new TreeNode(-1);
+        node = head;
+        TreeNode node9998 = null, node9999 = null;
+        for (int i = 0; i < 5000; i++) {
+            node.left = new TreeNode(i);
+            if (i== 4998) node9998 = node.left;
+            if (i== 4999) node9999 = node.left;
+            node = node.left;
+        }
+        node = new Solution().lowestCommonAncestor3(head, node9998,  node9999);//9998
+        logger.info("{}", node.val);
+
+
 
         //测试3
         head = new TreeNode(3);
