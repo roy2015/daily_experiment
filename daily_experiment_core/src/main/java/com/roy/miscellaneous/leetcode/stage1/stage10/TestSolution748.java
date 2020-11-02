@@ -72,7 +72,7 @@ public class TestSolution748 {
          * 前提条件：words[i] 由小写英文字母组成 licensePlate 由数字、大小写字母或空格 ' ' 组成
          *
          * 思路清晰的算法，简洁高效
-         * 
+         *
          * 执行结果：通过
          * 显示详情
          * 执行用时：3 ms, 在所有 Java 提交中击败了96.49%的用户
