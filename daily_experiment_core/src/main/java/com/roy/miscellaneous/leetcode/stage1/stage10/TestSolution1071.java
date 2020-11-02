@@ -90,6 +90,18 @@ public class TestSolution1071 {
 
         }
 
+        /**
+         *
+         * 执行结果：
+         * 通过
+         * 显示详情
+         * 执行用时：3 ms, 在所有 Java 提交中击败了19.55%的用户
+         * 内存消耗：38.5 MB, 在所有 Java 提交中击败了85.33%的用户
+         *
+         * @param str1
+         * @param str2
+         * @return
+         */
         public String gcdOfStrings(String str1, String str2) {
             if (str1.isEmpty() || str2.isEmpty()) {
                 return "";
