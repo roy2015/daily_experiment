@@ -2,6 +2,9 @@ package com.roy.miscellaneous.leetcode.stage2.stage21;
 
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author guojun
  * @date 2020/11/5
@@ -55,10 +58,96 @@ public class TestSolution560 {
             }
             return dp[length];
         }
+
+        /**
+         *
+         * 参考官方的前缀和算法
+         *
+         * 执行结果：
+         * 通过
+         * 显示详情
+         * 执行用时：
+         * 1609 ms
+         * , 在所有 Java 提交中击败了
+         * 5.02%
+         * 的用户
+         * 内存消耗：
+         * 40.9 MB
+         * , 在所有 Java 提交中击败了
+         * 18.33%
+         * 的用户
+         * @param nums
+         * @param k
+         * @return
+         */
+        public int subarraySum1(int[] nums, int k) {
+            int length = nums.length;
+            int[] prefixSum = new int[length +1];
+            prefixSum[0] =0;//虚拟一个0，把原数组看做从1开始，N结束
+            for (int i = 1; i <= length; i++) {
+                prefixSum[i] = prefixSum[i -1] + nums[i-1];
+            }
+
+            int times = 0;
+            for (int i = 0; i < length; i++) {
+                for (int j = i +1; j <= length ; j++) {
+                    if (prefixSum[j] - prefixSum[i] == k) {
+                        times ++;
+                    }
+                }
+            }
+            return times;
+        }
+
+
+        /**
+         * 参考 @link{https://leetcode-cn.com/problems/subarray-sum-equals-k/solution/bao-li-jie-fa-qian-zhui-he-qian-zhui-he-you-hua-ja/}
+         * 前缀和+hash优化
+         *
+         * 执行结果：
+         * 通过
+         * 显示详情
+         * 执行用时：
+         * 28 ms
+         * , 在所有 Java 提交中击败了
+         * 46.03%
+         * 的用户
+         * 内存消耗：
+         * 41.2 MB
+         * , 在所有 Java 提交中击败了
+         * 7.24%
+         * 的用户
+         *
+         * @param nums
+         * @param k
+         * @return
+         */
+        public int subarraySum2(int[] nums, int k) {
+            int length = nums.length;
+            int[] prefixSum = new int[length +1];
+            prefixSum[0] =0;//虚拟一个0，把原数组看做从1开始，N结束
+
+            int ret =0;
+            Map<Integer, Integer> dic = new HashMap<>();
+
+            for (int i = 1; i <= length; i++) {
+                prefixSum[i] = prefixSum[i -1] + nums[i-1];
+                int prefixSumIval = prefixSum[i];
+                if (prefixSumIval == k) {
+                    ret ++;
+                }
+                if (dic.containsKey(prefixSumIval - k )){
+                    ret += dic.get(prefixSumIval - k );
+                }
+                dic.put(prefixSumIval, dic.getOrDefault(prefixSumIval, 0) +1);
+            }
+            return ret;
+        }
+
     }
 
     public static void main(String[] args) {
-        logger.info("{}", new Solution().subarraySum(new int[]{1,1,1}, 2));//2
-        logger.info("{}", new Solution().subarraySum(new int[]{1,2,1,-1,3,-2,5}, 3));//7
+        logger.info("{}", new Solution().subarraySum2(new int[]{1,1,1}, 2));//2
+        logger.info("{}", new Solution().subarraySum2(new int[]{1,2,1,-1,3,-2,5}, 3));//7
     }
 }
