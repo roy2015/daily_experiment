@@ -4,6 +4,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.CircleCaptcha;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.captcha.ShearCaptcha;
+import cn.hutool.core.date.DateUtil;
 import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestBase64Codec;
 import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
@@ -59,6 +60,24 @@ import static java.lang.Math.*;
  */
 public class MainTest {
 
+    // 公式中的经纬度均用弧度表示，计算两点距离
+    double algorithm(double longitude1, double latitude1, double longitude2, double latitude2) {
+        double Lat1 = rad(latitude1); // 纬度
+        double Lat2 = rad(latitude2);
+        double a = Lat1 - Lat2;// 两点纬度之差
+        double b = rad(longitude1) - rad(longitude2); // 经度之差
+        // double s = 2 * Math.asin(Math
+        // .sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(Lat1) * Math.cos(Lat2) * Math.pow(Math.sin(b / 2), 2)));//计算两点距离的公式
+        double s = 2 * asin(sqrt(pow(sin(a / 2), 2) + cos(Lat1) * cos(Lat2) * pow(sin(b / 2), 2)));// 计算两点距离的公式
+        s = s * 6378137.0;// 弧长乘地球半径（半径为米）
+        // s = round(s * 10000) / 10000;//精确距离的数值
+        return s;
+    }
+
+    double rad(double d) {
+        return d * PI / 180.00; // 角度转换成弧度
+    }
+
     @Test
     public void test1() {
         new TestBloomFilter().bloomFilter();
@@ -78,7 +97,7 @@ public class MainTest {
         }
 
         int[] ints = new TestMergeSort().mergeSort(initArra);
-//        int[] ints = new TestMergeSort().mergeSort(new int[]{76, 91, 68});
+        // int[] ints = new TestMergeSort().mergeSort(new int[]{76, 91, 68});
         System.out.println("数据长度: " + ints.length);
         for (int i = 0; i < ints.length; i++) {
             System.out.println(StringUtils.leftPad(i + "", 8, " ") + "\t" + StringUtils.leftPad(ints[i] + "", 8, " "));
@@ -86,14 +105,14 @@ public class MainTest {
     }
 
     @Test
-    //插入排序
+    // 插入排序
     public void testInsertionSort() {
         int len = 10;
         int[] initArra = new int[len];
         for (int i = 0; i < len; i++) {
             initArra[i] = new Random().nextInt(100);
         }
-//        int[] initArra = new int[]{41, 0, 0} ;
+        // int[] initArra = new int[]{41, 0, 0} ;
         new TestInsertiionSort().print(initArra);
         new TestInsertiionSort().testInsertionSort(initArra);
 
@@ -101,45 +120,44 @@ public class MainTest {
     }
 
     @Test
-    //面试提，依次add 4,6,1到 arrayList，arrayList是 1，4，6， 用到是是add(index, value)，插入排序
+    // 面试提，依次add 4,6,1到 arrayList，arrayList是 1，4，6， 用到是是add(index, value)，插入排序
     public void testInsertionSortUseArrayList() throws OperationNotSupportedException {
         int len = 7;
         Long[] longArra = new Long[len];
         for (int i = 0; i < len; i++) {
             longArra[i] = Long.valueOf(new Random().nextInt(100));
         }
-        //写死的数组，上面是随机数数组
-//        Long[] longArra = new Long[]{41l, 0l, 0l} ;
+        // 写死的数组，上面是随机数数组
+        // Long[] longArra = new Long[]{41l, 0l, 0l} ;
 
         TestInsertionSortWithAyyayList<Long> testInsertionSortWithAyyayList = new TestInsertionSortWithAyyayList<>();
-        testInsertionSortWithAyyayList.printArray(longArra);//元素数据
-        testInsertionSortWithAyyayList.testInsertionSortUseArrayList(longArra);//process排序
-        testInsertionSortWithAyyayList.printList(testInsertionSortWithAyyayList.getList());//排序后
+        testInsertionSortWithAyyayList.printArray(longArra);// 元素数据
+        testInsertionSortWithAyyayList.testInsertionSortUseArrayList(longArra);// process排序
+        testInsertionSortWithAyyayList.printList(testInsertionSortWithAyyayList.getList());// 排序后
     }
 
     @Test
-    //同上，不过用的是Double
+    // 同上，不过用的是Double
     public void testInsertionSortUseArrayListDouble() throws OperationNotSupportedException {
         int len = 7;
         Double[] doubleArra = new Double[len];
         for (int i = 0; i < len; i++) {
-            doubleArra[i] = new BigDecimal(new Random().nextDouble()).
-                    multiply(new BigDecimal(100d), new MathContext(5, RoundingMode.HALF_UP)).doubleValue();
+            doubleArra[i] = new BigDecimal(new Random().nextDouble()).multiply(new BigDecimal(100d), new MathContext(5, RoundingMode.HALF_UP)).doubleValue();
         }
 
         TestInsertionSortWithAyyayList<Double> testInsertionSortWithAyyayList = new TestInsertionSortWithAyyayList<>();
-        testInsertionSortWithAyyayList.printArray(doubleArra);//元素数据
-        testInsertionSortWithAyyayList.testInsertionSortUseArrayList(doubleArra);//process排序
-        testInsertionSortWithAyyayList.printList(testInsertionSortWithAyyayList.getList());//排序后
+        testInsertionSortWithAyyayList.printArray(doubleArra);// 元素数据
+        testInsertionSortWithAyyayList.testInsertionSortUseArrayList(doubleArra);// process排序
+        testInsertionSortWithAyyayList.printList(testInsertionSortWithAyyayList.getList());// 排序后
     }
 
     @Test
     public void testInsertionSortUseArrayListFloat() throws OperationNotSupportedException {
-        Float[] floatArrays = new Float[]{41f, 0f, 0f};
+        Float[] floatArrays = new Float[] { 41f, 0f, 0f };
 
         TestInsertionSortWithAyyayList<Float> testInsertionSortWithAyyayList = new TestInsertionSortWithAyyayList<>();
-        testInsertionSortWithAyyayList.printArray(floatArrays);//元素数据
-        testInsertionSortWithAyyayList.testInsertionSortUseArrayList(floatArrays);//process排序
+        testInsertionSortWithAyyayList.printArray(floatArrays);// 元素数据
+        testInsertionSortWithAyyayList.testInsertionSortUseArrayList(floatArrays);// process排序
     }
 
     @Test
@@ -196,7 +214,6 @@ public class MainTest {
     public void testJdkSpi() {
         new TestJdkSpi().testJdkSpi();
 
-
     }
 
     @Test
@@ -229,7 +246,6 @@ public class MainTest {
     public void testLockSupport() throws Exception {
         TestThread.testLockSupport(null);
     }
-
 
     @Test
     public void testLockSupportInterrupt() throws Exception {
@@ -395,7 +411,6 @@ public class MainTest {
         rest_3 = rest1.add(new BigDecimal("11.32")).subtract(new BigDecimal("3.12"));
         rest_4 = rest1.add(new BigDecimal("13.55")).subtract(new BigDecimal("0.23"));
 
-
         rest1 = rest1.add(BigDecimal.ZERO);
         rest1 = rest1.add(new BigDecimal("13.32"));
         rest1 = rest1.add(BigDecimal.ZERO);
@@ -405,7 +420,6 @@ public class MainTest {
         rest1 = rest1.add(new BigDecimal("8.2"));
         rest1 = rest1.add(BigDecimal.ZERO);
         System.out.println(rest1);
-
 
         /*BigDecimal bigDecimal1 = new BigDecimal("8.2");
         BigDecimal bigDecimal2 = new BigDecimal("-0.22");
@@ -468,17 +482,15 @@ public class MainTest {
         userVOS.add(userVO3);
         userVOS.add(userVO4);
 
-        Map<Integer, String> userMap1 = userVOS.stream().collect(HashMap::new,
-                (integerStringHashMap, userVO) -> integerStringHashMap.put(userVO.getUserId(), userVO.getUserName()), HashMap::putAll);
+        Map<Integer, String> userMap1 = userVOS.stream().collect(HashMap::new, (integerStringHashMap, userVO) -> integerStringHashMap.put(userVO.getUserId(), userVO.getUserName()),
+                HashMap::putAll);
 
-        Map<Integer, String> userMap = userVOS.stream().collect(Collectors.toMap(
-                userVO -> userVO.getUserId(),
-                userVO -> userVO.getUserName()));
+        Map<Integer, String> userMap = userVOS.stream().collect(Collectors.toMap(userVO -> userVO.getUserId(), userVO -> userVO.getUserName()));
         int k = 3;
 
     }
 
-    @Test(expectedExceptions = {java.lang.NullPointerException.class})
+    @Test(expectedExceptions = { java.lang.NullPointerException.class })
     public void testCollectorToMapThrow() {
         UserVO userVO1 = new UserVO(1, "guo", "f");
         UserVO userVO2 = new UserVO(2, null, "f");
@@ -489,7 +501,7 @@ public class MainTest {
         userVOS.add(userVO2);
         userVOS.add(userVO3);
 
-        //抛异常，map.merge（）的 value不为空
+        // 抛异常，map.merge（）的 value不为空
         Map<Integer, String> userMap = userVOS.stream().collect(Collectors.toMap(new Function<UserVO, Integer>() {
             @Override
             public Integer apply(UserVO userVO) {
@@ -506,7 +518,7 @@ public class MainTest {
     }
 
     @Test
-    //测试hutool的验证码
+    // 测试hutool的验证码
     public void testHutool() {
         LineCaptcha captcha = CaptchaUtil.createLineCaptcha(250, 250, 4, 2000);
         Image image = captcha.createImage("2345");
@@ -522,43 +534,21 @@ public class MainTest {
 
     @Test
     public void testjwd() {
-        System.out.println(algorithm(30.51347276318229d, 114.41989512786928d,
-                30.19368660754606d, 120.19886377719692d));
+        System.out.println(algorithm(30.51347276318229d, 114.41989512786928d, 30.19368660754606d, 120.19886377719692d));
     }
 
-    //公式中的经纬度均用弧度表示，计算两点距离
+    @Test
+    public void testHutoolUtil() {
+        System.out.println(DateUtil.endOfDay(new Date()));
+    }
 
-    double algorithm(double longitude1, double latitude1, double longitude2, double latitude2) {
-
-        double Lat1 = rad(latitude1); // 纬度
-
-        double Lat2 = rad(latitude2);
-
-        double a = Lat1 - Lat2;//两点纬度之差
-
-        double b = rad(longitude1) - rad(longitude2); //经度之差
-
-//    double s = 2 * Math.asin(Math
-
-//                         .sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(Lat1) * Math.cos(Lat2) * Math.pow(Math.sin(b / 2), 2)));//计算两点距离的公式
-
-        double s = 2 *  asin( sqrt( pow( sin(a / 2), 2) +  cos(Lat1) *  cos(Lat2) *  pow( sin(b / 2), 2)));//计算两点距离的公式
-
-        s = s * 6378137.0;//弧长乘地球半径（半径为米）
-
-//        s = round(s * 10000) / 10000;//精确距离的数值
-
-        return s;
-
+    /**
+     * 测试BigDecimal的scale
+     */
+    @Test
+    public void testBigDecimal() {
+        System.out.println(new BigDecimal("8").divide(new BigDecimal("3"), 0, BigDecimal.ROUND_HALF_UP));
     }
 
 
-
-    double rad(double d) {
-
-        return d * PI / 180.00; //角度转换成弧度
-
-
-
-    }
 }
