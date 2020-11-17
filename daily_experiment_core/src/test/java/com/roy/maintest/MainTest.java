@@ -550,5 +550,14 @@ public class MainTest {
         System.out.println(new BigDecimal("8").divide(new BigDecimal("3"), 0, BigDecimal.ROUND_HALF_UP));
     }
 
+    @Test
+    public void test() {
+        List<UserVO> userVOS = new ArrayList<>();
+        Map<Integer, UserVO> collect = userVOS.stream().collect(Collectors.toMap(UserVO::getUserId, item -> item, (v1, v2) -> v2));
+
+        System.out.println();
+
+    }
+
 
 }
