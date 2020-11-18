@@ -20,6 +20,7 @@ import com.roy.miscellaneous.io.TestObjectSerializeFile;
 import com.roy.miscellaneous.juc.multiThread.TestOddEvenPrint;
 import com.roy.miscellaneous.javassist.TestJavassist;
 import com.roy.miscellaneous.juc.*;
+import com.roy.miscellaneous.leetcode.stage2.stage21.TestSolution152;
 import com.roy.miscellaneous.pattern.factory.CpuType;
 import com.roy.miscellaneous.pattern.factory.MainBoardType;
 import com.roy.miscellaneous.pattern.factory.abstractFactory.CaliforniaFactory;
@@ -33,6 +34,7 @@ import com.roy.miscellaneous.yaml.TestReadYaml;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import javax.naming.OperationNotSupportedException;
@@ -59,6 +61,8 @@ import static java.lang.Math.*;
  * Created by apple on 2018/12/7.
  */
 public class MainTest {
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainTest.class);
 
     // 公式中的经纬度均用弧度表示，计算两点距离
     double algorithm(double longitude1, double latitude1, double longitude2, double latitude2) {
@@ -554,9 +558,14 @@ public class MainTest {
     public void test() {
         List<UserVO> userVOS = new ArrayList<>();
         Map<Integer, UserVO> collect = userVOS.stream().collect(Collectors.toMap(UserVO::getUserId, item -> item, (v1, v2) -> v2));
-
         System.out.println();
+    }
 
+    @Test
+    public void test11() {
+        Set<Integer> set = new HashSet<>();
+        set.add(1);
+        logger.info("{}", set);
     }
 
 
