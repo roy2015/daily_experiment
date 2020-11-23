@@ -568,5 +568,12 @@ public class MainTest {
         logger.info("{}", set);
     }
 
+    @Test
+    public void testMapNullKey() {
+        HashMap<String, String> map = new HashMap<>();
+        String s = map.get(null);
+        logger.info("");
+    }
+
 
 }
