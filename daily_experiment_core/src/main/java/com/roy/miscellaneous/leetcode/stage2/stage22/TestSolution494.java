@@ -205,8 +205,6 @@ public class TestSolution494 {
     }
 
     public static void main(String[] args) {
-
-
         logger.info("{}", new Solution().findTargetSumWays1(new int[]{0,0,1,0}, 1));//8
         logger.info("{}", new Solution().findTargetSumWays1(new int[]{0,0,0,0,0,0,0,0,1}, 1));//256
 

@@ -575,5 +575,33 @@ public class MainTest {
         logger.info("");
     }
 
+    /**
+     *
+     * 洗牌算法
+     * Fisher–Yates随机置乱算法也被称做高纳德置乱算法 费雪耶兹置乱算法
+     *
+     */
+    @Test
+    public void testGetRandomSeed() {
+        //10000 * 40
+        int[] cards = new int[]{1,2,3,4,5,6,7,8,9,10};
+        int size = cards.length;
+
+        StringBuffer outStr = new StringBuffer();
+        for (int idx = size; idx >0; idx--) {
+            int tempIdx = new Random().nextInt(idx);
+            int temp = cards[idx -1];
+            cards[idx-1] = cards[tempIdx];
+            cards[tempIdx] = temp;
+            logger.info("{} {}", cards, cards[idx-1]);
+        }
+        logger.info(cards.toString());
+
+
+
+
+
+    }
+
 
 }
