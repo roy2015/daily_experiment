@@ -31,6 +31,17 @@ public class MD5Util {
 	}
 
     /**
+     * 同上，加盐
+     * @param src
+     * @param salt
+     * @return
+     */
+    public static String md5(String src, String salt) {
+        String completeStr = src.concat(salt);
+        return md5(completeStr);
+    }
+
+    /**
      * 基线版 强行转str，出现乱码的 比如：�ب�@�M�?u�N��4
      * @param src
      * @return  输出长度不固定
@@ -73,9 +84,11 @@ public class MD5Util {
 	public static void main(String[] args) {
 		System.out.println(Integer.toHexString(123));
         String mdStr = md5("123");
+        String mdSaltStr = md5("123", "a");
         String md1Str = md5_1("123124guoj1");
         String md2Str = md5_2("1234");
         System.out.println(String.format("mdStr: %s ,mdStr.length(): %s", mdStr, mdStr.length()));
+        System.out.println(String.format("mdStrSalt: %s ,mdSaltStr.length(): %s", mdSaltStr, mdSaltStr.length()));
         System.out.println(String.format("md1Str: %s ,md1Str.length(): %s", md1Str, md1Str.length()));
         System.out.println(String.format("md2Str: %s ,md2Str.length(): %s", md2Str, md2Str.length()));
 
