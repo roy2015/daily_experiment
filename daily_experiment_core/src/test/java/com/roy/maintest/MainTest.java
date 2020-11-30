@@ -596,12 +596,5 @@ public class MainTest {
             logger.info("{} {}", cards, cards[idx-1]);
         }
         logger.info(cards.toString());
-
-
-
-
-
     }
-
-
 }

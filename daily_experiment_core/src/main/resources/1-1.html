@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>地图标点</title>
+    <style type="text/css">
+        html{height:100%}
+        body{height:100%;margin:0px;padding:0px}
+        #container{height:100%}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=8zoCt5sxovNLYijbQcKA4SIeyzYuLajG"/>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils_min.js"></script>
+    <link href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="container"></div>
+<script type="text/javascript">
+    var map = new BMap.Map("container", {
+        coordsType: 5 // coordsType指定输入输出的坐标类型，3为gcj02坐标，5为bd0ll坐标，默认为5。
+                      // 指定完成后API将以指定的坐标类型处理您传入的坐标
+    });          // 创建地图实例
+    var point1 = new BMap.Point(114.43035499992237, 30.468010925927559);  // 创建点坐标
+    map.centerAndZoom(point1, 12);                 // 初始化地图，设置中心点坐标和地图级别
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+    //1. 标点
+    var marker1 = new BMap.Marker(point1);        // 创建标注
+    map.addOverlay(marker1);                     // 将标注添加到地图中
+
+
+    var point2 = new BMap.Point(114.41989512786928, 30.51347276318229);
+    var marker2 = new BMap.Marker(point2);
+    map.addOverlay(marker2);
+
+    var drawingManager;
+    styleOptions = {
+        strokeColor:"#494949",    // 边线颜色。
+        fillColor:"#999",      // 填充颜色。当参数为空时，圆形将没有填充效果。
+        strokeWeight: 1,       // 边线的宽度，以像素为单位。
+        strokeOpacity: 1,	   // 边线透明度，取值范围0 - 1。
+        fillOpacity: 0.6,      // 填充的透明度，取值范围0 - 1。
+        strokeStyle: 'dashed' // 边线的样式，solid或dashed。
+    };
+
+    drawingManager = new BMapLib.DrawingManager(map, {
+        isOpen: false, // 是否开启绘制模式
+        enableDrawingTool: false, // 是否显示工具栏
+        drawingToolOptions: {
+            anchor: BMAP_ANCHOR_TOP_LEFT,
+            offset: new BMap.Size(5, 5),
+            drawingModes: [
+                BMAP_DRAWING_POLYGON // 多边形模式
+            ]
+        },
+        polygonOptions: styleOptions // 多边形的样式
+    });
+
+    // 监听地图点击
+    map.addEventListener("click", () => {
+        drawingManager.open();
+    });
+    // 添加鼠标绘制工具监听事件，用于获取绘制结果
+    // 多边形画完之后的事件
+    drawingManager.addEventListener('polygoncomplete', this.polygonComplete)
+    this.drawingManager.setDrawingMode(BMAP_DRAWING_POLYGON)
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=8zoCt5sxovNLYijbQcKA4SIeyzYuLajG"></script>
+&lt;!&ndash;    <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>&ndash;&gt;
+&lt;!&ndash;    <script type="text/javascript" src="http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils_min.js"></script>&ndash;&gt;
+&lt;!&ndash;    <link href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" rel="stylesheet">&ndash;&gt;
+
+    <title>Baidu Map </title>
+    <style type="text/css">
+        html{height:100%}
+        body{height:100%;margin:0px;padding:0px}
+        #container{height:100%}
+    </style>
+</head>
+<body >
+13
+</body>
+</html>
+<script type="text/javascript">
+
+    window.onload= function (){
+        var map = new BMap.Map("container", {
+            coordsType: 5 // coordsType指定输入输出的坐标类型，3为gcj02坐标，5为bd0ll坐标，默认为5。
+                          // 指定完成后API将以指定的坐标类型处理您传入的坐标
+        });          // 创建地图实例
+        var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
+        map.centerAndZoom(point, 15);                 // 初始化地图，设置中心点坐标和地图级别
+
+        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    }
+
+
+
+</script>-->
