@@ -1,5 +1,7 @@
 package com.roy.miscellaneous.arithmetic;
 
+import cn.hutool.crypto.digest.MD5;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -82,11 +84,12 @@ public class MD5Util {
     }
 	
 	public static void main(String[] args) {
-		System.out.println(Integer.toHexString(123));
-        String mdStr = md5("123");
-        String mdSaltStr = md5("123", "a");
-        String md1Str = md5_1("123124guoj1");
-        String md2Str = md5_2("1234");
+        String mdHutoolStr = new MD5().digestHex("TMS");
+        String mdStr = md5("TMS");
+        String mdSaltStr = md5("TMS", "a");
+        String md1Str = md5_1("TMS");
+        String md2Str = md5_2("TMS");
+        System.out.println(String.format("mdHutoolStr: %s ,mdHutoolStr.length(): %s", mdHutoolStr, mdHutoolStr.length()));
         System.out.println(String.format("mdStr: %s ,mdStr.length(): %s", mdStr, mdStr.length()));
         System.out.println(String.format("mdStrSalt: %s ,mdSaltStr.length(): %s", mdSaltStr, mdSaltStr.length()));
         System.out.println(String.format("md1Str: %s ,md1Str.length(): %s", md1Str, md1Str.length()));
