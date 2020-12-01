@@ -44,16 +44,18 @@
     <div id="map" style="height:100%;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;"></div>
 </div>
 <div id="result">
-    <input type="button" value="标点是否在覆盖物内" onclick="overlaycomplete()"/>
+<!--    <input type="button" value="标点是否在覆盖物内" onclick="overlaycomplete()"/>-->
     <input type="button" value="清除所有覆盖物" onclick="clearAll()"/>
 </div>
 <script type="text/javascript">
     // 百度地图API功能
-    var map = new BMap.Map('map');
+    var map = new BMap.Map('map', {enableMapClick:false});//enableMapClick 禁用鼠标单击，避免谈交通信息框
+    map.addControl(new BMap.NavigationControl())// 添加平移缩放控件
+    map.enableScrollWheelZoom();//设置可滚动缩放
     var poi = new BMap.Point(114.43035499992237, 30.468010925927559);
     map.centerAndZoom(poi, 16);
-    map.enableScrollWheelZoom();
     var overlays = [];
+    var points = [];
     var overlaycomplete = function(e){
         var str = "";
         for(var i = 0; i < e.getPath().length; i++){
@@ -68,8 +70,13 @@
         list = e.getPath()
         area = new BMap.Polygon(list)
 
-        alert(BMapLib.GeoUtils.isPointInPolygon(point1, area));
-        alert(BMapLib.GeoUtils.isPointInPolygon(point2, area));
+        for(var i = 0; i < points.length; i++){
+            if (!BMapLib.GeoUtils.isPointInPolygon(points[i], area) ) {
+                alert("false");
+                return;
+            }
+        }
+        alert("true")
     };
 
     var styleOptions = {
@@ -102,11 +109,37 @@
     //1. 标点
     var marker1 = new BMap.Marker(point1);        // 创建标注
     map.addOverlay(marker1);                     // 将标注添加到地图中
-
+    points.push(point1);
 
     var point2 = new BMap.Point(114.41989512786928, 30.51347276318229);
     var marker2 = new BMap.Marker(point2);
     map.addOverlay(marker2);
+    points.push(point2);
+
+    var point3 = new BMap.Point(114.4107, 30.477504);
+    var marker3 = new BMap.Marker(point3);
+    map.addOverlay(marker3);
+    points.push(point3);
+
+    var point4 = new BMap.Point(114.364779,30.482235);
+    var marker4 = new BMap.Marker(point4);
+    map.addOverlay(marker4);
+    points.push(point4);
+
+    var point5 = new BMap.Point(114.309587,30.549436);
+    var marker5 = new BMap.Marker(point5);
+    map.addOverlay(marker5);
+    points.push(point5);
+
+    var point6 = new BMap.Point(114.497872,30.507379);
+    var marker6 = new BMap.Marker(point6);
+    map.addOverlay(marker6);
+
+    var point7 = new BMap.Point(114.438512,30.516993);
+    var marker7 = new BMap.Marker(point7);
+    map.addOverlay(marker7);
+    points.push(point7);
+
 
     //添加鼠标绘制工具监听事件，用于获取绘制结果
     /*drawingManager.addEventListener('overlaycomplete', overlaycomplete);*/
