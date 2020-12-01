@@ -50,20 +50,25 @@
     // 创建地址解析器实例
     var myGeo = new BMap.Geocoder();
     // 将地址解析结果显示在地图上，并调整地图视野
-    var point1 = myGeo.getPoint("湖北省武汉市武昌区民主路232号", function(point){
+    /*var point1 = myGeo.getPoint("湖北省武汉市武昌区民主路232号", function(point){
             if (point) {
                 map.centerAndZoom(point, 16);
                 map.addOverlay(new BMap.Marker(point));
             }
         },
-        "武汉市");
+        "武汉市");*/
+
+    var point1 = new BMap.Point(116.404, 39.915);
+    map.centerAndZoom(point1, 16);
+    map.addOverlay(new BMap.Marker(point1));
+
 
     map.addEventListener("click", function(e){
         var pt = e.point;
         myGeo.getLocation(pt, function(rs){
 
             var addComp = rs.addressComponents;
-            alert( pt.lat + "," + pt.lng + " " + addComp.province  + addComp.city  + addComp.district + addComp.street + addComp.streetNumber);
+            alert( pt.lng + "," + pt.lat + " " + addComp.province  + addComp.city  + addComp.district + addComp.street + addComp.streetNumber);
         });
     });
 
