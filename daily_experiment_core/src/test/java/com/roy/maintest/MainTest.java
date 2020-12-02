@@ -597,4 +597,24 @@ public class MainTest {
         }
         logger.info(cards.toString());
     }
+
+    /**
+     * 测试array copy
+     */
+    @Test
+    public void testCopyArray() {
+        int[] oldCards = {1,2,3,4,5};
+        int removeIdx = 4;
+
+        int oldCardLen = oldCards.length;
+        int newCardLen = oldCardLen - 1 ;
+        int[] newCards = new int[newCardLen];
+//        if (removeIdx > 0) {
+            System.arraycopy(oldCards, 0, newCards, 0, removeIdx);
+//        }
+//        if (removeIdx < newCardLen) {
+            System.arraycopy(oldCards, removeIdx + 1, newCards, removeIdx, newCardLen - removeIdx);
+//        }
+        int i = 0;
+    }
 }
