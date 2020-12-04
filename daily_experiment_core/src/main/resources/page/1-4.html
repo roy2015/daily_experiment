@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>轨迹移动</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=8zoCt5sxovNLYijbQcKA4SIeyzYuLajG"></script>
+    <style type="text/css">
+        body, html,#container {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript">
+    var map = new BMap.Map("container");
+    map.centerAndZoom(new BMap.Point(114.43035499992237, 30.468010925927559), 14);
+    map.enableScrollWheelZoom();
+    var driving = new BMap.DrivingRoute(map, {
+        renderOptions: {
+            map: map,
+            autoViewport: true
+        }
+    });
+
+    //114.42980646493392, 30.512844827730214 光谷凯悦酒店
+    //114.43035499992237, 30.468010925927559 光谷智慧园
+    //120.19886377719692, 30.19368660754606
+    //114.41325428760705, 30.546718531112604 （东湖梅园）
+    //114.41989512786928, 30.51347276318229
+    var myP1 = new BMap.Point(114.43035499992237, 30.468010925927559);
+    var myP2 = new BMap.Point(114.333449,30.544189);
+
+    var myIcon = new BMap.Icon("./icon1.png", new BMap.Size(60, 39), {    //小车图片
+        //offset: new BMap.Size(0, -5),    //相当于CSS精灵
+        imageOffset: new BMap.Size(0, 0)    //图片的偏移量。为了是图片底部中心对准坐标点。
+    });
+    var driving2 = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});    //驾车实例
+    driving2.search(myP1, myP2);    //显示一条公交线路
+
+
+    window.run = function (){
+        var driving = new BMap.DrivingRoute(map);    //驾车实例
+        driving.search(myP1, myP2);
+        driving.setSearchCompleteCallback(function(){
+            var pts = driving.getResults().getPlan(0).getRoute(0).getPath();    //通过驾车实例，获得一系列点的数组
+            var paths = pts.length;    //获得有几个点
+
+            var carMk = new BMap.Marker(pts[0],{icon:myIcon});
+            map.addOverlay(carMk);
+            // i=0;
+            function resetMkPoint(i){
+                carMk.setPosition(pts[i]);
+                if(i < paths){
+                    setTimeout(function(){
+                        i++;
+                        resetMkPoint(i);
+                    },50);
+                }
+            }
+            setTimeout(function(){
+                resetMkPoint(5);
+            },100)
+
+        });
+    }
+
+    setTimeout(function(){
+        run();
+    },1500);
+
+
+</script>
+</body>
+</html>
