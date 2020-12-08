@@ -14,6 +14,7 @@ public class TestBitOps {
     public void test1() {
         int k =-12;
         int k1 = Integer.parseInt("-1111111111111111111111111110100",2);
+        logger.debug(Integer.toBinaryString(-16));
         logger.debug(Integer.toBinaryString(k1));
         logger.debug(Integer.toBinaryString(k1 >>> 1));
         logger.debug(Integer.toBinaryString(k1 >> 1));
