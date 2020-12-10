@@ -56,28 +56,7 @@
     map.centerAndZoom(poi, 16);
     var overlays = [];
     var points = [];
-    var overlaycomplete = function(e){
-        var str = "";
-        for(var i = 0; i < e.getPath().length; i++){
-            str += e.getPath()[i].lat;
-            str +=",";
-            str += e.getPath()[i].lng;
-            str +="";
-        }
-        alert(str);
-        overlays.push(e);
 
-        list = e.getPath()
-        area = new BMap.Polygon(list)
-
-        for(var i = 0; i < points.length; i++){
-            if (!BMapLib.GeoUtils.isPointInPolygon(points[i], area) ) {
-                alert("false");
-                return;
-            }
-        }
-        alert("true")
-    };
 
     var styleOptions = {
         strokeColor:"#494949",    // 边线颜色。
@@ -121,24 +100,28 @@
     map.addOverlay(marker3);
     points.push(point3);
 
-    var point4 = new BMap.Point(114.364779,30.482235);
-    var marker4 = new BMap.Marker(point4);
-    map.addOverlay(marker4);
-    points.push(point4);
+    var overlaycomplete = function(e){
+        var str = "";
+        for(var i = 0; i < e.getPath().length; i++){
+            str += e.getPath()[i].lat;
+            str +=",";
+            str += e.getPath()[i].lng;
+            str +="| ";
+        }
+        alert(str);
+        overlays.push(e);
 
-    var point5 = new BMap.Point(114.309587,30.549436);
-    var marker5 = new BMap.Marker(point5);
-    map.addOverlay(marker5);
-    points.push(point5);
+        list = e.getPath()
+        area = new BMap.Polygon(list)
 
-    var point6 = new BMap.Point(114.497872,30.507379);
-    var marker6 = new BMap.Marker(point6);
-    map.addOverlay(marker6);
-
-    var point7 = new BMap.Point(114.438512,30.516993);
-    var marker7 = new BMap.Marker(point7);
-    map.addOverlay(marker7);
-    points.push(point7);
+        for(var i = 0; i < points.length; i++){
+            if (!BMapLib.GeoUtils.isPointInPolygon(points[i], area) ) {
+                alert("false");
+                return;
+            }
+        }
+        alert("true")
+    };
 
 
     //添加鼠标绘制工具监听事件，用于获取绘制结果
