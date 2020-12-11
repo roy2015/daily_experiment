@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>画折线</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=8zoCt5sxovNLYijbQcKA4SIeyzYuLajG"></script>
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 95%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+</head>
+<body>
+    <div id="allmap"></div>
+    <input type="button" onclick="add_overlay();" value="添加覆盖物" />
+    <input type="button" onclick="remove_overlay();" value="删除覆盖物" />
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var point = new BMap.Point(114.426945,30.479443);
+    map.centerAndZoom(point, 15);
+    map.enableScrollWheelZoom();
+    map.addControl(new BMap.NavigationControl())// 添加平移缩放控件
+
+    var marker = new BMap.Marker(point); // 创建点
+    map.addOverlay(marker);
+
+    var point1 = new BMap.Point(114.43035499992237, 30.468010925927559);
+    var point2 = new BMap.Point(114.42716,30.473249);
+    var point3 = new BMap.Point(114.428023,30.486445);
+    map.addOverlay(new BMap.Marker(point1))
+    map.addOverlay(new BMap.Marker(point2, {title: '123', icon: new BMap.Icon("./123.png", new BMap.Size(40, 38))}));
+    // map.addOverlay(new BMap.Label("1",{position:point2}));
+
+    map.addOverlay(new BMap.Marker(point3, {title: '123', icon: new BMap.Icon("./123.png", new BMap.Size(40, 38))}));
+    map.addOverlay(new BMap.Label("2",{position:point3}));
+
+    var polyline = new BMap.Polyline([
+        point1,
+        point2,
+        point,
+        point3
+    ], {strokeColor:"red", strokeWeight:3, strokeOpacity:1});   //创建折线
+
+
+    //添加覆盖物
+    function add_overlay(){
+        map.addOverlay(polyline);          //增加折线
+    }
+    //清除覆盖物
+    function remove_overlay(){
+        map.clearOverlays();
+    }
+
+
+</script>
+</body>
+</html>

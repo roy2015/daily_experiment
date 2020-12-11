@@ -29,6 +29,7 @@ import com.roy.miscellaneous.pattern.factory.abstractFactory.NewYorkFactory;
 import com.roy.miscellaneous.pattern.factory.simpleFactory.SimpleFactory;
 import com.roy.miscellaneous.spi.TestJdkSpi;
 import com.roy.miscellaneous.targetObject.TestString;
+import com.roy.miscellaneous.targetObject.TestVO;
 import com.roy.miscellaneous.targetObject.UserVO;
 import com.roy.miscellaneous.yaml.TestReadYaml;
 import com.sun.image.codec.jpeg.JPEGCodec;
@@ -48,6 +49,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -616,5 +618,20 @@ public class MainTest {
             System.arraycopy(oldCards, removeIdx + 1, newCards, removeIdx, newCardLen - removeIdx);
 //        }
         int i = 0;
+    }
+
+    @Test
+    public void testGroupingby() {
+        List<TestVO> testVOS = new ArrayList<>();
+        TestVO testVO1 = new TestVO("1", "2", "3", Arrays.asList("41","42,", "43"));
+        TestVO testVO2 = new TestVO("1", "2", "4", Arrays.asList("41","42,", "43"));
+        testVOS.add(testVO1);
+        testVOS.add(testVO2);
+
+        Map<String, List<TestVO>> map1 = testVOS.stream().collect(Collectors.groupingBy(x -> x.getField1() + "-" + x.getField2()));
+        logger.info("");
+
+        logger.info("{}", MessageFormat.format("{0}-{1}", 123,456));
+
     }
 }

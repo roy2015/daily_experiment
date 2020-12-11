@@ -31,7 +31,7 @@
         new BMap.Point(116.410827,39.917324),
         new BMap.Point(116.413774,39.91619 ),
         new BMap.Point(116.425, 39.900)
-    ], {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});   //创建折线
+    ], {strokeColor:"red", strokeWeight:2, strokeOpacity:0.5});   //创建折线
 
     var circle = new BMap.Circle(point,500,{strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5}); //创建圆
 
@@ -56,9 +56,9 @@
     function add_overlay(){
         map.addOverlay(marker);            //增加点
         map.addOverlay(polyline);          //增加折线
-        // map.addOverlay(circle);            //增加圆
-        // map.addOverlay(polygon);           //增加多边形
-        // map.addOverlay(rectangle);         //增加矩形
+        map.addOverlay(circle);            //增加圆
+        map.addOverlay(polygon);           //增加多边形
+        map.addOverlay(rectangle);         //增加矩形
     }
     //清除覆盖物
     function remove_overlay(){
