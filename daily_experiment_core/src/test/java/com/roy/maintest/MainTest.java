@@ -623,12 +623,14 @@ public class MainTest {
     @Test
     public void testGroupingby() {
         List<TestVO> testVOS = new ArrayList<>();
-        TestVO testVO1 = new TestVO("1", "2", "3", Arrays.asList("41","42,", "43"));
-        TestVO testVO2 = new TestVO("1", "2", "4", Arrays.asList("41","42,", "43"));
+        TestVO testVO1 = new TestVO("1", "2", "3");
+        TestVO testVO2 = new TestVO("1", "2", "4");
+        TestVO testVO3 = new TestVO("1", "2", "3");
         testVOS.add(testVO1);
         testVOS.add(testVO2);
+        testVOS.add(testVO3);
 
-        Map<String, List<TestVO>> map1 = testVOS.stream().collect(Collectors.groupingBy(x -> x.getField1() + "-" + x.getField2()));
+        Map<String, List<TestVO>> map1 = testVOS.stream().collect(Collectors.groupingBy(x -> x.getField1() + "-" + x.getField2() + "-" + x.getField3()));
         logger.info("");
 
         logger.info("{}", MessageFormat.format("{0}-{1}", 123,456));

@@ -23,6 +23,12 @@ public class TestVO implements java.io.Serializable {
         this.field4s = field4s;
     }
 
+    public TestVO(String field1, String field2, String field3) {
+        this.field1 = field1;
+        this.field2 = field2;
+        this.field3 = field3;
+    }
+
     public String getField1() {
         return field1;
     }
