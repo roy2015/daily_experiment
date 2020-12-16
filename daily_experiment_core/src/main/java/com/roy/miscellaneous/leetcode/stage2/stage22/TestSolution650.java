@@ -91,7 +91,7 @@ public class TestSolution650 {
 
         /**
          *
-         * 官方题解，因式分解， 质因数之和，两数相加小于两数相乘（a, b >=2） 
+         * 官方题解，因式分解， 质因数之和，两数相加小于两数相乘（a, b >=2）
          * 也是骚套路,利用了某种认知策略把问题简化了，不如上面暴力破解来的清晰
          * https://leetcode-cn.com/problems/2-keys-keyboard/solution/zhi-you-liang-ge-jian-de-jian-pan-by-leetcode/
          *
