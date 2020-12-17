@@ -31,7 +31,8 @@ public class TestSolution307 {
 
     /**
      *
-     * 树状数组， O(logn)的更新和求区间和，前缀和
+     * 树状数组 @link{ https://blog.csdn.net/bestsort/article/details/80796531 }
+     * ， O(logn)的更新和求区间和，前缀和, 求前缀喝也是O(logn)
      *
      * 之所以能实现O(logn)的关键： j & (-j) 求末尾1
      *
