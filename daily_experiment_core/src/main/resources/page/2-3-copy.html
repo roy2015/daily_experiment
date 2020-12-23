@@ -18,23 +18,57 @@
     // 百度地图API功能
     var map = new BMap.Map("allmap");
 
-    var point1 = new BMap.Point(117.825630000000,30.951604000000);
-    var point2 = new BMap.Point(117.825630000000,30.951604000000)
-    var point3 = new BMap.Point(121.436674000000,31.160265000000)
-    var point4 = new BMap.Point(121.487267000000,31.173614000000)
+    /*114.42702962285,30.468244382124
+    114.42693635452,30.471527330654
+    114.42690411532,30.478268845842
+    114.42702938372,30.479503932843*/
 
-    map.centerAndZoom(point1, 15);
+    /*{
+        "loc_time": 1608708421,
+        "latitude": 30.468244382124,
+        "longitude": 114.42702962285,
+        "speed": 134.45104051185,
+        "direction": 357.68521270881
+    },
+    {
+        "loc_time": 1608708421,
+        "latitude": 30.471527330654,
+        "longitude": 114.42693635452,
+        "speed": 134.45104051185,
+        "direction": 359.56744290748
+    },
+    {
+        "loc_time": 1608708441,
+        "latitude": 30.478268845842,
+        "longitude": 114.42690411532,
+        "speed": 90.93661010262,
+        "direction": 0.66345248286893
+    },
+    {
+        "loc_time": 1608708461,
+        "latitude": 30.479503932843,
+        "longitude": 114.42702938372,
+        "speed": 90.93661010262,
+        "direction": 2.5556067061333
+    }*/
+
+    var point1 = new BMap.Point(114.42702962285,30.468244382124);
+    var point2 = new BMap.Point(114.42693635452,30.471527330654)
+    var point3 = new BMap.Point(114.42690411532,30.478268845842)
+    var point4 = new BMap.Point(114.42702938372,30.479503932843)
+
+    map.centerAndZoom(point1, 16);
     map.enableScrollWheelZoom();
     map.addControl(new BMap.NavigationControl())// 添加平移缩放控件
 
 
-    map.addOverlay(new BMap.Marker(point1))
+    map.addOverlay(new BMap.Marker(point1,{title: '1'}))
     map.addOverlay(new BMap.Marker(point2, {title: '2', icon: new BMap.Icon("./123.png", new BMap.Size(40, 38))}));
     // map.addOverlay(new BMap.Label("1",{position:point2}));
 
     map.addOverlay(new BMap.Marker(point3, {title: '3', icon: new BMap.Icon("./123.png", new BMap.Size(40, 38))}));
-    map.addOverlay(new BMap.Label("2",{position:point3}));
-    map.addOverlay(new BMap.Marker(point4, { icon: new BMap.Icon("./123.png", new BMap.Size(40, 38))}))
+    // map.addOverlay(new BMap.Label("2",{position:point3}));
+    map.addOverlay(new BMap.Marker(point4, { title: '4', icon: new BMap.Icon("./123.png", new BMap.Size(40, 38))}))
 
     var polyline = new BMap.Polyline([
         point1,
