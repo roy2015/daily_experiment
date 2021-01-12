@@ -19,8 +19,8 @@ public class TestEventBus {
         EventBus eventBus = new AsyncEventBus(Executors.newFixedThreadPool(10));
 //        EventBus eventBus = new EventBus("123");
         eventBus.register(new CustomSubscriber());
-//        eventBus.register(new CustomSubscriber1());
-//        eventBus.register(new CustomSubscriber2());
+        eventBus.register(new CustomSubscriber1());
+        eventBus.register(new CustomSubscriber2());
 
         for (int i = 1; i <= 10; i++) {
             eventBus.post(new CustomEvent().setEventId(i ));
