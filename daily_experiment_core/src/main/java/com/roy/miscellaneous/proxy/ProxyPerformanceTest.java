@@ -47,19 +47,19 @@ public class ProxyPerformanceTest {
     public static void main(String[] args) {
         //创建测试对象
         Target nativeTest = new TargetImpl();
-        Target jdkDynamicProxy = JdkDynamicProxyTest.newProxyInstance(nativeTest);
+//        Warship jdkDynamicProxy = JdkDynamicProxyTest.newProxyInstance(new AircraftCarrier("辽宁舰"));
         Target cglibProxy = CglibProxyTest.newProxyInstance(TargetImpl.class);
 
         //预热一下
         int preRunCount = 10000;
         runWithoutMonitor(nativeTest, preRunCount);
-        runWithoutMonitor(jdkDynamicProxy, preRunCount);
+//        runWithoutMonitor(jdkDynamicProxy, preRunCount);
         runWithoutMonitor(cglibProxy, preRunCount);
 
         //开始测试
         LinkedHashMap<String, Target> tests = new LinkedHashMap<>();
         tests.put("Native  ", nativeTest);
-        tests.put("JdkProxy ", jdkDynamicProxy);
+//        tests.put("JdkProxy ", jdkDynamicProxy);
         tests.put("CglibProxy", cglibProxy);
 
         int repeatCount =3;
