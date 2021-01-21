@@ -115,7 +115,7 @@ public class MD5Util {
 
         System.out.println(String.format("3%s3", new String(new byte[]{-32})));
 
-        System.out.println(new MD5().digestHex("20201231" + passW));
+        System.out.println(new MD5().digestHex("20210119" + passW));
 
 	}
 }
