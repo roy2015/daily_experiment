@@ -403,42 +403,18 @@ public class MainTest {
         }
     }
 
+    /**
+     * 测试刻度（scale），精度(precision  MathContext)
+     */
     @Test
     public void testAddBigDecimal() {
-        MathContext MATH_CONTEXT_3 = new MathContext(4, RoundingMode.HALF_UP);
-        BigDecimal rest_1 = BigDecimal.ZERO;
-        BigDecimal rest_2 = BigDecimal.ZERO;
-        BigDecimal rest_3 = BigDecimal.ZERO;
-        BigDecimal rest_4 = BigDecimal.ZERO;
-        BigDecimal rest1 = BigDecimal.ZERO;
-
-        rest_1 = rest1.add(new BigDecimal("13.34")).subtract(new BigDecimal("10.44")).subtract(new BigDecimal("8.41"));
-        rest_2 = rest1.add(new BigDecimal("2.52")).subtract(new BigDecimal("1.15")).subtract(new BigDecimal("1.59"));
-        rest_3 = rest1.add(new BigDecimal("11.32")).subtract(new BigDecimal("3.12"));
-        rest_4 = rest1.add(new BigDecimal("13.55")).subtract(new BigDecimal("0.23"));
-
-        rest1 = rest1.add(BigDecimal.ZERO);
-        rest1 = rest1.add(new BigDecimal("13.32"));
-        rest1 = rest1.add(BigDecimal.ZERO);
-        rest1 = rest1.add(new BigDecimal("-0.22"));
-        rest1 = rest1.add(BigDecimal.ZERO);
-        rest1 = rest1.add(new BigDecimal("-5.51"));
-        rest1 = rest1.add(new BigDecimal("8.2"));
-        rest1 = rest1.add(BigDecimal.ZERO);
-        System.out.println(rest1);
-
-        /*BigDecimal bigDecimal1 = new BigDecimal("8.2");
-        BigDecimal bigDecimal2 = new BigDecimal("-0.22");
-        BigDecimal bigDecimal3 = new BigDecimal("-5.51");
-        BigDecimal bigDecimal4 = new BigDecimal("13.32");
-        rest = rest.add(bigDecimal1,MATH_CONTEXT_3);
-        rest = rest.add(bigDecimal2,MATH_CONTEXT_3);
-        rest = rest.add(bigDecimal3,MATH_CONTEXT_3);
-        rest = rest.add(bigDecimal4,MATH_CONTEXT_3);
-        System.out.println(new BigDecimal("8.2").scale());
-        System.out.println(new BigDecimal("18.79",MATH_CONTEXT_3));
-        System.out.println(new BigDecimal("8.201").scale());
-        System.out.println(rest);*/
+        logger.info("5/3, 保留小数点后5位, scale {}", new BigDecimal("5").divide(new BigDecimal("3"), 5, RoundingMode.HALF_UP));
+        logger.info("5/3, 保留有效数据5位, MathContext {}", new BigDecimal("5").divide(new BigDecimal("3"), new MathContext(5, RoundingMode.HALF_UP)));
+        String example = "8.23";
+        logger.info("{} scale {}",example, new BigDecimal(example).scale());
+        logger.info("{} precision {}",example, new BigDecimal(example).precision());
+        logger.info("new BigDecimal(\"8.2352\", new MathContext(3, RoundingMode.HALF_UP)    {}",
+                new BigDecimal("8.2352", new MathContext(3, RoundingMode.HALF_UP)));
     }
 
     @Test

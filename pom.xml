@@ -20,6 +20,7 @@
         <curator-version>2.11.0</curator-version>
         <hutool.version>5.3.10</hutool.version>
         <lombok.version>1.16.22</lombok.version>
+        <jackson.version>2.9.10.8</jackson.version>
     </properties>
 
     <dependencyManagement>
