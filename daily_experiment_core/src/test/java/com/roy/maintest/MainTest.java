@@ -1,9 +1,7 @@
 package com.roy.maintest;
 
 import cn.hutool.captcha.CaptchaUtil;
-import cn.hutool.captcha.CircleCaptcha;
 import cn.hutool.captcha.LineCaptcha;
-import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.core.date.DateUtil;
 import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestBase64Codec;
@@ -15,12 +13,11 @@ import com.roy.miscellaneous.arithmetic.cipher.TestRSAEncrypt;
 import com.roy.miscellaneous.arithmetic.cipher.TestRsaSignature;
 import com.roy.miscellaneous.executors.TestScheduledThreadPoolExecutor;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
-import com.roy.miscellaneous.interview.TestJdkIOs;
+import com.roy.miscellaneous.io.TestJdkIOs;
 import com.roy.miscellaneous.io.TestObjectSerializeFile;
 import com.roy.miscellaneous.juc.multiThread.TestOddEvenPrint;
 import com.roy.miscellaneous.javassist.TestJavassist;
 import com.roy.miscellaneous.juc.*;
-import com.roy.miscellaneous.leetcode.stage2.stage21.TestSolution152;
 import com.roy.miscellaneous.pattern.factory.CpuType;
 import com.roy.miscellaneous.pattern.factory.MainBoardType;
 import com.roy.miscellaneous.pattern.factory.abstractFactory.CaliforniaFactory;
@@ -52,7 +49,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -373,9 +369,22 @@ public class MainTest {
         TestDES3.testDES3("071366666qwertyuiopasdfghjklzxcvbnm,./1234567890");
     }
 
+    /**
+     *
+     * 字节流转字符流
+     */
     @Test
-    public void testJkdIo1() {
-        TestJdkIOs.testIO1();
+    public void testInputStreamReader() {
+        TestJdkIOs.testInputStreamReader();
+    }
+
+    /**
+     *
+     * 字节流转字符流
+     */
+    @Test
+    public void testInputStreamReader1() {
+        TestJdkIOs.testInputStreamReader1();
     }
 
     @Test
@@ -396,18 +405,11 @@ public class MainTest {
         ;
     }
 
-    @Test
-    public void testAddBigDecimalLoop() {
-        for (int i = 0; i < 1000; i++) {
-            testAddBigDecimal();
-        }
-    }
-
     /**
-     * 测试刻度（scale），精度(precision  MathContext)
+     * 测试BigDecimal的 刻度（scale），精度(有效数据长度 precision  MathContext)
      */
     @Test
-    public void testAddBigDecimal() {
+    public void testBigDecimalScalePrecision() {
         logger.info("5/3, 保留小数点后5位, scale {}", new BigDecimal("5").divide(new BigDecimal("3"), 5, RoundingMode.HALF_UP));
         logger.info("5/3, 保留有效数据5位, MathContext {}", new BigDecimal("5").divide(new BigDecimal("3"), new MathContext(5, RoundingMode.HALF_UP)));
         String example = "8.23";
@@ -417,9 +419,34 @@ public class MainTest {
                 new BigDecimal("8.2352", new MathContext(3, RoundingMode.HALF_UP)));
     }
 
+    /**
+     * double丢失精度，改成bigDecimal
+     */
+    @Test
+    public void testDoubleLoss() {
+        double a = 1;
+        double b = 20.2;
+        double c = 300.02;
+        double result = a+b+c;
+        logger.info("double丢失精度 {}, {} , {}, {}", a, b, c, result);
+
+        BigDecimal bdA = new BigDecimal(String.valueOf(a));
+        BigDecimal bdB = new BigDecimal(String.valueOf(b));
+        BigDecimal bdC = new BigDecimal(String.valueOf(c));
+        logger.info("改成bigDecimal后 {}, {} , {}, {}", bdA, bdB, bdC, bdA.add(bdB).add(bdC));
+    }
+
+    /**
+     * 测试BigDecimal的scale =0
+     */
+    @Test
+    public void testBigDecimal() {
+        System.out.println(new BigDecimal("8").divide(new BigDecimal("3"), 0, BigDecimal.ROUND_HALF_UP));
+    }
+
     @Test
     /**
-     * 测试BigDecimal的0
+     * 测试BigDecimal的0是否相等
      */
     public void testZero() {
         System.out.println(new BigDecimal("0.17").intValue() == 0);
@@ -451,12 +478,17 @@ public class MainTest {
 
     }
 
-    @Test
-    public void testCollectorToMap() {
+
+
+    /**
+     * Collectors.toMap 不能处理重复key
+     */
+    @Test(expectedExceptions = { java.lang.NullPointerException.class })
+    public void testCollectorToMapThrow() {
         UserVO userVO1 = new UserVO(1, "guo", "f");
-        UserVO userVO2 = new UserVO(2, "guo2", "f");
-        UserVO userVO3 = new UserVO(3, "guo3", "f");
-        UserVO userVO4 = new UserVO(1, "guo1", "f");
+        UserVO userVO2 = new UserVO(2, "g", "f");
+        UserVO userVO3 = new UserVO(2, "j", "f");
+        UserVO userVO4 = new UserVO(3, "guo", "f");
 
         List<UserVO> userVOS = new ArrayList<>();
         userVOS.add(userVO1);
@@ -464,39 +496,87 @@ public class MainTest {
         userVOS.add(userVO3);
         userVOS.add(userVO4);
 
-        Map<Integer, String> userMap1 = userVOS.stream().collect(HashMap::new, (integerStringHashMap, userVO) -> integerStringHashMap.put(userVO.getUserId(), userVO.getUserName()),
-                HashMap::putAll);
-
-        Map<Integer, String> userMap = userVOS.stream().collect(Collectors.toMap(userVO -> userVO.getUserId(), userVO -> userVO.getUserName()));
+        // 抛异常，map.merge（）的 value不为空
+        Map<Integer, String> userMap = userVOS.stream().collect(Collectors.toMap(userVO -> userVO.getUserId(),
+                userVO -> userVO.getUserName()));
         int k = 3;
 
     }
 
-    @Test(expectedExceptions = { java.lang.NullPointerException.class })
-    public void testCollectorToMapThrow() {
+    /**
+     * 测试jdk8 stream toMap 能处理重复key, 但不能处理value null ,merger时，异常
+     */
+    @Test
+    public void testCollectorToMap2() {
         UserVO userVO1 = new UserVO(1, "guo", "f");
-        UserVO userVO2 = new UserVO(2, null, "f");
-        UserVO userVO3 = new UserVO(3, "guo", "f");
+        UserVO userVO2 = new UserVO(2, "g", "f");
+        UserVO userVO3 = new UserVO(2, "j", "f");
+        UserVO userVO4 = new UserVO(3, "guo", "f");
+        UserVO userVO5 = new UserVO(4, null, "f");
 
         List<UserVO> userVOS = new ArrayList<>();
         userVOS.add(userVO1);
         userVOS.add(userVO2);
         userVOS.add(userVO3);
+        userVOS.add(userVO4);
+        userVOS.add(userVO5);
+        Map<Integer, String> map = userVOS.stream().collect(Collectors.toMap(UserVO::getUserId, item -> item.getUserName(), (v1, v2) -> v2));
+        logger.info("{}", map);
+    }
 
-        // 抛异常，map.merge（）的 value不为空
-        Map<Integer, String> userMap = userVOS.stream().collect(Collectors.toMap(new Function<UserVO, Integer>() {
-            @Override
-            public Integer apply(UserVO userVO) {
-                return userVO.getUserId();
-            }
-        }, new Function<UserVO, String>() {
-            @Override
-            public String apply(UserVO userVO) {
-                return userVO.getUserName();
-            }
-        }));
-        int k = 3;
 
+    /**
+     * 测试jdk8 stream toMap  唯一正确写法
+     */
+    @Test
+    public void testCollectorToMap() {
+        UserVO userVO1 = new UserVO(1, "guo", "f");
+        UserVO userVO2 = new UserVO(2, "guo", "f");
+        UserVO userVO3 = new UserVO(2, null, "f");
+        UserVO userVO4 = new UserVO(3, "guo", "f");
+
+        List<UserVO> userVOS = new ArrayList<>();
+        userVOS.add(userVO1);
+        userVOS.add(userVO2);
+        userVOS.add(userVO3);
+        userVOS.add(userVO4);
+
+        Map<Integer, String> userMap1 = userVOS.stream().collect(
+                HashMap::new,
+                (map, userVO) -> map.put(userVO.getUserId(), userVO.getUserName()),
+                HashMap::putAll);
+        int i = 0;
+
+    }
+
+
+
+
+    /**
+     * 测试jdk的groupingBy
+     */
+    @Test
+    public void testGroupingby() {
+        List<TestVO> testVOS = new ArrayList<>();
+        TestVO testVO1 = new TestVO("1", "2", "3");
+        TestVO testVO2 = new TestVO("1", "2", "4");
+        TestVO testVO3 = new TestVO("1", "2", "3");
+        testVOS.add(testVO1);
+        testVOS.add(testVO2);
+        testVOS.add(testVO3);
+
+        Map<String, List<TestVO>> map1 = testVOS.stream().collect(Collectors.groupingBy(x -> x.getField1() + "-" + x.getField2() + "-" + x.getField3()));
+        logger.info("");
+
+        logger.info("{}", MessageFormat.format("{0}-{1}", 123,456));
+
+    }
+
+    @Test
+    public void testMapNullKey() {
+        HashMap<String, String> map = new HashMap<>();
+        String s = map.get(null);
+        logger.info("");
     }
 
     @Test
@@ -524,34 +604,8 @@ public class MainTest {
         System.out.println(DateUtil.endOfDay(new Date()));
     }
 
-    /**
-     * 测试BigDecimal的scale
-     */
-    @Test
-    public void testBigDecimal() {
-        System.out.println(new BigDecimal("8").divide(new BigDecimal("3"), 0, BigDecimal.ROUND_HALF_UP));
-    }
 
-    @Test
-    public void test() {
-        List<UserVO> userVOS = new ArrayList<>();
-        Map<Integer, UserVO> collect = userVOS.stream().collect(Collectors.toMap(UserVO::getUserId, item -> item, (v1, v2) -> v2));
-        System.out.println();
-    }
 
-    @Test
-    public void test11() {
-        Set<Integer> set = new HashSet<>();
-        set.add(1);
-        logger.info("{}", set);
-    }
-
-    @Test
-    public void testMapNullKey() {
-        HashMap<String, String> map = new HashMap<>();
-        String s = map.get(null);
-        logger.info("");
-    }
 
     /**
      *
@@ -594,22 +648,5 @@ public class MainTest {
             System.arraycopy(oldCards, removeIdx + 1, newCards, removeIdx, newCardLen - removeIdx);
 //        }
         int i = 0;
-    }
-
-    @Test
-    public void testGroupingby() {
-        List<TestVO> testVOS = new ArrayList<>();
-        TestVO testVO1 = new TestVO("1", "2", "3");
-        TestVO testVO2 = new TestVO("1", "2", "4");
-        TestVO testVO3 = new TestVO("1", "2", "3");
-        testVOS.add(testVO1);
-        testVOS.add(testVO2);
-        testVOS.add(testVO3);
-
-        Map<String, List<TestVO>> map1 = testVOS.stream().collect(Collectors.groupingBy(x -> x.getField1() + "-" + x.getField2() + "-" + x.getField3()));
-        logger.info("");
-
-        logger.info("{}", MessageFormat.format("{0}-{1}", 123,456));
-
     }
 }

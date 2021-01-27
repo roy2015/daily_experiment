@@ -22,17 +22,24 @@ public class TestDepponInterface {
 
     static class Solution {
 
+        private DepponRouteDto getDepponRouteDto(int objectId) {
+            DepponRouteDto routeDto = new DepponRouteDto();
+            DepponRouteAddressDto senderAddress = new DepponRouteAddressDto();
+            senderAddress.setProvince("浙江省").setCity("杭州市").setArea("余杭").setTown("余杭街道").setDetail("狮山路11号");
+            DepponRouteAddressDto receiverAddress = new DepponRouteAddressDto();
+            receiverAddress.setProvince("江苏省").setCity("南京市").setArea("江宁").setTown("东山街道").setDetail("东麒路33号A座");
+            routeDto.setObjectId(objectId);
+            routeDto.setSenderAddress(senderAddress);
+            routeDto.setReceiverAddress(receiverAddress);
+            return routeDto;
+        }
+
         public void queryRouteCode() {
-        List<DepponRouteDto> logisticsInterface = new ArrayList<>();
-        DepponRouteDto routeDto = new DepponRouteDto();
-        DepponRouteAddressDto senderAddress = new DepponRouteAddressDto();
-        senderAddress.setProvince("浙江省").setCity("杭州市").setArea("余杭").setTown("余杭街道").setDetail("狮山路11号");
-        DepponRouteAddressDto receiverAddress = new DepponRouteAddressDto();
-        receiverAddress.setProvince("江苏省").setCity("南京市").setArea("江宁").setTown("东山街道").setDetail("东麒路33号A座");
-        routeDto.setObjectId(1);
-        routeDto.setSenderAddress(senderAddress);
-        routeDto.setReceiverAddress(receiverAddress);
-        logisticsInterface.add(routeDto);
+            List<DepponRouteDto> logisticsInterface = new ArrayList<>();
+            for (int i = 0; i < 50; i++) {
+                logisticsInterface.add(getDepponRouteDto(i));
+
+            }
             String logisticsJson = JacksonUtil.toJsonString(logisticsInterface);
             String secretKey = "256ba2a62a46402396cfe4922c4b5dcf";
             String url = "http://dpapi.deppon.com/dop-interface-sync/dop-nonstandard-extension/queryRuleBatch.action";
@@ -96,7 +103,6 @@ public class TestDepponInterface {
         private List<DepponRouteDto> logisticsInterface;
     }
 
-
     @Data
     @ToString(callSuper = true)
     @Accessors(chain = true)
@@ -156,12 +162,8 @@ public class TestDepponInterface {
         private String zip;
     }
 
-
-
-
     public static void main(String[] args) {
         new Solution().queryRouteCode();
-
 
     }
 

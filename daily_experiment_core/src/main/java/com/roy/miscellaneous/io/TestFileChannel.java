@@ -19,7 +19,7 @@ public class TestFileChannel {
     public static void test() {
         try {
             ReadableByteChannel byteChannel = Channels.newChannel(
-                    new FileInputStream(new File("/Users/apple/guojun/docker相关.txt")));
+                    new FileInputStream(new File("/Users/apple/guojun/test/docker相关.txt")));
             ByteBuffer byteBuffer = ByteBuffer.allocateDirect(1000);
             int bytesRead = byteChannel.read(byteBuffer);
             while (bytesRead != -1) {
