@@ -16,11 +16,13 @@
     <properties>
         <jdk-version>1.8</jdk-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.springframework-version>4.3.1.RELEASE</org.springframework-version>
+        <org.springframework-version>5.0.7.RELEASE</org.springframework-version>
         <curator-version>2.11.0</curator-version>
         <hutool.version>5.3.10</hutool.version>
         <lombok.version>1.16.22</lombok.version>
-        <jackson.version>2.9.10.8</jackson.version>
+        <jackson-databind.version>2.9.10.8</jackson-databind.version>
+        <jackson-annotations.version>2.9.0</jackson-annotations.version>
+        <jackson-core.version>2.9.6</jackson-core.version>
     </properties>
 
     <dependencyManagement>

@@ -1,20 +1,22 @@
 package com.roy.miscellaneous.proxy;
 
-import cn.hutool.aop.ProxyUtil;
-import cn.hutool.aop.proxy.ProxyFactory;
+import cn.hutool.core.date.DateUtil;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
-import sun.reflect.generics.tree.VoidDescriptor;
+import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.Date;
 
 /**
  * jdk动态代理
+ *
+ * 演示了简单的动态代理，航母驱逐舰航速监控器，自定义InvocationHandler
  *
  * @author: BG244210
  * Date:    22/10/2018
@@ -24,15 +26,11 @@ import java.lang.reflect.Proxy;
 public class JdkDynamicProxyTest {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(JdkDynamicProxyTest.class);
 
-    public static Warship newProxyInstance(Warship target) {
-        return (Warship) Proxy.newProxyInstance(JdkDynamicProxyTest.class.getClassLoader(), new Class[]{Warship.class}, new WarProxy(target));
-    }
-
     /**
      * 生成接口 Warship的代理类
      * @return
      */
-    public static <T extends WarProxy> Warship newProxyInstance(T handler) {
+    public static <T extends BaseInvocationHandler> Warship newProxyInstance(T handler) {
         return (Warship) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
                 new Class[]{Warship.class}, handler);
     }
@@ -42,7 +40,8 @@ public class JdkDynamicProxyTest {
      * @param warship
      */
     public void test2(Warship warship) {
-        WarProxy warProxy = (WarProxy)Proxy.getInvocationHandler(warship);
+        //获取proxy所使用的InvocationHandler
+        BaseInvocationHandler warProxy = (BaseInvocationHandler)Proxy.getInvocationHandler(warship);
         try  {
             Field warship1 = warProxy.getClass().getDeclaredField("warship");
             warship1.setAccessible(true);
@@ -57,39 +56,42 @@ public class JdkDynamicProxyTest {
     }
 
     public void test1() {
-        Warship warship = JdkDynamicProxyTest.newProxyInstance(new WarProxy(new AircraftCarrier("辽宁舰")));
+        Warship warship = JdkDynamicProxyTest.newProxyInstance(new BaseInvocationHandler(new AircraftCarrier("辽宁舰")));
+        logger.info("{}",AopUtils.isAopProxy(warship));
+
         warship.fire(1);
 
-        Warship warship1 = JdkDynamicProxyTest.newProxyInstance(new WarProxy(new Destroyer("055")));
+        Warship warship1 = JdkDynamicProxyTest.newProxyInstance(new BaseInvocationHandler(new Destroyer("055")));
         warship1.fire(2);
     }
 
     public void test3 () {
-        SeawayAlarmer.SeawayAlarmerBuilder seaway = new SeawayAlarmer.SeawayAlarmerBuilder().methodName("seaway").limitSpeed(30);
-
-        for (int i = 1; i < 20; i++) {
-            Warship warship = JdkDynamicProxyTest.newProxyInstance(seaway.warship(new AircraftCarrier("辽宁舰-" + i) ).build());
-            warship.seaway(20 + i);
-
-            Warship warship1 = JdkDynamicProxyTest.newProxyInstance(seaway.warship(new Destroyer("055-" + i)).build());
-            warship1.seaway(25 + i);
+        SeawayAlarmer.SeawayAlarmerBuilder seawayBuilder1 = new SeawayAlarmer.SeawayAlarmerBuilder().methodName("seaway").limitSpeed(27);
+        SeawayAlarmer.SeawayAlarmerBuilder seawayBuilder2 = new SeawayAlarmer.SeawayAlarmerBuilder().methodName("seaway").limitSpeed(27);
+        Warship warship1 = JdkDynamicProxyTest.newProxyInstance(seawayBuilder1.warship(new AircraftCarrier("辽宁舰") ).build());
+        Warship warship2 = JdkDynamicProxyTest.newProxyInstance(seawayBuilder2.warship(new Destroyer("055")).build());
+        for (int i = 1; i < 10; i++) {
+            warship1.seaway(20 + i);
+            warship2.seaway(25 + i);
         }
+        warship1.fire(1);
     }
 
     public static void main(String[] args) throws InterruptedException {
         JdkDynamicProxyTest jdkDynamicProxyTest = new JdkDynamicProxyTest();
-        jdkDynamicProxyTest.test3();
+        jdkDynamicProxyTest.test1();
     }
 
 
     /**
-     * 调用处理器
+     *
+     * 基本的 proxy wrapper
      */
     @Data
-    static class WarProxy implements InvocationHandler {
+    static class BaseInvocationHandler implements InvocationHandler {
         protected Warship warship;
 
-        public WarProxy(Warship warship) {
+        public BaseInvocationHandler(Warship warship) {
             this.warship = warship;
         }
 
@@ -99,13 +101,17 @@ public class JdkDynamicProxyTest {
         }
     }
 
+    /**
+     * 航速监控器
+     */
     @Data
     @Accessors(chain = true)
-    static class SeawayAlarmer extends WarProxy {
+    static class SeawayAlarmer extends BaseInvocationHandler {
+        //需要拦截的方法名
         private String methodName;
         private int limitSpeed;
 
-        public SeawayAlarmer() {
+        protected SeawayAlarmer() {
         }
 
         @Override
@@ -113,8 +119,12 @@ public class JdkDynamicProxyTest {
             if (method.getName().equals(methodName)) {
                 int arg = (int) args[0];
                 if (arg > limitSpeed) {
-                    logger.warn(" [{}], 实时航速[{}], 限速[{}],请减速!!!!!!",  warship.getWarshipName() ,arg, limitSpeed);
+                    logger.warn(" [{}], 时间[{}] 实时航速[{}], 限速[{}],已超速，请减速！",  warship.getWarshipName() , DateUtil.formatDateTime(new Date()), arg, limitSpeed);
+                } else {
+                    logger.warn(" [{}], 时间[{}] 实时航速[{}], 正常航速，请保持",  warship.getWarshipName() , DateUtil.formatDateTime(new Date()), arg, limitSpeed);
                 }
+            } else {
+                logger.info("执行了方法 {}", method.getName());
             }
             return method.invoke(warship, args);
         }
@@ -122,7 +132,7 @@ public class JdkDynamicProxyTest {
         /**
          * builder
          */
-        public  static final class  SeawayAlarmerBuilder {
+        static class  SeawayAlarmerBuilder {
             private SeawayAlarmer seawayAlarmer;
 
             public  SeawayAlarmerBuilder() {

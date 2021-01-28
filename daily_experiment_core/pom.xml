@@ -14,6 +14,7 @@
     <name>daily_experiment_core</name>
 
     <dependencies>
+        <!-- springframework start-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
@@ -45,15 +46,16 @@
             <artifactId>spring-tx</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
             <version>${org.springframework-version}</version>
-        </dependency>
+        </dependency>-->
+        <!-- springframework end-->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
-            <version>1.7.2.RELEASE</version>
+            <version>2.0.8.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -281,7 +283,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>${jackson-databind.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>jackson-annotations</artifactId>
