@@ -36,10 +36,10 @@ public class JdkDynamicProxyTest {
     }
 
     /**
-     * 获取代理类中个属性
-     * @param warship
+     * 获取代理中invocationHandler里的属性
      */
-    public void test2(Warship warship) {
+    public void test2() {
+        Warship warship = JdkDynamicProxyTest.newProxyInstance(new BaseInvocationHandler(new AircraftCarrier("辽宁舰")));
         //获取proxy所使用的InvocationHandler
         BaseInvocationHandler warProxy = (BaseInvocationHandler)Proxy.getInvocationHandler(warship);
         try  {
@@ -80,6 +80,7 @@ public class JdkDynamicProxyTest {
     public static void main(String[] args) throws InterruptedException {
         JdkDynamicProxyTest jdkDynamicProxyTest = new JdkDynamicProxyTest();
         jdkDynamicProxyTest.test1();
+        jdkDynamicProxyTest.test2();
     }
 
 
