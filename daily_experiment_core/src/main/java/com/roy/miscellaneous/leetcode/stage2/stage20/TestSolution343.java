@@ -107,10 +107,49 @@ public class TestSolution343 {
             }
             return ret;
         }
+
+        /**
+         * 自我净化版本，只要统计3和2个数，不用拼接字符串
+         *
+         * 执行结果：通过
+         * 显示详情
+         * 执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
+         * 内存消耗：35.3 MB, 在所有 Java 提交中击败了36.67%的用户
+         *
+         *
+         * @param n
+         * @return
+         */
+        public int integerBreak1(int n) {
+            if (n == 2) {
+                return 1;
+            }
+            if (n == 3) {
+                return 2;
+            }
+            if (n == 4) {
+                return 4;
+            }
+            int threeNums = 0;
+            int twoNums = 2;
+            //从5开始
+            for (int i = 5; i <= n ; i++) {
+                if (twoNums != 0) {
+                    threeNums++;
+                    twoNums--;
+                } else {
+                    threeNums--;
+                    twoNums = 2;
+                }
+            }
+            return (int) (Math.pow(3, threeNums) * Math.pow(2, twoNums));
+        }
+
+
     }
 
     public static void main(String[] args) {
-        logger.info("{}", new Solution().integerBreak(4));//4
-        logger.info("{}", new Solution().integerBreak(58));//1549681956
+        logger.info("{}", new Solution().integerBreak1(4));//4
+        logger.info("{}", new Solution().integerBreak1(58));//1549681956
     }
 }
