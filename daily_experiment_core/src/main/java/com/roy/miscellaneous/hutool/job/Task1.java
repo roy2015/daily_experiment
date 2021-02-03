@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.hutool;
+package com.roy.miscellaneous.hutool.job;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2021/1/27 下午5:51
  */
 @Slf4j
-public class Task2 {
+public class Task1 {
     public void test() {
         log.info(this.getClass().getName());
     }

@@ -1,3 +1,3 @@
-com.roy.miscellaneous.hutool.Task1.test = 0/10 * * * * ?
-com.roy.miscellaneous.hutool.Task2.test = 0/10 * * * * ?
-com.roy.miscellaneous.hutool.Task3.test = 0/10 * * * * ?
+com.roy.miscellaneous.hutool.job.Task1.test = 0/10 * * * * ?
+com.roy.miscellaneous.hutool.job.Task2.test = 0/10 * * * * ?
+com.roy.miscellaneous.hutool.job.Task3.test = 0/10 * * * * ?

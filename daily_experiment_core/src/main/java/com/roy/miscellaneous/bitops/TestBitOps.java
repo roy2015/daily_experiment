@@ -1,4 +1,4 @@
-package com.roy.miscellaneous;
+package com.roy.miscellaneous.bitops;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,17 @@ import org.slf4j.LoggerFactory;
  */
 public class TestBitOps {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestBitOps.class);
+
+    /**
+     * 测试取二进制最后一个1
+     */
+    public void test2() {
+        int k = 10;
+        logger.info(Integer.toBinaryString(k));
+        logger.info(Integer.toBinaryString(-k));
+        logger.info(Integer.toBinaryString(k & -k));
+    }
+
     public void test1() {
         int k =-12;
         int k1 = Integer.parseInt("-1111111111111111111111111110100",2);
@@ -49,11 +60,9 @@ public class TestBitOps {
         logger.debug(String.format("hashMap的hash运算: (h = Integer.valueOf(a).hashCode()) ^ (h >>> 16))=\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" ,
                 StringUtils.leftPad(Integer.toBinaryString( (h = Integer.valueOf(a).hashCode()) ^ (h >>> 16)), 32, "0")));
         logger.debug(Integer.valueOf((h = Integer.valueOf(a).hashCode()) ^ (h >>> 16)).toString());
+    }
 
-        /*int h;
-        Integer key = 123;
-        int result = (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);*/
-
-
+    public static void main(String[] args) {
+        new TestBitOps().test2();
     }
 }

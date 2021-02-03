@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun
- * @date 2020/2/1 14:51
+ * @date 2021/2/1 14:51
  *
  * 400. 第 N 位数字
  * 在无限的整数序列 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...中找到第 n 位数字。

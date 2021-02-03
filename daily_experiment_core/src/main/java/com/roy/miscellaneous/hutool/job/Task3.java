@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.hutool;
+package com.roy.miscellaneous.hutool.job;
 
 import lombok.extern.slf4j.Slf4j;
 

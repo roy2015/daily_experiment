@@ -11,6 +11,7 @@ import com.roy.miscellaneous.arithmetic.cipher.TestDES3;
 import com.roy.miscellaneous.arithmetic.cipher.TestMac;
 import com.roy.miscellaneous.arithmetic.cipher.TestRSAEncrypt;
 import com.roy.miscellaneous.arithmetic.cipher.TestRsaSignature;
+import com.roy.miscellaneous.bitops.TestBitOps;
 import com.roy.miscellaneous.executors.TestScheduledThreadPoolExecutor;
 import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
 import com.roy.miscellaneous.io.TestJdkIOs;
