@@ -1,12 +1,13 @@
 package com.roy.miscellaneous.io;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by apple on 2019/8/16.
@@ -60,6 +61,23 @@ public class TestJdkIOs {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 输出一万个单号到文件
+     */
+    public static void writeToFile() {
+        String order_no_prifix = "test_guoj_20210204_";
+
+        List<String> toWriteList = CollUtil.newArrayList((String) null);
+        for (int i = 0; i < 10000; i++) {
+            toWriteList.add(StrUtil.concat(true, order_no_prifix , StrUtil.padPre(i + "", 4, '0')));
+        }
+        FileUtil.appendLines(toWriteList, new File("/Users/apple/guojun/tms_jmeter/order_no.csv"), CharsetUtil.CHARSET_UTF_8);
+    }
+
+    public static void main(String[] args) {
+        writeToFile();
     }
 
 
