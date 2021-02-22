@@ -2,8 +2,6 @@ package com.roy.miscellaneous.leetcode.stage2.stage22;
 
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-
 /**
  * @author guojun
  * @date 2021/1/29
@@ -53,8 +51,8 @@ import java.util.Arrays;
  *
  *
  */
-public class TestSolutionTemplate1706 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionTemplate1706.class);
+public class TestSolution1706 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution1706.class);
 
 
     static class Solution {
