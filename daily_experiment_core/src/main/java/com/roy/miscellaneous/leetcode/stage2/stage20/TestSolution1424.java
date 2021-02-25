@@ -3,9 +3,7 @@ package com.roy.miscellaneous.leetcode.stage2.stage20;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author guojun
@@ -53,8 +51,10 @@ public class TestSolution1424 {
 
     static class Solution {
         /**
-         * 超出时间限制了？？继续找出性能问题点优化
+         * 虽然超时了，但思路和后续的优化努力是值得肯定的，见骚操作 @see #findDiagonalOrder2
          *
+         * 超出时间限制了？？继续找出性能问题点优化
+         * @see #findDiagonalOrder2
          * @param nums
          * @return
          */
@@ -117,6 +117,7 @@ public class TestSolution1424 {
             List<Integer> retList = new ArrayList<>();
             int maxCol = nums.get(0).size();
             int[] rowColLengthArray = new int[globalRowSize];
+            BitSet barrier = new BitSet();
             for (int i = 0; i < globalRowSize; i++) {
                 int currentRowSize = nums.get(i).size();
                 if (currentRowSize > maxCol) {
@@ -126,12 +127,12 @@ public class TestSolution1424 {
             }
             //phase1 （0,0） -> （max,0）
             for (int i = 0; i < globalRowSize; i++) {
-                retList.addAll(test1(i, 0, nums, rowColLengthArray));
+                retList.addAll(test1(i, 0, nums, rowColLengthArray, barrier));
             }
             //phase2 （max,1）-> （max,max）
             int row = globalRowSize -1;
             for (int i = 1; i < maxCol; i++) {
-                retList.addAll(test1(row, i, nums, rowColLengthArray));
+                retList.addAll(test1(row, i, nums, rowColLengthArray, barrier));
 
             }
             int retSize = retList.size();
@@ -152,17 +153,75 @@ public class TestSolution1424 {
          * @param rowColLengthArray
          * @return
          */
-        public List<Integer> test1(int rowIdx, int colIdx, List<List<Integer>> nums, int[] rowColLengthArray) {
+        public List<Integer> test1(int rowIdx, int colIdx, List<List<Integer>> nums, int[] rowColLengthArray, BitSet barrier) {
             List<Integer> retList = new ArrayList<>();
             int sumIdx = rowIdx + colIdx;
             for (int i = rowIdx; i >= 0 ; i--) {
                 int j = sumIdx - i;
+                if (barrier.get(i)) {
+                    continue;
+                }
                 if (j < rowColLengthArray[i]) {
                     retList.add(nums.get(i).get(j));
+                } else {
+                    barrier.set(i, true);
                 }
             }
             return retList;
         }
+
+        /**
+         *
+         * 参考扣友的思路，大一统思路，相同的和归集到map,再遍历，必须要用LinkedHashMap, hashMap是不行的
+         *
+         * 执行结果：
+         * 通过
+         * 显示详情
+         * 执行用时：
+         * 42 ms
+         * , 在所有 Java 提交中击败了
+         * 50.18%
+         * 的用户
+         * 内存消耗：
+         * 66.8 MB
+         * , 在所有 Java 提交中击败了
+         * 44.65%
+         * 的用户
+         * @param nums
+         * @return
+         */
+        public int[] findDiagonalOrder2(List<List<Integer>> nums) {
+            Map<Integer, List<Integer>> map = new LinkedHashMap<>();
+            int length = 0;
+            for (int i = 0; i < nums.size(); i++) {
+                List<Integer> num = nums.get(i);
+                for (int i1 = 0; i1 < num.size(); i1++) {
+                    int sumIdx = i + i1;
+                    Integer val = num.get(i1);
+                    map.compute(sumIdx, (key, oldVal) -> {
+                        if (oldVal == null) {
+                            oldVal = new ArrayList<>();
+                            oldVal.add(val);
+                        } else {
+                            oldVal.add(val);
+                        }
+                        return oldVal;
+                    });
+                    length ++;
+                }
+            }
+
+            int[] retInts = new int[length];
+            int k = 0;
+            for (Map.Entry<Integer, List<Integer>> listEntry : map.entrySet()) {
+                List<Integer> list = listEntry.getValue();
+                for (int i = list.size() - 1; i >= 0; i--) {
+                    retInts[k ++] = list.get(i);
+                }
+            }
+            return retInts;
+        }
+
     }
 
     public static void main(String[] args) {
@@ -179,6 +238,6 @@ public class TestSolution1424 {
         lists.add(Arrays.asList(8));
         lists.add(Arrays.asList(9,10,11));
         lists.add(Arrays.asList(12,13,14,15,16));
-        logger.info("{}", new Solution().findDiagonalOrder1(lists));//1,6,2,8,7,3,9,4,12,10,5,13,11,14,15,16
+        logger.info("{}", new Solution().findDiagonalOrder2(lists));//1,6,2,8,7,3,9,4,12,10,5,13,11,14,15,16
     }
 }
