@@ -65,6 +65,16 @@ public class TestSolution1206 {
         ListNode(Integer x) { val = x; }
     }
 
+    /**
+     *
+     * 执行结果：
+     * 通过
+     * 显示详情
+     * 执行用时：688 ms, 在所有 Java 提交中击败了6.11%的用户
+     * 内存消耗：46.6 MB, 在所有 Java 提交中击败了18.21%的用户
+     *
+     *
+     */
     static class Skiplist {
         /**
          * 头的最上层节点
