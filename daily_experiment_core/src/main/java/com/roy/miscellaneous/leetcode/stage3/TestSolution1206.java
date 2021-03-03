@@ -357,18 +357,18 @@ public class TestSolution1206 {
 //        logger.info("");
 
         //test3
-//        skiplist.add(9);//9], [4],   [5],[ 6],   [9],
-//        skiplist.add(4);
-//        skiplist.add(5);
-//        skiplist.add(6);
-//        skiplist.add(9);
-//        logger.info("{}", skiplist.erase(2));//false
-//        logger.info("{}", skiplist.erase(1));//false
-//        skiplist.add(2);
-//        logger.info("{}", skiplist.search(7));//false
-//        logger.info("{}", skiplist.search(4));//true
-//        skiplist.add(5);
-//        logger.info("{}", skiplist.erase(6));//true
+        skiplist.add(9);//9], [4],   [5],[ 6],   [9],
+        skiplist.add(4);
+        skiplist.add(5);
+        skiplist.add(6);
+        skiplist.add(9);
+        logger.info("{}", skiplist.erase(2));//false
+        logger.info("{}", skiplist.erase(1));//false
+        skiplist.add(2);
+        logger.info("{}", skiplist.search(7));//false
+        logger.info("{}", skiplist.search(4));//true
+        skiplist.add(5);
+        logger.info("{}", skiplist.erase(6));//true
 
 
 
