@@ -650,4 +650,23 @@ public class MainTest {
 //        }
         int i = 0;
     }
+
+    @Test
+    public void testPriorityQueue() {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        int addVal ;
+//        for (int i = 0; i < 10; i++) {
+//            addVal = new Random().nextInt(100);
+//            logger.info("{}",addVal);
+//            priorityQueue.add(addVal);
+////            logger.info("{}",priorityQueue);
+//        }
+
+        priorityQueue.add(3);
+        priorityQueue.add(5);
+        priorityQueue.add(8);
+        priorityQueue.add(9);
+        priorityQueue.poll();
+        logger.info("");
+    }
 }

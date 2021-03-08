@@ -37,8 +37,11 @@ public class TestSolution703 {
 
 
     /**
+     *
+     * 注意：PriorityQueue默认是小顶堆
+     *
      * 执行用时 :97 ms, 在所有 java 提交中击败了75.62%的用户
-     内存消耗 :49.1 MB, 在所有 java 提交中击败了91.14%的用户
+     * 内存消耗 :49.1 MB, 在所有 java 提交中击败了91.14%的用户
      */
     static class KthLargest {
         private PriorityQueue<Integer> priorityQueue;

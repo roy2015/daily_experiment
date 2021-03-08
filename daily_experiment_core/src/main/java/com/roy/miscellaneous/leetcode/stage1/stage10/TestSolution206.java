@@ -56,6 +56,26 @@ public class TestSolution206 {
             return pre;
         }
 
+        /**
+         * 练习  2021/03/08
+         * @param head
+         * @return
+         */
+        public Node reverseList1(Node head) {
+            Node current = head;
+            Node pre = null;
+            Node temp;
+
+            while(current != null) {
+                temp = current.next;
+                current.next = pre;
+                pre = current;
+                current = temp;
+            }
+            return pre;
+
+        }
+
         public static void print (Node node) {
             while (node != null) {
                 logger.info("node: [{}]", node.value);
@@ -81,7 +101,7 @@ public class TestSolution206 {
         new Solution().print(nodeA);
 
         logger.info("逆序后==============================");
-        Node node = new Solution().reverseList (nodeA);
+        Node node = new Solution().reverseList1 (nodeA);
         new Solution().print(node);
 
     }
