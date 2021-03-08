@@ -3,6 +3,9 @@ package com.roy.miscellaneous.proxy;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author: BG244210
@@ -27,13 +30,12 @@ public class AircraftCarrier implements Warship {
     }
 
     @Override
-    public int fire(int i) {
-        System.out.println("航母" + i);
-        return  i +1 ;
+    public List<String> fire(int i) {
+        return  Arrays.asList();
     }
 
     @Override
     public void seaway(int speed) {
-//        logger.info("【{}】航速：[{}]" , name, speed);
+        logger.info("【{}】航速：[{}]" , name, speed);
     }
 }

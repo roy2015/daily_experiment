@@ -2,6 +2,9 @@ package com.roy.miscellaneous.proxy;
 
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author guojun
  * @date 2021/1/15 下午3:37
@@ -23,13 +26,15 @@ public class Destroyer implements Warship{
     }
 
     @Override
-    public int fire(int i) {
-        System.out.println("驱逐舰" + i);
-        return  i +1 ;
+    public List<String> fire(int i) {
+        return  Arrays.asList(
+                "击中美军阿利-伯克级 CDG-100",
+                "击中美军阿利-伯克级 CDG-101",
+                "击中美军阿利-伯克级 CDG-102");
     }
 
     @Override
     public void seaway(int speed) {
-//        logger.info("【{}】航速：[{}]" , name, speed);
+        logger.info("【{}】航速：[{}]" , name, speed);
     }
 }

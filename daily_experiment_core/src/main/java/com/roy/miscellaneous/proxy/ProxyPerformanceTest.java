@@ -48,7 +48,7 @@ public class ProxyPerformanceTest {
         //创建测试对象
         Target nativeTest = new TargetImpl();
 //        Warship jdkDynamicProxy = JdkDynamicProxyTest.newProxyInstance(new AircraftCarrier("辽宁舰"));
-        Target cglibProxy = CglibProxyTest.newProxyInstance(TargetImpl.class);
+        Target cglibProxy = CglibProxyTest.newProxyInstance(TargetImpl.class, nativeTest);
 
         //预热一下
         int preRunCount = 10000;

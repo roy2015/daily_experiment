@@ -79,8 +79,9 @@ public class JdkDynamicProxyTest {
 
     public static void main(String[] args) throws InterruptedException {
         JdkDynamicProxyTest jdkDynamicProxyTest = new JdkDynamicProxyTest();
-        jdkDynamicProxyTest.test1();
-        jdkDynamicProxyTest.test2();
+//        jdkDynamicProxyTest.test1();
+//        jdkDynamicProxyTest.test2();
+        jdkDynamicProxyTest.test3();
     }
 
 
