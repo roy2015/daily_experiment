@@ -1,11 +1,8 @@
 package com.roy.miscellaneous.leetcode.stage1.stage12;
 
-import org.slf4j.LoggerFactory;
-
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Stack;
-import java.util.function.Function;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

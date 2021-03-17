@@ -1,13 +1,10 @@
 package com.roy.miscellaneous.leetcode.stage1.stage12;
 
-import cn.hutool.core.util.StrUtil;
-import com.sun.jmx.remote.internal.ArrayQueue;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayDeque;
 import java.util.BitSet;
 import java.util.Deque;
-import java.util.Queue;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

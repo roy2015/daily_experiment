@@ -1,10 +1,10 @@
 package com.roy.miscellaneous.leetcode.stage2.stage21;
 
-import org.slf4j.LoggerFactory;
-
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Stack;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

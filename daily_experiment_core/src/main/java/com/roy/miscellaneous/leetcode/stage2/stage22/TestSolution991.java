@@ -1,10 +1,9 @@
 package com.roy.miscellaneous.leetcode.stage2.stage22;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
-import org.slf4j.LoggerFactory;
-
 import java.util.LinkedList;
 import java.util.Queue;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

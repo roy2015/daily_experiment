@@ -1,7 +1,6 @@
 package com.roy.miscellaneous.arithmetic;
 
 import com.alibaba.druid.filter.config.ConfigTools;
-import com.roy.miscellaneous.TestDigitalArithmetic;
 import org.slf4j.LoggerFactory;
 
 import java.security.NoSuchAlgorithmException;
@@ -14,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
  *
  */
 public class TestDruidDeEncrypt {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestDigitalArithmetic.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestDruidDeEncrypt.class);
 
     static class Solution {
         /**
@@ -59,11 +58,11 @@ public class TestDruidDeEncrypt {
 
 
     public static void main(String[] args) {
-        String password = "KGfEEPSgJeRNtPJJ7PPs6Lt54exP36tX03QjUFqG7OY/7bn+gHfJIolP6nQFKsZb0CK2cL5YTHn4BFYqSn7prQ==";
-        String publickey = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJXksAlPy1olvXpNZbB3k+/4SeFdnFelnVC3RyFl18lTwMzNGyRoSE0BfcL4PbusMlD5OP2GAxJpvMvHwsI5cbkCAwEAAQ==";
+        String publickey = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKFpxt+Ufru/F/sM+xpB66PblBNg5T0gE13tvarbBXWsJ83TIPu1QP5tXePB8DT3vi8C405Ah+/8YYo3W6mgfVcCAwEAAQ==";
+        String password = "fwsR80Gs/C3YqOg2kJgDjiBTeTuSWK8UtMkTDZjrax2joMBmzwlakbuDTZ+w75nKe5pDOHmSxQTQcMaXKUataA==";
         String s = new Solution().doDecrypt(publickey, password);
         logger.debug(s);
-//        new Solution().doEncrypt("Itsme@999");
+        new Solution().doEncrypt("GgmA1d@2d@QFtEsn");
     }
 
 }

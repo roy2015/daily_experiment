@@ -1,9 +1,9 @@
 package com.roy.miscellaneous.leetcode.stage1.stage10;
 
-import org.slf4j.LoggerFactory;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by apple on 2019/9/22.

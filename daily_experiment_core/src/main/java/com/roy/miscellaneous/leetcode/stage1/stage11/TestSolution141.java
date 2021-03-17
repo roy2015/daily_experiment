@@ -93,6 +93,32 @@ public class TestSolution141 {
             }
         }
 
+
+
+
+
+
+        /**
+         * 练习  20210309 追击问题
+         * @param head
+         * @return
+         */
+        public boolean hasCycle1(ListNode head) {
+            ListNode fastNode, slowNode;
+            fastNode = slowNode = head;
+            while (true) {
+                if (fastNode == null || fastNode.next == null) {
+                    return false;
+                }
+                //走两步，走一步
+                fastNode = fastNode.next.next;
+                slowNode = slowNode.next;
+                if (fastNode == slowNode) {
+                    return true;
+                }
+            }
+        }
+
     }
 
     public static void main(String[] args) {
@@ -118,13 +144,13 @@ public class TestSolution141 {
         listNode9.next = listNode10;
         listNode10.next = listNode3;
 
-        logger.info("{}", new Solution().hasCycle(listNode1));//true
+        logger.info("{}", new Solution().hasCycle1(listNode1));//true
         listNode1 = new ListNode(1);
-        logger.info("{}", new Solution().hasCycle(listNode1));//false
+        logger.info("{}", new Solution().hasCycle1(listNode1));//false
         listNode1 = new ListNode(1);
         listNode1.next = listNode2;
         listNode2.next = null;
-        logger.info("{}", new Solution().hasCycle(listNode1));//false
+        logger.info("{}", new Solution().hasCycle1(listNode1));//false
 
     }
 }

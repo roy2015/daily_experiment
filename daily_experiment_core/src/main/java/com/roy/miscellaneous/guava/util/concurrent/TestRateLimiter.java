@@ -28,7 +28,7 @@ public class TestRateLimiter {
         for (Thread task : tasks) {
             long startTimeInMil = System.currentTimeMillis();
             LOGGER.info("线程[{}]开始提交， 提交时间【{}】", task.getName(), startTimeInMil);
-            rateLimiter.acquire(); // may wait
+            LOGGER.info("{}",rateLimiter.acquire()); // may wait
             executor.execute(task);
             LOGGER.info("线程[{}]提交 done， 提交用时【{}】", task.getName(), System.currentTimeMillis() - startTimeInMil);
         }

@@ -1,10 +1,8 @@
 package com.roy.miscellaneous.leetcode.stage3;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayDeque;
-import java.util.Queue;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

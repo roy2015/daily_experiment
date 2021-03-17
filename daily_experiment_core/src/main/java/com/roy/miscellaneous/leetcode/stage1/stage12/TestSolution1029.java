@@ -1,8 +1,11 @@
 package com.roy.miscellaneous.leetcode.stage1.stage12;
 
-import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-import java.util.*;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun
@@ -80,12 +83,45 @@ public class TestSolution1029 {
             }
             return cost;
         }
+
+        /**
+         * 骚思路：全部2N都去B，再选一半(N)人去A,   每选一个人去A，补贴差价 -y+x = x-y, 当然选差值最小的N个，相比上方法1，省去了开销
+         *
+         * 执行用时：
+         * 1 ms
+         * , 在所有 Java 提交中击败了
+         * 99.34%
+         * 的用户
+         * 内存消耗：
+         * 36.5 MB
+         * , 在所有 Java 提交中击败了
+         * 61.46%
+         * 的用户
+         * @param costs
+         * @return
+         */
+        public int twoCitySchedCost1(int[][] costs) {
+            int size = costs.length;
+            int allChooseB = 0;
+            int[] gaps = new int[size];
+            for (int i = 0; i < size; i++) {
+                allChooseB += costs[i][1];
+                gaps[i] = costs[i][0] - costs[i][1];
+            }
+            Arrays.sort(gaps);
+            int halfSize = size /2;
+            for (int i = 0; i < halfSize; i++) {
+                allChooseB += gaps[i];
+            }
+            return allChooseB;
+        }
     }
 
-    public static void main(String[] args) {
-        logger.info("{}", new Solution().twoCitySchedCost(new int[][]{
-                {10,20},{30,200},{400,50},{30,20}
 
-        }));
+
+    public static void main(String[] args) {
+        logger.info("{}", new Solution().twoCitySchedCost1(new int[][]{
+                {10,20},{30,200},{400,50},{30,20}
+        }));//110
     }
 }

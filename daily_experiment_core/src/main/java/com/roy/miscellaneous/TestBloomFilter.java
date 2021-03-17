@@ -2,10 +2,14 @@ package com.roy.miscellaneous;
 
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
 import org.slf4j.LoggerFactory;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by apple on 2018/12/7.
@@ -36,5 +40,13 @@ public class TestBloomFilter {
         }
         logger.debug("有误伤的数量：" + list.size());
 
+    }
+
+    public static void main(String[] args) {
+        HashFunction hashFunction = Hashing.murmur3_32();
+        for (int i = 0; i < 10000; i++) {
+            String s = new Random().nextInt(100000) + "";
+            logger.info("{}, {}", s , hashFunction.hashString (s, Charset.defaultCharset()). asInt());
+        }
     }
 }

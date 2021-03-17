@@ -1,6 +1,5 @@
 package com.roy.miscellaneous.leetcode.stage1.stage11;
 
-import org.apache.commons.collections4.functors.PredicateTransformer;
 import org.slf4j.LoggerFactory;
 
 /**

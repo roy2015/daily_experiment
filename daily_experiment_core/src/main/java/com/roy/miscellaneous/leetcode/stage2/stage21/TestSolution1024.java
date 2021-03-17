@@ -1,9 +1,8 @@
 package com.roy.miscellaneous.leetcode.stage2.stage21;
 
-import org.slf4j.LoggerFactory;
-
 import java.util.*;
-import java.util.function.BiFunction;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

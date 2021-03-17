@@ -1,9 +1,9 @@
 package com.roy.miscellaneous.leetcode.stage2.stage21;
 
-import org.slf4j.LoggerFactory;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

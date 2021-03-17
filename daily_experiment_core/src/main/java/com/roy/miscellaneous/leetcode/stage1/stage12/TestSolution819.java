@@ -1,8 +1,8 @@
 package com.roy.miscellaneous.leetcode.stage1.stage12;
 
-import org.slf4j.LoggerFactory;
-
 import java.util.*;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

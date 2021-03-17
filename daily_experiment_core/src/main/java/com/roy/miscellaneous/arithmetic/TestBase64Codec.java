@@ -43,7 +43,7 @@ public class TestBase64Codec {
     }
 
     public static void main(String[] args) throws Exception {
-        testBase64Encode("0123456789000000");
+        testBase64Encode("01234567890000");
         testBase64Decode("MTIzNDU2");
     }
 

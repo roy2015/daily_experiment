@@ -1,10 +1,8 @@
 package com.roy.miscellaneous.leetcode.stage1.stage13;
 
-import org.slf4j.LoggerFactory;
-
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.ToIntFunction;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

@@ -1,10 +1,10 @@
 package com.roy.miscellaneous.leetcode.stage2.stage21;
 
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

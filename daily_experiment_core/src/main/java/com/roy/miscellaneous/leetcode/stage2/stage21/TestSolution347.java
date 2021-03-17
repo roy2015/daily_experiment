@@ -1,12 +1,11 @@
 package com.roy.miscellaneous.leetcode.stage2.stage21;
 
-import org.slf4j.LoggerFactory;
-
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.function.BiFunction;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

@@ -1,9 +1,8 @@
 package com.roy.miscellaneous.leetcode.stage2.stage20;
 
-import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Array;
 import java.util.*;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

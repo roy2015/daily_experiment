@@ -20,6 +20,7 @@
         <curator-version>2.11.0</curator-version>
         <hutool.version>5.3.10</hutool.version>
         <lombok.version>1.16.22</lombok.version>
+        <roaringbitmap.version>0.8.9</roaringbitmap.version>
         <jackson-databind.version>2.9.10.8</jackson-databind.version>
         <jackson-annotations.version>2.9.0</jackson-annotations.version>
         <jackson-core.version>2.9.6</jackson-core.version>
@@ -57,14 +58,14 @@
 
     <distributionManagement>
         <repository>
-            <id>nexus-releases</id>
-            <name>Internal Release Repository</name>
-            <url>http://mvn.rograndec.net/nexus/content/repositories/releases/</url>
+            <id>releases</id>
+            <name>releases</name>
+            <url>http://localhost:8099/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>Internal Snapshot Repository</name>
-            <url>http://mvn.rograndec.net/nexus/content/repositories/snapshots/</url>
+            <id>snapshots</id>
+            <name>snapshots</name>
+            <url>http://localhost:8099/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>

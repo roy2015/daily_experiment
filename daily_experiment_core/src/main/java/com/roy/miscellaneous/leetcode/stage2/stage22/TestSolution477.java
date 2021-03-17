@@ -1,11 +1,11 @@
 package com.roy.miscellaneous.leetcode.stage2.stage22;
 
-import com.roy.miscellaneous.leetcode.CommonUtils;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.roy.miscellaneous.leetcode.CommonUtils;
 
 /**
  * @author guojun

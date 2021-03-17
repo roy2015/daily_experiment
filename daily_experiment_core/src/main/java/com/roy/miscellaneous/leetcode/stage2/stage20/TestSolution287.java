@@ -1,8 +1,8 @@
 package com.roy.miscellaneous.leetcode.stage2.stage20;
 
-import org.slf4j.LoggerFactory;
-
 import java.util.BitSet;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author guojun

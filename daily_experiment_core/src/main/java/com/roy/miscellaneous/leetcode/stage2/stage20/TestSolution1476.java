@@ -2,8 +2,6 @@ package com.roy.miscellaneous.leetcode.stage2.stage20;
 
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
-
 /**
  * @author guojun
  * @date 2020/12/23
