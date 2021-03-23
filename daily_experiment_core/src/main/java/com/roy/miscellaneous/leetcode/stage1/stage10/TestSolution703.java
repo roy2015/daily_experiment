@@ -51,7 +51,7 @@ public class TestSolution703 {
             priorityQueue = new PriorityQueue<>(k);
             this.k = k;
             for (int num : nums) {
-                add(num);
+                add1(num);
             }
         }
 
@@ -63,6 +63,32 @@ public class TestSolution703 {
                 priorityQueue.poll();
             }
             return priorityQueue.peek();
+        }
+
+        /**
+         * 改进的算法 20210322
+         *
+         * 执行结果：通过
+         * 显示详情
+         * 执行用时：17 ms, 在所有 Java 提交中击败了94.63%的用户
+         * 内存消耗：43.8 MB, 在所有 Java 提交中击败了53.13%的用户
+         * @param val
+         * @return
+         */
+        public int add1(int val) {
+            if (priorityQueue.size() < k) {
+                priorityQueue.add(val);
+                return priorityQueue.peek();
+            }
+
+            int topVal = priorityQueue.peek();
+            if (val <= topVal) {
+                return topVal;
+            } else {
+                priorityQueue.add(val);
+                priorityQueue.poll();
+                return priorityQueue.peek();
+            }
         }
     }
 

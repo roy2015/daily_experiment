@@ -67,6 +67,21 @@ public class TestSolutionJZoffer24 {
             return preNode;
         }
 
+        public ListNode reverseList1(ListNode head) {
+            ListNode currentNode = head;
+            ListNode preNode = null;//给下一个迭代准备的node
+
+            while (currentNode != null) {
+                ListNode coptOfCurrentNode = currentNode;
+                currentNode = currentNode.next;
+                coptOfCurrentNode.next = preNode;
+                preNode = coptOfCurrentNode;
+            }
+
+
+            return preNode;
+        }
+
 
     }
 
@@ -76,6 +91,6 @@ public class TestSolutionJZoffer24 {
         node1.next.next = new ListNode(2);
 
 
-        logger.info("{}", new Solution().reverseList(node1));
+        logger.info("{}", new Solution().reverseList1(node1));
     }
 }

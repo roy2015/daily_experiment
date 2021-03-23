@@ -669,4 +669,14 @@ public class MainTest {
         priorityQueue.poll();
         logger.info("");
     }
+
+    @Test
+    public void testRedBlackTree() {
+        TreeSet<Integer> treeSet = new TreeSet<>();
+        treeSet.add(1);
+        treeSet.add(3);
+        logger.info("");
+
+
+    }
 }
