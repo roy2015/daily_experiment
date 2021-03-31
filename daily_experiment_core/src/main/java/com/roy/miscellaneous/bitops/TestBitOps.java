@@ -16,7 +16,7 @@ public class TestBitOps {
      * 测试取二进制最后一个1
      */
     public void test2() {
-        int k = 10;
+        int k = 1;
         logger.info(Integer.toBinaryString(k));
         logger.info(Integer.toBinaryString(-k));
         logger.info(Integer.toBinaryString(k & -k));
