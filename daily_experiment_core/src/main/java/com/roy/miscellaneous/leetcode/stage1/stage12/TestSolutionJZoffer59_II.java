@@ -34,8 +34,8 @@ import java.util.LinkedList;
  * 1 <= value <= 10^5
  *
  */
-public class TestSolutionJZoffer59 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionJZoffer59.class);
+public class TestSolutionJZoffer59_II {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionJZoffer59_II.class);
 
 
     /**
