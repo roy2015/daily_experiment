@@ -24,7 +24,7 @@ public class ESConfig {
 
     public static String INDEX_TEL = "telindex";
 
-    public static String TYPE_TEL = "teltype";
+    public static String TYPE_TEL  = "teltype";
 
 
     public static String INDEX_MES_PRE = "messageindex";
