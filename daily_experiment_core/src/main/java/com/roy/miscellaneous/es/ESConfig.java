@@ -22,9 +22,9 @@ public class ESConfig {
 //    @Value("${fulltextsearch.es.type.tel}")
 //    public String TYPE = "hbdx_archive";
 
-    public static String INDEX_TEL = "telindex311";
+    public static String INDEX_TEL = "telindex";
 
-    public static String TYPE_TEL = "teltype3";
+    public static String TYPE_TEL = "teltype";
 
 
     public static String INDEX_MES_PRE = "messageindex";

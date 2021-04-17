@@ -43,21 +43,28 @@ public class ESBuilder {
     private volatile static TransportClient client;//客户端对象,用于连接到Elasticsearch集群
     public static void main(String args[]) throws Exception{
         getSingleTransportClient();
+
+        //delete
         //deleteType();
 //        deleteIndex();
         //deleteByQuery();
         //deleteIndex(ESConfig.INDEX_TEL);
 
         //创建索引
-        createIndex();
-        //getAllIndices();
+//        createIndex();
+//        getAllIndices();
+
         //创建type
+//        defineIndexTypeMapping();
 //        defineTelIndexTypeMapping();
 //        defineMessageIndexTypeMapping();
-        //createDocumentByMap();
-//        createTelDocumentByMap();
-//        createMessageDocumentByMap();
 
+        //创建document
+        createDocumentByMap();
+        createTelDocumentByMap();
+        createMessageDocumentByMap();
+
+        //更新document
         //updateMessage();
 
 
@@ -132,11 +139,13 @@ public class ESBuilder {
 
 
     public static TransportClient getSingleTransportClient() {
-        Settings settings = Settings.builder().put("cluster.name", "ESCluster1").build();
+        Settings settings = Settings.builder().put("cluster.name", "docker-cluster").build();
         if (client == null) {
             synchronized (TransportClient.class) {
                 try {
-                    client = new PreBuiltTransportClient(settings).addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("172.31.100.51"), 9300));
+                    client = new PreBuiltTransportClient(settings)
+                            .addTransportAddress(new InetSocketTransportAddress
+                                    (InetAddress.getByName("127.0.0.1"), 9300));
                     //client = new PreBuiltTransportClient(settings).addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
                 } catch (UnknownHostException e) {
                     e.printStackTrace();
@@ -161,8 +170,8 @@ public class ESBuilder {
 
     // 创建索引
     public static void createIndex() {
-//        client.admin().indices().create(new CreateIndexRequest(IndexName))
-//            .actionGet();
+        client.admin().indices().create(new CreateIndexRequest(IndexName))
+            .actionGet();
         client.admin().indices().create(new CreateIndexRequest(INDEX_TEL))
                 .actionGet();
         try {
@@ -290,18 +299,18 @@ System.out.println(132);
                     .startObject(TypeName)
                     .startObject("_all").field("enabled", false).endObject()
                     .startObject("properties")
-                    .startObject("id").field("type", "integer").field("store", "yes").endObject()
+                    .startObject("id").field("type", "integer").field("store", "true").endObject()
                     .startObject("actionZone").field("type", "text").field("analyzer", "ik_smart").field("search_analyzer","ik_smart").endObject()
                     .startObject("age").field("type", "integer").endObject()
                     .startObject("income").field("type", "integer").endObject()
-                    .startObject("name").field("type", "string").endObject()
-                    .startObject("birthday").field("type", "string").endObject()
-                    .startObject("gender").field("type", "string").endObject()
-                    .startObject("language").field("type", "string").endObject()
-                    .startObject("idCard").field("type", "string").endObject()
+                    .startObject("name").field("type", "text").endObject()
+                    .startObject("birthday").field("type", "text").endObject()
+                    .startObject("gender").field("type", "text").endObject()
+                    .startObject("language").field("type", "text").endObject()
+                    .startObject("idCard").field("type", "text").endObject()
                     .startObject("address").field("type", "text").endObject()
-                    .startObject("telNo").field("type", "string").endObject()
-                    .startObject("tags").field("type", "string").endObject()
+                    .startObject("telNo").field("type", "text").endObject()
+                    .startObject("tags").field("type", "text").endObject()
                     .endObject()
                     .endObject()
                     .endObject();
@@ -311,7 +320,7 @@ System.out.println(132);
                     .source(mapBuilder);
             client.admin().indices().putMapping(putMappingRequest).actionGet();
 
-            System.out.println("diyige suoyin type chuangjian 创建成功");
+//            System.out.println("diyige suoyin type chuangjian 创建成功");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -467,7 +476,7 @@ System.out.println(132);
                     .endObject()
                     .endObject()
                     .endObject();
-            System.out.println("defineIndexTypeMapping创建成功");
+            System.out.println("defineTelIndexTypeMapping创建成功");
             PutMappingRequest putMappingRequest = Requests
                     .putMappingRequest(INDEX_TEL).type(TYPE_TEL)
                     .source(mapBuilder);
@@ -572,7 +581,7 @@ System.out.println(132);
                     .endObject()
                     .endObject()
                     .endObject();
-            System.out.println("defineIndexTypeMapping创建成功");
+            System.out.println("defineMessageIndexTypeMapping创建成功");
 
             try {
                 List<String> list;
