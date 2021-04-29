@@ -2,7 +2,10 @@ package com.roy.maintest;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.format.DateParser;
 import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestBase64Codec;
 import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
@@ -28,7 +31,9 @@ import com.roy.miscellaneous.pattern.factory.simpleFactory.SimpleFactory;
 import com.roy.miscellaneous.spi.TestJdkSpi;
 import com.roy.miscellaneous.targetObject.TestString;
 import com.roy.miscellaneous.targetObject.TestVO;
+import com.roy.miscellaneous.targetObject.User1VO;
 import com.roy.miscellaneous.targetObject.UserVO;
+import com.roy.miscellaneous.util.JacksonUtil;
 import com.roy.miscellaneous.yaml.TestReadYaml;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -47,7 +52,10 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import java.util.function.Function;
@@ -676,7 +684,24 @@ public class MainTest {
         treeSet.add(1);
         treeSet.add(3);
         logger.info("");
+    }
 
+    @Test
+    public void testListMaptoListObj() throws ParseException {
+
+        Map<String, Object> map1 = new HashMap<>();
+        Map<String, Object> map2 = new HashMap<>();
+        map1.put("userId", "1");
+        map1.put("userName", "guojun1");
+//        map1.put("brithday", new SimpleDateFormat(DatePattern.NORM_DATE_PATTERN).parse("2021-04-29"));
+        map1.put("brithday", "2021-04-29");
+
+        map2.put("userId", "2");
+        map2.put("userName", "guojun2");
+//        map2.put("brithday", new SimpleDateFormat(DatePattern.NORM_DATE_PATTERN).parse("2021-04-28"));
+
+        User1VO user1VO = BeanUtil.mapToBean(map1, User1VO.class, true);
+        logger.info(user1VO.toString());
 
     }
 }

@@ -1,14 +1,21 @@
 package com.roy.miscellaneous.targetObject;
 
+import lombok.Data;
+
+import java.util.Date;
+
 /**
  * Created by apple on 2019/4/8.
  */
+
+@Data
 public class User1VO extends UserVO implements java.io.Serializable {
 
     private static final long serialVersionUID = -6729433024891051984L;
     private int userId;
     private String userName;
     private String userSex;//male, female;
+    private Date brithday;
 
     public User1VO() {}
 
@@ -18,36 +25,5 @@ public class User1VO extends UserVO implements java.io.Serializable {
         this.userSex = userSex;
     }
 
-    public int getUserId() {
-        return userId;
-    }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserSex() {
-        return userSex;
-    }
-
-    public void setUserSex(String userSex) {
-        this.userSex = userSex;
-    }
-
-    @Override
-    public String toString() {
-        return "UserVO{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", userSex='" + userSex + '\'' +
-                '}';
-    }
 }
