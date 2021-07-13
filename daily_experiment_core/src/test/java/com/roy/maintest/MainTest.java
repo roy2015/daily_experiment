@@ -3,9 +3,7 @@ package com.roy.maintest;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.format.DateParser;
 import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestBase64Codec;
 import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
@@ -33,7 +31,6 @@ import com.roy.miscellaneous.targetObject.TestString;
 import com.roy.miscellaneous.targetObject.TestVO;
 import com.roy.miscellaneous.targetObject.User1VO;
 import com.roy.miscellaneous.targetObject.UserVO;
-import com.roy.miscellaneous.util.JacksonUtil;
 import com.roy.miscellaneous.yaml.TestReadYaml;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -52,10 +49,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import java.util.function.Function;
@@ -178,6 +173,10 @@ public class MainTest {
         }
     }
 
+    /**
+     * 测试unsaft，直接操作内存地址
+     * @throws Exception
+     */
     @Test
     public void testsUnsafe() throws Exception {
         new TestUnSafe().testUnsafe();
@@ -249,28 +248,32 @@ public class MainTest {
     }
 
     /**
-     * 测试下 LockSupport
+     * 测试下 LockSupport.unpark
      *
      * @throws Exception
      */
     @Test
     public void testLockSupport() throws Exception {
-        TestThread.testLockSupport(null);
+        TestInterrupte.testLockSupport();
     }
 
+    /**
+     * lockSupport park后 Thread.interrupt
+     * @throws Exception
+     */
     @Test
     public void testLockSupportInterrupt() throws Exception {
-        TestThread.testLockSupportInterrupt();
+        TestInterrupte.testLockSupportInterrupt();
     }
 
     @Test
     public void testLockSleepInterrupt() throws Exception {
-        TestThread.testLockSleepInterrupt();
+        TestInterrupte.testSleepInterrupt();
     }
 
     @Test
     public void testLoopInterrupt() throws Exception {
-        TestThread.testLoopInterrupt();
+        TestInterrupte.testLoopInterrupt();
     }
 
     /**
@@ -303,23 +306,24 @@ public class MainTest {
         new TestScheduledThreadPoolExecutor().testScheduledThreadPoolExecutor_2();
     }
 
+    /**
+     * 计数器
+     * @throws InterruptedException
+     */
     @Test
-    public void testWithoutUnsafe() throws InterruptedException {
-        TestUnsafeCas.testWithoutUnsafe();
-    }
-
-    @Test
-    public void testUnsafe() throws InterruptedException {
-        TestUnsafeCas.testUnsafe();
+    public void testWithoutUnsafeCounter() throws InterruptedException {
+        TestUnsafeExample.testWithoutUnsafe();
     }
 
     /**
-     * 测试下testCompareAndSwapInt
+     * 线程安全的计数器
+     * @throws InterruptedException
      */
     @Test
-    public void testCompareAndSwapInt() {
-        TestUnsafeCas.testCompareAndSwapInt();
+    public void testUnsafeCounter() throws InterruptedException {
+        TestUnsafeExample.testUnsafe();
     }
+
 
     @Test
     public void testObjRefClass() {

@@ -5,26 +5,34 @@ import org.slf4j.LoggerFactory;
 import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
+import java.security.AccessController;
+import java.security.PrivilegedExceptionAction;
 
 /**
  * Created by apple on 2019/4/8.
  */
 public class TestUnSafe {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestUnSafe.class);
-    private static Unsafe unsafe = null;
+    private static final Unsafe unsafe ;
 
     static {
         try {
-            Field theUnsafeField = Unsafe.class.getDeclaredField("theUnsafe");
-            theUnsafeField.setAccessible(true);
-            unsafe = (Unsafe) theUnsafeField.get(null);
-        } catch (NoSuchFieldException e) {
-            logger.error(e.getMessage(),e);
-        } catch (IllegalAccessException e) {
-            logger.error(e.getMessage(),e);
+            //获取unSafe
+            unsafe = AccessController.doPrivileged((PrivilegedExceptionAction<Unsafe>) () -> {
+                Field theUnsafe = Unsafe.class.getDeclaredField("theUnsafe");
+                theUnsafe.setAccessible(true);
+                return (Unsafe) theUnsafe.get(null);
+            });
+        }
+        catch (Exception e){
+            throw new RuntimeException("Unable to load unsafe", e);
         }
     }
 
+    /**
+     * 直接操作内存地址
+     * @throws Exception
+     */
     public void testUnsafe() throws Exception {
         long userNameOffset = unsafe.objectFieldOffset(UserVO.class.getDeclaredField("userName"));
         UserVO userVO = new UserVO();
