@@ -1,0 +1,2 @@
+alipay=com.roy.miscellaneous.spi.AlipayService
+wechat=com.roy.miscellaneous.spi.WechatPayService
