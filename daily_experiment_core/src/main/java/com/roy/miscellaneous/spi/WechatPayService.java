@@ -2,9 +2,12 @@ package com.roy.miscellaneous.spi;
 
 import org.slf4j.LoggerFactory;
 
-public class WeichatPayService implements PayService {
+/**
+ * 微信支付
+ */
+public class WechatPayService implements PayService {
     private static final org.slf4j.Logger logger =
-            LoggerFactory.getLogger(WeichatPayService.class);
+            LoggerFactory.getLogger(WechatPayService.class);
 
     @Override
     public void pay() {

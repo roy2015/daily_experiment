@@ -708,4 +708,21 @@ public class MainTest {
         logger.info(user1VO.toString());
 
     }
+
+    @Test
+    public void swap2argsWithBit() {
+        int a = 10;
+        int b = -13;
+        logger.info("a = {}", Integer.toBinaryString(a));
+        logger.info("b = {}", Integer.toBinaryString(b));
+
+        int temp = a ^ b;
+        logger.info("a ^ b = {}", Integer.toBinaryString(temp));
+        a = temp ^ b;
+        logger.info("temp ^ b = {}", Integer.toBinaryString(a));
+        logger.info("{}", a);
+        b = temp ^ a;
+        logger.info("temp ^ a = {}", Integer.toBinaryString(b));
+        logger.info("{}", b);
+    }
 }
