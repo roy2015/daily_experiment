@@ -3,7 +3,7 @@ package com.roy.miscellaneous.agent;
 /**
  * 被测试类
  *
- * -javaagent:/Users/apple/guojun/code/github/my-agent/target/com.roy.agent-1.0-SNAPSHOT.jar=Hello1
+ * java -javaagent:/Users/apple/guojun/code/github/my-agent/target/com.roy.agent-1.0-SNAPSHOT.jar=Hello1 -jar daily_experiment_core-1.0-SNAPSHOT-jar-with-dependencies.jar
  *
  * @author   单红宇(365384722)
  * @myblog  http://blog.csdn.net/catoop/
