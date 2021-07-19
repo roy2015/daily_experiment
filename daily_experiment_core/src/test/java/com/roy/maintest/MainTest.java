@@ -32,8 +32,8 @@ import com.roy.miscellaneous.targetObject.TestVO;
 import com.roy.miscellaneous.targetObject.User1VO;
 import com.roy.miscellaneous.targetObject.UserVO;
 import com.roy.miscellaneous.yaml.TestReadYaml;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+//import com.sun.image.codec.jpeg.JPEGCodec;
+//import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -592,20 +592,20 @@ public class MainTest {
         logger.info("");
     }
 
-    @Test
+//    @Test
     // 测试hutool的验证码
-    public void testHutool() {
-        LineCaptcha captcha = CaptchaUtil.createLineCaptcha(250, 250, 4, 2000);
-        Image image = captcha.createImage("2345");
-        try (FileOutputStream fos = new FileOutputStream("/Users/apple/logs/img.jpg")) {
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(fos);
-            encoder.encode((BufferedImage) image);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(123);
-    }
+//    public void testHutool() {
+//        LineCaptcha captcha = CaptchaUtil.createLineCaptcha(250, 250, 4, 2000);
+//        Image image = captcha.createImage("2345");
+//        try (FileOutputStream fos = new FileOutputStream("/Users/apple/logs/img.jpg")) {
+//            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(fos);
+//            encoder.encode((BufferedImage) image);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println(123);
+//    }
 
     @Test
     public void testjwd() {
