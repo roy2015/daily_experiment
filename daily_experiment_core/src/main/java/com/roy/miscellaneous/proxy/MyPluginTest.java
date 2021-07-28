@@ -8,6 +8,9 @@ import com.roy.miscellaneous.proxy.plugin.WarFireMyInterceptor;
 import com.roy.miscellaneous.proxy.plugin.frame.MyInterceptorChain;
 
 /**
+ *
+ * 1. demo mybatis的plugin机制
+ *
  * @author guojun
  * @date 2021/3/8 上午10:47
  */
