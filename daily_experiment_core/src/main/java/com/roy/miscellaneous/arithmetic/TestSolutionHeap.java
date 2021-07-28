@@ -131,19 +131,6 @@ public class TestSolutionHeap {
             }
         }
 
-        private void doHeapSort(boolean isMinHeap) {
-            for (int i = dataLength - 1; i >0 ; i--) {
-                int temp = dataArray[0];
-                dataArray[0] = dataArray[i];
-                dataArray[i] = temp;
-
-                if (isMinHeap) {
-                    siftDownN(0, i - 1);
-                } else siftDown(0, i - 1);
-
-            }
-        }
-
         /**
          * 上浮，主要用于add元素时, 大顶
          */
@@ -179,6 +166,24 @@ public class TestSolutionHeap {
                 dataArray[idx] = dataArray[parentIdx];
                 dataArray[parentIdx] = temp;
                 idx = parentIdx;
+            }
+        }
+
+
+        /**
+         *
+         * @param isMinHeap 是否小顶
+         */
+        private void doHeapSort(boolean isMinHeap) {
+            for (int i = dataLength - 1; i >0 ; i--) {
+                int temp = dataArray[0];
+                dataArray[0] = dataArray[i];
+                dataArray[i] = temp;
+
+                if (isMinHeap) {
+                    siftDownN(0, i - 1);
+                } else siftDown(0, i - 1);
+
             }
         }
 
