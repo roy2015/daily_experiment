@@ -725,4 +725,11 @@ public class MainTest {
         logger.info("temp ^ a = {}", Integer.toBinaryString(b));
         logger.info("{}", b);
     }
+
+    @Test
+  public void testEmptyStrem() {
+      ArrayList<String> list = new ArrayList<>();
+      List<Integer> collect = list.stream().map(item -> 123).collect(Collectors.toList());
+      logger.info("123");
+    }
 }
