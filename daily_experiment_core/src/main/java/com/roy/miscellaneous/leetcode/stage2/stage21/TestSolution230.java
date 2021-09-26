@@ -35,8 +35,8 @@ import org.slf4j.LoggerFactory;
  * @author guojun
  * @date 2021/6/11
  */
-public class TestSolutionTemplate230 {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionTemplate230.class);
+public class TestSolution230 {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution230.class);
 
 
 
