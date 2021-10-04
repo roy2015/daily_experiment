@@ -36,55 +36,203 @@ public class TestSolution223 {
 
 
     static class Solution {
-        public int computeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
-            //右下角
-            int ax3 = ax2;
-            int ay3 = ay1;
+        /**
+         *
+         *
+         * 考虑16种情况
+         * 
+         * 执行结果：通过
+         * 显示详情
+         * 添加备注
+         *
+         * 执行用时：3 ms, 在所有 Java 提交中击败了55.68%的用户
+         * 内存消耗：
+         * 37.8 MB, 在所有 Java 提交中击败了59.69%的用户通过测试用例：
+         *
+         * @param ax1
+         * @param ay1
+         * @param ax2
+         * @param ay2
+         * @param bx1
+         * @param by1
+         * @param bx2
+         * @param by2
+         * @return
+         */
+        public int computeArea1(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+            //顺时针
+            //左上
+            int a1x,a1y;
+            //右上
+            int a2x,a2y;
+            //右下
+            int a3x,a3y;
+            //左下
+            int a4x,a4y;
+            a1x = ax1;
+            a1y = ay2;
+            a2x = ax2;
+            a2y = ay2;
+            a3x = ax2;
+            a3y = ay1;
+            a4x = ax1;
+            a4y = ay1;
 
-            int bx3 = bx2;
-            int by3 = by1;
+            //同理
+            int b1x,b1y;
+            //右上
+            int b2x,b2y;
+            //右下
+            int b3x,b3y;
+            //左下
+            int b4x,b4y;
+            b1x = bx1;
+            b1y = by2;
+            b2x = bx2;
+            b2y = by2;
+            b3x = bx2;
+            b3y = by1;
+            b4x = bx1;
+            b4y = by1;
 
             //算重叠面积
             int shadeArea ;
             //两个矩形的面积
-            int area = (ax2 - ax1) * (ay2  - ay1) + (bx2 - bx1) * (by2  - by1);
+            int aArea = Math.abs(a1x - a3x) * Math.abs(a1y - a3y) ;
+            int bArea = Math.abs(b1x - b3x) * Math.abs(b1y - b3y) ;
 
             //无重叠
-            if (bx1 >= ax3 || bx3 <= ax1 || by3 <= ay3 || by3 >= ay2) {
-                return area ;
+            if (b1x >= a3x || b2x <= a1x || b1y <= a4y || b4y >= a1y) {
+                return aArea + bArea ;
             }
 
-            //分三种情况，
+            int resut = 0;
+            //拿B去切割A
+            if (isInRectangle(b1x, b1y, a1x, a2x, a4y, a1y)) {
+                resut |= 1;
+            }
+            if (isInRectangle(b2x, b2y, a1x, a2x, a4y, a1y)) {
+                resut |= 2;
+            }
+            if (isInRectangle(b3x, b3y, a1x, a2x, a4y, a1y)) {
+                resut |= 4;
+            }
+            if (isInRectangle(b4x, b4y, a1x, a2x, a4y, a1y)) {
+                resut |= 8;
+            }
 
+            switch (resut) {
+                case 0x0://四个点在A外
+                    break;
+                case 0xF://B四个点均在A里
+                    return aArea;
+                case 0x3://
+                    return aArea + bArea - (b2x - b1x) * (b1y - a4y);
+                case 0xc:
+                    return aArea + bArea - (b2x - b1x) * (a1y - b4y);
+                case 0x6:
+                    return aArea + bArea - (b2x - a1x) * (b2y - b3y);
+                case 0x9:
+                    return aArea + bArea - (a2x - b1x) * (b2y - b3y);
+                case 0x1:
+                    return aArea + bArea - (a3x - b1x) * (b1y - a3y);
+                case 0x2:
+                    return aArea + bArea - (b2x - a4x) * (b2y - a4y);
+                case 0x4:
+                    return aArea + bArea - (b3x - a1x) * (a1y - b3y);
+                case 0x8:
+                    return aArea + bArea - (a2x - b4x) * (a2y - b4y);
+            }
 
-            return 0;
-
+            //B的四个点在A外的相交
+            int width = Math.min(a2x, b2x) - Math.max(a1x, b1x);
+            int height = Math.min(a1y, b1y) - Math.max(a4y, b4y);
+            int shadowArea = width * height;
+            return aArea + bArea - shadowArea;
         }
 
-        static class Tuple {
-            private int px;
-            private int py;
+        /**
+         *
+         * 再多的判断场景也不如一个公式来的容易，适用所有场景
+         *
+         * 执行结果：通过
+         * 显示详情
+         * 添加备注
+         *
+         * 执行用时：3 ms, 在所有 Java 提交中击败了55.68%的用户
+         * 内存消耗：37.7 MB, 在所有 Java 提交中击败了89.38%的用户
+         * 通过测试用例：
+         * 3080 / 3080
+         *
+         * @param ax1
+         * @param ay1
+         * @param ax2
+         * @param ay2
+         * @param bx1
+         * @param by1
+         * @param bx2
+         * @param by2
+         * @return
+         */
+        public int computeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+            //顺时针
+            //左上
+            int a1x,a1y;
+            //右上
+            int a2x,a2y;
+            //右下
+            int a3x,a3y;
+            //左下
+            int a4x,a4y;
+            a1x = ax1;
+            a1y = ay2;
+            a2x = ax2;
+            a2y = ay2;
+            a3x = ax2;
+            a3y = ay1;
+            a4x = ax1;
+            a4y = ay1;
 
-            public Tuple(int px, int py) {
-                this.px = px;
-                this.py = py;
+            //同理
+            int b1x,b1y;
+            //右上
+            int b2x,b2y;
+            //右下
+            int b3x,b3y;
+            //左下
+            int b4x,b4y;
+            b1x = bx1;
+            b1y = by2;
+            b2x = bx2;
+            b2y = by2;
+            b3x = bx2;
+            b3y = by1;
+            b4x = bx1;
+            b4y = by1;
+
+            //算重叠面积
+            int shadeArea ;
+            //两个矩形的面积
+            int aArea = Math.abs(a1x - a3x) * Math.abs(a1y - a3y) ;
+            int bArea = Math.abs(b1x - b3x) * Math.abs(b1y - b3y) ;
+
+            //无重叠
+            if (b1x >= a3x || b2x <= a1x || b1y <= a4y || b4y >= a1y) {
+                return aArea + bArea ;
             }
 
-            public int getPx() {
-                return px;
-            }
+            //B的四个点在A外的相交
+            int width = Math.min(a2x, b2x) - Math.max(a1x, b1x);
+            int height = Math.min(a1y, b1y) - Math.max(a4y, b4y);
+            int shadowArea = width * height;
+            return aArea + bArea - shadowArea;
+        }
 
-            public void setPx(int px) {
-                this.px = px;
+        private boolean isInRectangle (int px, int py, int minX, int maxX, int minY, int maxY) {
+            if (px > minX && px < maxX && py > minY  && py < maxY ) {
+                return true;
             }
-
-            public int getPy() {
-                return py;
-            }
-
-            public void setPy(int py) {
-                this.py = py;
-            }
+            return false;
         }
 
 
@@ -92,6 +240,14 @@ public class TestSolution223 {
     }
 
     public static void main(String[] args) {
-        logger.info("{}", new Solution().computeArea(-3, 0,  3,  4,  0,  -1,  9,  2));
+        logger.info("{}", new Solution().computeArea1(-3,-3,3,-1,
+                -2,-2,2,2
+            ));//24
+        logger.info("{}", new Solution().computeArea(-2,   -2,   2, 2,
+             -2,  -2,  2, 2));//16
+        logger.info("{}", new Solution().computeArea(-3, 0,  3,  4,
+            0,  -1,  9,  2));//45
+
+
     }
 }
