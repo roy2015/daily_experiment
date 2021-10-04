@@ -40,7 +40,7 @@ public class TestSolution223 {
          *
          *
          * 考虑16种情况
-         * 
+         *
          * 执行结果：通过
          * 显示详情
          * 添加备注
@@ -221,7 +221,7 @@ public class TestSolution223 {
                 return aArea + bArea ;
             }
 
-            //B的四个点在A外的相交
+            //我去，两个公式包含所有情况
             int width = Math.min(a2x, b2x) - Math.max(a1x, b1x);
             int height = Math.min(a1y, b1y) - Math.max(a4y, b4y);
             int shadowArea = width * height;
