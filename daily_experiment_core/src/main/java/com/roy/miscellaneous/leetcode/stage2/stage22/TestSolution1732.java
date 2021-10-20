@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 
 提示：
 
-n == gain.length
+n == gai n.length
 1 <= n <= 100
 -100 <= gain[i] <= 100
 通过次数7,213提交次数8,961
