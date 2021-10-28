@@ -36,6 +36,18 @@ import com.roy.miscellaneous.yaml.TestReadYaml;
 //import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.SimpleTypeConverter;
+import org.springframework.beans.factory.config.BeanExpressionContext;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.expression.StandardBeanExpressionResolver;
+import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.env.PropertiesPropertySource;
+import org.springframework.core.env.PropertySourcesPropertyResolver;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.testng.annotations.Test;
 
 import javax.naming.OperationNotSupportedException;
@@ -54,6 +66,8 @@ import java.text.ParseException;
 import java.util.*;
 import java.util.List;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -732,4 +746,61 @@ public class MainTest {
       List<Integer> collect = list.stream().map(item -> 123).collect(Collectors.toList());
       logger.info("123");
     }
+
+    @Test
+    public void testRegex() {
+        logger.info("{}", Pattern.matches("^[0-9]+$", "a"));
+
+    }
+
+    @Test
+    public void testMessageFormat() {
+        logger.info("{}", MessageFormat.format("abc: {0}", "12ac"));
+
+    }
+
+
+    @Test
+    public void testSPEL() {
+        ExpressionParser parser = new SpelExpressionParser();
+        EvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("name", 123);
+        Expression expression = parser.parseExpression("#name");
+        Object value = expression.getValue(context);
+    }
+
+    @Test
+    public void test() {
+        //数据
+        Properties properties = new Properties();
+        properties.put("ARCHIVE_CREATE_ARCHIVE_CATEGORY_LENGTH_CONSTRAINT", "hello world");
+        properties.put("timeout", "#{30 * 1000L}");
+//        properties.put("random", "${random.int}");
+
+        //数据源
+        MutablePropertySources propertySources = new MutablePropertySources();
+        propertySources.addLast(new PropertiesPropertySource("default", properties));
+//        propertySources.addLast(new RandomValuePropertySource());
+
+        //属性解析
+        PropertySourcesPropertyResolver propertyResolver = new PropertySourcesPropertyResolver(propertySources);
+
+        //表达式解析
+        StandardBeanExpressionResolver expressionResolver = new StandardBeanExpressionResolver();
+        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+
+        //类型转换
+        SimpleTypeConverter typeConverter = new SimpleTypeConverter();
+
+        String textProp = propertyResolver.resolveRequiredPlaceholders("${ARCHIVE_CREATE_ARCHIVE_CATEGORY_LENGTH_CONSTRAINT}");
+        Object textObj = expressionResolver.evaluate(textProp, new BeanExpressionContext(factory, null));
+        String text = typeConverter.convertIfNecessary(textObj, String.class);
+        System.out.println(text);
+
+        String timeoutProp = propertyResolver.resolveRequiredPlaceholders("${timeout}");
+        Object timeoutObj = expressionResolver.evaluate(timeoutProp, new BeanExpressionContext(factory, null));
+        Long timeout = typeConverter.convertIfNecessary(timeoutObj, Long.class);
+        System.out.println(timeout);
+    }
+
 }
