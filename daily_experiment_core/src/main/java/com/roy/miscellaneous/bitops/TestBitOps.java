@@ -63,6 +63,13 @@ public class TestBitOps {
     }
 
     public static void main(String[] args) {
-        new TestBitOps().test2();
+//        new TestBitOps().test2();
+        logger.debug(Integer.toBinaryString(1 ^ 1));
+        logger.debug(Integer.toBinaryString(0 ^ 0));
+        logger.debug(Integer.toBinaryString(1 ^ 0));
+
+        logger.debug(Integer.toBinaryString(1 & 1));
+        logger.debug(Integer.toBinaryString(1 & 0));
+
     }
 }
