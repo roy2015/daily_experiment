@@ -749,7 +749,7 @@ public class MainTest {
 
     @Test
     public void testRegex() {
-        logger.info("{}", Pattern.matches("^[0-9]+$", "a"));
+        logger.info("{}", Pattern.matches("^[0-9]+$", "01"));
 
     }
 
