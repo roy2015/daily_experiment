@@ -39,7 +39,7 @@ public class TestSolution396 {
         /**
          *
          *
-         * F(k)=F(k-1)+ sum(A[]) - n*A[n-k]
+         * 证明：F(k)=F(k-1)+ sum(A[]) - n*A[n-k]
          *
          * 执行结果：通过
          * 显示详情
