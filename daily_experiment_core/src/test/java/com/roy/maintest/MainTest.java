@@ -4,6 +4,9 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestBase64Codec;
 import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
@@ -801,6 +804,15 @@ public class MainTest {
         Object timeoutObj = expressionResolver.evaluate(timeoutProp, new BeanExpressionContext(factory, null));
         Long timeout = typeConverter.convertIfNecessary(timeoutObj, Long.class);
         System.out.println(timeout);
+    }
+
+    @Test
+    public void testXX() {
+        String s = "{\n"
+            + "\"left\":20,\n"
+            + "\"type\":\"face\"\n"
+            + "}";
+        logger.info(JSON.toJSONString(s, SerializerFeature.PrettyFormat));
     }
 
 }
