@@ -753,8 +753,18 @@ public class MainTest {
     @Test
     public void testRegex() {
 //        logger.info("{}", Pattern.matches("^[0-9]+$", "01"));
-        logger.info("{}", Pattern.matches("(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)(:(\\d\\d\\d\\d|\\d\\d\\d|\\d\\d|\\d))",
-            "192.168.1.104:9011"));
+        //ip
+//        logger.info("{}", Pattern.matches("(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)(:(\\d\\d\\d\\d|\\d\\d\\d|\\d\\d|\\d))",
+//            "192.168.1.104:9011"));
+
+        logger.info("{}", "sample/10.jpeg".contains("/."));
+
+
+        logger.info("{}", "__MACOSX/sample/._47.jpeg".startsWith("__MACOSX"));
+
+        logger.info("{}", "__MACOSX/sample/._47.jpeg".startsWith("."));
+
+
     }
 
     @Test
@@ -814,6 +824,12 @@ public class MainTest {
             + "\"type\":\"face\"\n"
             + "}";
         logger.info(JSON.toJSONString(s, SerializerFeature.PrettyFormat));
+    }
+
+    @Test
+    public void testNullJson() {
+        User1VO user1VO = JSON.parseObject("{}", User1VO.class);
+        logger.info("{}", user1VO);
     }
 
 }
