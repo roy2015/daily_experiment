@@ -752,19 +752,15 @@ public class MainTest {
 
     @Test
     public void testRegex() {
+        logger.info("{}", Pattern.matches("^[0-9]{10}200[0-9]{7}$", "40401111222101234532"));
+
 //        logger.info("{}", Pattern.matches("^[0-9]+$", "01"));
         //ip
 //        logger.info("{}", Pattern.matches("(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)(:(\\d\\d\\d\\d|\\d\\d\\d|\\d\\d|\\d))",
 //            "192.168.1.104:9011"));
-
-        logger.info("{}", "sample/10.jpeg".contains("/."));
-
-
-        logger.info("{}", "__MACOSX/sample/._47.jpeg".startsWith("__MACOSX"));
-
-        logger.info("{}", "__MACOSX/sample/._47.jpeg".startsWith("."));
-
-
+//        logger.info("{}", "sample/10.jpeg".contains("/."));
+//        logger.info("{}", "__MACOSX/sample/._47.jpeg".startsWith("__MACOSX"));
+//        logger.info("{}", "__MACOSX/sample/._47.jpeg".startsWith("."));
     }
 
     @Test
