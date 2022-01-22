@@ -1,6 +1,10 @@
 package com.roy.miscellaneous;
 
+import static com.roy.miscellaneous.util.JacksonUtil.OBJECT_MAPPER;
+
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.roy.miscellaneous.util.JacksonUtil;
 import lombok.Data;
 import lombok.ToString;
@@ -164,6 +168,53 @@ public class TestDepponInterface {
 
     public static void main(String[] args) {
         new Solution().queryRouteCode();
+    }
+
+    public static void testJackson1() {
+        String str = "{\n"
+            + "  \"DeviceCount\": 2,\n"
+            + "  \"DeviceList\": [\n"
+            + "    {\n"
+            + "      \"ID\": \"11010000002000000104\",\n"
+            + "      \"Name\": null,\n"
+            + "      \"Type\": \"GB\",\n"
+            + "      \"ChannelCount\": 3,\n"
+            + "      \"RecvStreamIP\": \"\",\n"
+            + "      \"CatalogInterval\": 3600,\n"
+            + "      \"SubscribeInterval\": 0,\n"
+            + "      \"Online\": true,\n"
+            + "      \"Password\": \"\",\n"
+            + "      \"MediaTransport\": \"UDP\",\n"
+            + "      \"RemoteIP\": \"192.168.1.104\",\n"
+            + "      \"RemotePort\": 5060,\n"
+            + "      \"LastRegisterAt\": \"\",\n"
+            + "      \"LastKeepaliveAt\": \"\",\n"
+            + "      \"UpdatedAt\": \"\",\n"
+            + "      \"CreatedAt\": \"\"\n"
+            + "    },\n"
+            + "    {\n"
+            + "      \"ID\": \"11010000002000000105\",\n"
+            + "      \"Name\": null,\n"
+            + "      \"Type\": \"GB\",\n"
+            + "      \"ChannelCount\": 14,\n"
+            + "      \"RecvStreamIP\": \"\",\n"
+            + "      \"CatalogInterval\": 3600,\n"
+            + "      \"SubscribeInterval\": 0,\n"
+            + "      \"Online\": true,\n"
+            + "      \"Password\": \"\",\n"
+            + "      \"MediaTransport\": \"UDP\",\n"
+            + "      \"RemoteIP\": \"192.168.1.105\",\n"
+            + "      \"RemotePort\": 5060,\n"
+            + "      \"LastRegisterAt\": \"\",\n"
+            + "      \"LastKeepaliveAt\": \"\",\n"
+            + "      \"UpdatedAt\": \"\",\n"
+            + "      \"CreatedAt\": \"\"\n"
+            + "    }\n"
+            + "  ]\n"
+            + "}";
+
+        ObjectNode jsonNode = JacksonUtil.parseObject(str, ObjectNode.class);
+        logger.info(jsonNode.toString());
 
     }
 

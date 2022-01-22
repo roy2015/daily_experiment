@@ -828,4 +828,14 @@ public class MainTest {
         logger.info("{}", user1VO);
     }
 
+    @Test
+    public void testJacksonJsonObject() {
+        TestDepponInterface.testJackson1();
+    }
+
+    @Test
+    public void test101() {
+        logger.info("{}", Double.valueOf("300.000").intValue());
+    }
+
 }

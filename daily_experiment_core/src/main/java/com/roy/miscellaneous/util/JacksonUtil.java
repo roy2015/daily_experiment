@@ -20,7 +20,7 @@ public final class JacksonUtil {
     /**
      * ObjectMapper
      */
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     static {
         // 序列化时候统一日期格式
