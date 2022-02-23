@@ -34,6 +34,7 @@ import com.roy.miscellaneous.targetObject.TestString;
 import com.roy.miscellaneous.targetObject.TestVO;
 import com.roy.miscellaneous.targetObject.User1VO;
 import com.roy.miscellaneous.targetObject.UserVO;
+import com.roy.miscellaneous.util.JacksonUtil;
 import com.roy.miscellaneous.yaml.TestReadYaml;
 //import com.sun.image.codec.jpeg.JPEGCodec;
 //import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -754,6 +755,11 @@ public class MainTest {
     public void testRegex() {
         logger.info("{}", Pattern.matches("^[0-9]{10}200[0-9]{7}$", "40401111222101234532"));
 
+        String[] split = "ap-svc-3417884030140417-cc-plate-module".split("-", 4);
+
+        logger.info("{}", "ap-svc-3417884030140417-cc-plate-module-9-".replaceFirst("\\-[0-9]+\\-", "-4-"));
+
+
 //        logger.info("{}", Pattern.matches("^[0-9]+$", "01"));
         //ip
 //        logger.info("{}", Pattern.matches("(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)(:(\\d\\d\\d\\d|\\d\\d\\d|\\d\\d|\\d))",
@@ -837,5 +843,17 @@ public class MainTest {
     public void test101() {
         logger.info("{}", Double.valueOf("300.000").intValue());
     }
+
+    @Test
+    public void test102() {
+        String mapStr = "{\n"
+            + "  \"name\": \"123\",\n"
+            + "  \"age\": 17\n"
+            + "}";
+
+        Map<String, Object> map = JacksonUtil.parseObject(mapStr, Map.class);
+        logger.info("{}", map);
+    }
+
 
 }
