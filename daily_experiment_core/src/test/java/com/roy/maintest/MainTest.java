@@ -855,5 +855,11 @@ public class MainTest {
         logger.info("{}", map);
     }
 
+    @Test
+    public void test1000() {
+        logger.info("{}", Integer.valueOf(1).equals(Long.valueOf(123)));
+    }
+
+
 
 }
