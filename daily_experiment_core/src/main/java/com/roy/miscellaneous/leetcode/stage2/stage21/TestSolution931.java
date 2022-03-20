@@ -45,6 +45,17 @@ public class TestSolution931 {
 
     static class Solution {
 
+        /**
+         * 执行结果：通过
+         * 显示详情
+         * 添加备注
+         *
+         * 执行用时：4 ms, 在所有 Java 提交中击败了74.04%的用户
+         * 内存消耗：42.2 MB, 在所有 Java 提交中击败了5.09%的用户
+         * 通过测试用例：49 / 49
+         * @param matrix
+         * @return
+         */
         public int minFallingPathSum(int[][] matrix) {
             int n = matrix.length;
             for (int i = 1; i < n; i++) {
@@ -63,7 +74,14 @@ public class TestSolution931 {
                     currentRow[j] += preVal;
                 }
             }
-            return Arrays.stream(matrix[n-1]).min().getAsInt();
+            int[] lastRow = matrix[n-1];
+            int minVal = lastRow[0];
+            for (int i = 1; i < n; i++) {
+                if (lastRow[i] < minVal) {
+                    minVal = lastRow[i];
+                }
+            }
+            return minVal;
         }
 
     }

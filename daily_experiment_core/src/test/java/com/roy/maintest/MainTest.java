@@ -52,6 +52,7 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.testng.annotations.Test;
 
 import javax.naming.OperationNotSupportedException;
@@ -69,6 +70,7 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -755,8 +757,8 @@ public class MainTest {
     public void testRegex() {
         logger.info("{}", Pattern.matches("^[0-9]{10}200[0-9]{7}$", "40401111222101234532"));
 
-        String[] split = "ap-svc-3417884030140417-cc-plate-module".split("-", 4);
-
+        String[] split = "ap-123-svc-3417884030140417-cc-plate-module".split("\\-[0-9]+\\-", 3);
+        logger.info(" {}", split);
         logger.info("{}", "ap-svc-3417884030140417-cc-plate-module-9-".replaceFirst("\\-[0-9]+\\-", "-4-"));
 
 
@@ -858,6 +860,21 @@ public class MainTest {
     @Test
     public void test1000() {
         logger.info("{}", Integer.valueOf(1).equals(Long.valueOf(123)));
+    }
+
+    @Test
+    public void testSchedule() throws InterruptedException {
+        Date stateTime = new Date(System.currentTimeMillis() + 30*1000L);
+        ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
+        taskScheduler.initialize();
+//        taskScheduler.scheduleAtFixedRate(() -> logger.info("1233"), 1000l);
+        taskScheduler.schedule(() -> logger.info("1233"), stateTime);
+        TimeUnit.MINUTES.sleep(10);
+    }
+
+    @Test
+    public void test10001 () {
+        logger.info(String.format("%S_%s", "Ab", "ab"));
     }
 
 
