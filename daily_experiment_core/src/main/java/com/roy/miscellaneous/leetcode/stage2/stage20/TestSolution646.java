@@ -58,7 +58,6 @@ public class TestSolution646 {
                 data[i] = new Triple(pair[0], pair[1]);
             }
             Arrays.sort(data);
-
             int[] dp = new int[len];
             dp[0] = 1;
             for (int i = 1; i < len; i++) {
@@ -72,14 +71,12 @@ public class TestSolution646 {
                 }
                 dp[i] = count + 1;
             }
-
             int ret = 0;
             for (int i : dp) {
                 if (i > ret) {
                     ret  = i;
                 }
             }
-
             return ret;
         }
 
