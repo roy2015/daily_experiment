@@ -755,6 +755,10 @@ public class MainTest {
 
     @Test
     public void testRegex() {
+        logger.info("{}", Pattern.matches("^[\\u4e00-\\u9fa5A-Za-z\\d][\\u4e00-\\u9fa5A-Za-z\\d_\\-\\s]{0,19}$", "郭"));
+
+        //中英文最多20位
+        logger.info("{}", Pattern.matches("^[a-zA-Z0-9]{0,20}$" ,"40401111222101"));
         logger.info("{}", Pattern.matches("^[0-9]{10}200[0-9]{7}$", "40401111222101234532"));
 
         String[] split = "ap-123-svc-3417884030140417-cc-plate-module".split("\\-[0-9]+\\-", 3);
