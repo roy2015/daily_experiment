@@ -4,6 +4,9 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.text.UnicodeUtil;
+import sun.nio.cs.UnicodeEncoder;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -68,6 +71,9 @@ import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -773,6 +779,12 @@ public class MainTest {
 //        logger.info("{}", "sample/10.jpeg".contains("/."));
 //        logger.info("{}", "__MACOSX/sample/._47.jpeg".startsWith("__MACOSX"));
 //        logger.info("{}", "__MACOSX/sample/._47.jpeg".startsWith("."));
+
+        Pattern bitrant_regex = Pattern.compile("(\\d+(?:\\.\\d+)?)kbits/s");
+        Matcher matcher = bitrant_regex.matcher("123.1kbits/s");
+        matcher.find();
+        logger.info(matcher.group(1));
+        logger.info("{}",matcher.groupCount());
     }
 
     @Test
@@ -881,6 +893,78 @@ public class MainTest {
         logger.info(String.format("%S_%s", "Ab", "ab"));
     }
 
+    @Test
+    public void testUnicode() {
+      logger.info("{}", UnicodeUtil.toUnicode("郭俊"));
+      logger.info("{}", UnicodeUtil.toString("\\u90ed\\u4fca"));
+    }
+
+    @Test
+    public void test1001() {
+        logger.info("{}",
+            Pattern.matches("^(0[0-9]{1}|1[0-9]{1}|20|21|22|23)\\:([0-5][0-9])$", "00:59"));
+
+        logger.info("{}",
+            Pattern.matches("^(0[0-9]{1}|1[0-9]{1}|20|21|22|23)\\:([0-5][0-9])$", "0:59"));
+
+        logger.info("{}",
+            Pattern.matches("^(0[0-9]{1}|1[0-9]{1}|20|21|22|23)\\:([0-5][0-9])$", "00:5"));
+
+        logger.info("{}", "09:19".compareTo("09:57") < 0);
+    }
+
+    @Test
+    public void test1002() {
+//        LocalDateTime now = LocalDateTimeUtil.of(new Date());
+        LocalDateTime now = LocalDateTime.of(2022, 4,24, 7,9,20);
+        logger.info("{}",now);
+        logger.info("{}",now.getDayOfWeek().getValue());
+
+        logger.info("{} {}",StringUtils.leftPad(String.valueOf(now.getMinute()), 2, "0") , now.getHour());
+
+        LocalTime time1 = LocalTime.parse("01:30");
+        LocalTime time2 = LocalTime.parse("02:29");
+
+        logger.info("{}", 60 * (time2.getMinute() - time1.getMinute()) + 3600 * (time2.getHour() - time1.getHour()) );
+
+        LocalDateTime nowLDT = LocalDateTimeUtil.of(new Date());
+        logger.info("{}", nowLDT.getDayOfWeek().getValue());
+        logger.info("{}", LocalTime.of(nowLDT.getHour(), nowLDT.getMinute()));
+        logger.info("{}", LocalTime.of(16,27).isBefore(nowLDT.toLocalTime()));
+
+        int year = nowLDT.getYear();
+        int monthValue = nowLDT.getMonthValue();
+        int dayOfMonth = nowLDT.getDayOfMonth();
+        int hour = nowLDT.getHour();
+        int minute = nowLDT.plusMinutes(1).getMinute();
+        int second = nowLDT.getSecond();
+        logger.info("{}, {}, {}, {}, {}, {}", year, monthValue, dayOfMonth, hour, minute, second);
+
+
+
+    }
+
+    @Test
+    public void test1003() {
+        String str = "RECORD_STREAM_END_TRIGGER_{0}_{1}_{2}_{3}";
+        String formatStr = MessageFormat.format(str, "11", "22", "33", "44");
+        logger.debug("formatStr: {}", formatStr);
+
+        String[] split = formatStr.split("_");
+        logger.debug("{}", split.length);
+
+        Pattern bitrant_regex = Pattern.compile("(?:\\S+)_(\\S+)_(\\S+)_(\\S+)_(\\S+)$");
+        Matcher matcher = bitrant_regex.matcher(formatStr);
+        matcher.find();
+        logger.info("{}", matcher.group(4));
+        logger.debug("{}", Pattern.matches("(\\S+)_(\\S+)_(\\S+)_(\\S+)$", formatStr));
+
+        logger.info("11111111111111111111");
+
+        String[] s = "RECORD_STREAM_END_TRIGGER_10000001_1_rtp_11010000002000000163_34020000001310000163".split("_", 8);
+        logger.error("{}", s[4]);
+        logger.error("{}", s[5]);
+    }
 
 
 }
