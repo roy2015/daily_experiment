@@ -35,6 +35,7 @@ import com.roy.miscellaneous.pattern.factory.simpleFactory.SimpleFactory;
 import com.roy.miscellaneous.spi.TestJdkSpi;
 import com.roy.miscellaneous.targetObject.TestString;
 import com.roy.miscellaneous.targetObject.TestVO;
+import com.roy.miscellaneous.targetObject.TplBeanVO;
 import com.roy.miscellaneous.targetObject.User1VO;
 import com.roy.miscellaneous.targetObject.UserVO;
 import com.roy.miscellaneous.util.JacksonUtil;
@@ -949,7 +950,6 @@ public class MainTest {
         String str = "RECORD_STREAM_END_TRIGGER_{0}_{1}_{2}_{3}";
         String formatStr = MessageFormat.format(str, "11", "22", "33", "44");
         logger.debug("formatStr: {}", formatStr);
-
         String[] split = formatStr.split("_");
         logger.debug("{}", split.length);
 
@@ -964,6 +964,26 @@ public class MainTest {
         String[] s = "RECORD_STREAM_END_TRIGGER_10000001_1_rtp_11010000002000000163_34020000001310000163".split("_", 8);
         logger.error("{}", s[4]);
         logger.error("{}", s[5]);
+    }
+
+    public static <K,V,T> Map<K,V> toMap(List<T> list, Function<T,K> keyFunc, Function<T,V> valFunc) {
+        Map<K, V> resMap = list.stream().collect(
+            HashMap::new,
+            (map, item) -> map.put(keyFunc.apply(item), valFunc.apply(item)),
+            HashMap::putAll);
+        return resMap;
+    }
+
+    /**
+     * test toMap
+     */
+    @Test
+    public void test1004() {
+        List<TplBeanVO> tplBeanVOS = new ArrayList<>();
+        tplBeanVOS.add(new TplBeanVO().setUserId(1).setUserName("test-1"));
+        tplBeanVOS.add(new TplBeanVO().setUserId(2).setUserName("test-2"));
+        Map<Integer, String> integerStringMap = toMap(tplBeanVOS, TplBeanVO::getUserId, TplBeanVO::getUserName);
+        logger.info("{}", integerStringMap);
     }
 
 
