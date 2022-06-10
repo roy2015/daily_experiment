@@ -95,16 +95,18 @@ public class TestLocalDateTime {
         }
 
         public void test11() {
-            logger.info("{}", Instant.now());
+            logger.info("本地时间： {}", LocalDateTime.now());
+            logger.info("国际标准时间： {}", Instant.now());
+            logger.info("{}", ZoneId.systemDefault());
         }
 
     }
 
     public static void main(String[] args) {
         Solution so = new Solution();
-        so.testParseDate();
+//        so.testParseDate();
 //        so.test2();
 //        so.test3();
-//          so.test11();
+          so.test11();
     }
 }
