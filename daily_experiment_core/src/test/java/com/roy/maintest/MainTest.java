@@ -26,6 +26,7 @@ import com.roy.miscellaneous.io.TestObjectSerializeFile;
 import com.roy.miscellaneous.juc.multiThread.TestOddEvenPrint;
 import com.roy.miscellaneous.javassist.TestJavassist;
 import com.roy.miscellaneous.juc.*;
+import com.roy.miscellaneous.mainTest.TestRegex;
 import com.roy.miscellaneous.pattern.factory.CpuType;
 import com.roy.miscellaneous.pattern.factory.MainBoardType;
 import com.roy.miscellaneous.pattern.factory.abstractFactory.CaliforniaFactory;
@@ -42,6 +43,7 @@ import com.roy.miscellaneous.util.JacksonUtil;
 import com.roy.miscellaneous.yaml.TestReadYaml;
 //import com.sun.image.codec.jpeg.JPEGCodec;
 //import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.SimpleTypeConverter;
@@ -761,34 +763,6 @@ public class MainTest {
     }
 
     @Test
-    public void testRegex() {
-        logger.info("{}", Pattern.matches("^[\\u4e00-\\u9fa5A-Za-z\\d][\\u4e00-\\u9fa5A-Za-z\\d_\\-\\s]{0,19}$", "郭"));
-
-        //中英文最多20位
-        logger.info("{}", Pattern.matches("^[a-zA-Z0-9]{0,20}$" ,"40401111222101"));
-        logger.info("{}", Pattern.matches("^[0-9]{10}200[0-9]{7}$", "40401111222101234532"));
-
-        String[] split = "ap-123-svc-3417884030140417-cc-plate-module".split("\\-[0-9]+\\-", 3);
-        logger.info(" {}", split);
-        logger.info("{}", "ap-svc-3417884030140417-cc-plate-module-9-".replaceFirst("\\-[0-9]+\\-", "-4-"));
-
-
-//        logger.info("{}", Pattern.matches("^[0-9]+$", "01"));
-        //ip
-//        logger.info("{}", Pattern.matches("(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|\\d\\d|\\d)(:(\\d\\d\\d\\d|\\d\\d\\d|\\d\\d|\\d))",
-//            "192.168.1.104:9011"));
-//        logger.info("{}", "sample/10.jpeg".contains("/."));
-//        logger.info("{}", "__MACOSX/sample/._47.jpeg".startsWith("__MACOSX"));
-//        logger.info("{}", "__MACOSX/sample/._47.jpeg".startsWith("."));
-
-        Pattern bitrant_regex = Pattern.compile("(\\d+(?:\\.\\d+)?)kbits/s");
-        Matcher matcher = bitrant_regex.matcher("123.1kbits/s");
-        matcher.find();
-        logger.info(matcher.group(1));
-        logger.info("{}",matcher.groupCount());
-    }
-
-    @Test
     public void testMessageFormat() {
         logger.info("{}", MessageFormat.format("abc: {0}", "12ac"));
 
@@ -946,24 +920,8 @@ public class MainTest {
     }
 
     @Test
-    public void test1003() {
-        String str = "RECORD_STREAM_END_TRIGGER_{0}_{1}_{2}_{3}";
-        String formatStr = MessageFormat.format(str, "11", "22", "33", "44");
-        logger.debug("formatStr: {}", formatStr);
-        String[] split = formatStr.split("_");
-        logger.debug("{}", split.length);
-
-        Pattern bitrant_regex = Pattern.compile("(?:\\S+)_(\\S+)_(\\S+)_(\\S+)_(\\S+)$");
-        Matcher matcher = bitrant_regex.matcher(formatStr);
-        matcher.find();
-        logger.info("{}", matcher.group(4));
-        logger.debug("{}", Pattern.matches("(\\S+)_(\\S+)_(\\S+)_(\\S+)$", formatStr));
-
-        logger.info("11111111111111111111");
-
-        String[] s = "RECORD_STREAM_END_TRIGGER_10000001_1_rtp_11010000002000000163_34020000001310000163".split("_", 8);
-        logger.error("{}", s[4]);
-        logger.error("{}", s[5]);
+    public void testRegex() {
+        new TestRegex.Solution().testRegex();
     }
 
     public static <K,V,T> Map<K,V> toMap(List<T> list, Function<T,K> keyFunc, Function<T,V> valFunc) {
@@ -984,6 +942,37 @@ public class MainTest {
         tplBeanVOS.add(new TplBeanVO().setUserId(2).setUserName("test-2"));
         Map<Integer, String> integerStringMap = toMap(tplBeanVOS, TplBeanVO::getUserId, TplBeanVO::getUserName);
         logger.info("{}", integerStringMap);
+    }
+
+    /**
+     * 测试分页
+     */
+    @Test
+    public void testPage() {
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        logger.info("{}", list.subList(0,2));
+        logger.info("{}", list.subList(2,3));
+    }
+
+
+    @Test
+    public void testStringToken() {
+        StringTokenizer tokenizer = new StringTokenizer("123 222  233", " ");
+        while (tokenizer.hasMoreTokens()) {
+            logger.info("*{}*", tokenizer.nextToken());
+        }
+    }
+
+    @Test
+    public void testRandomNumber() {
+        logger.info("randomAlphabetic: {}",RandomStringUtils.randomAlphabetic(16));
+        logger.info("randomAlphanumeric: {}",RandomStringUtils.randomAlphanumeric(16));
+    }
+
+    @Test
+    public void testFastJsonArray() {
+//        logger.info(JSON.toJSONString(new int[]{1,2,3}));
+//        logger.info(JSON.("[1,2,3]"));
     }
 
 

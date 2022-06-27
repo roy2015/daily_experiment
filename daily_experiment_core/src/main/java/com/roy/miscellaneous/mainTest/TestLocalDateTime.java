@@ -1,11 +1,12 @@
 package com.roy.miscellaneous.mainTest;
 
-import java.text.DateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
@@ -97,7 +98,20 @@ public class TestLocalDateTime {
         public void test11() {
             logger.info("本地时间： {}", LocalDateTime.now());
             logger.info("国际标准时间： {}", Instant.now());
+            logger.info("LocalDateTime.now().toInstant： {}", LocalDateTime.now().toInstant(ZoneOffset.UTC));
             logger.info("{}", ZoneId.systemDefault());
+        }
+
+        public void testFormat() {
+            Date now = new Date();
+            LocalDateTime nowLDT = LocalDateTimeUtil.of(now);
+            LocalDate nowLD = nowLDT.toLocalDate();
+            LocalTime nowLT = nowLDT.toLocalTime();
+            logger.info("{}", nowLDT);
+            logger.info("{}", nowLD);
+            logger.info("{}", nowLT);
+            logger.info("{}", nowLD.format(DateTimeFormatter.ofPattern("yyyyMMdd")));
+            logger.info("{}", nowLT.format(DateTimeFormatter.ofPattern("HHmmss")));
         }
 
     }
@@ -107,6 +121,7 @@ public class TestLocalDateTime {
 //        so.testParseDate();
 //        so.test2();
 //        so.test3();
-          so.test11();
+//          so.test11();
+          so.testFormat();
     }
 }
