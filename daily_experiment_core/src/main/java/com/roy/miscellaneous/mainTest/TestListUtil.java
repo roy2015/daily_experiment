@@ -13,15 +13,13 @@ import java.util.stream.Collectors;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
-import com.roy.miscellaneous.mainTest.TestSolutionTemplate.Solution;
-
 /**
  * @author guojun
  * @date 2022/5/26 上午10:30
  */
 public class TestListUtil {
   private static final org.slf4j.Logger logger = LoggerFactory.getLogger(
-      TestSolutionTemplate.class);
+      TestMd5Sh1Sh256.class);
 
   public static class ListUtil {
     /**

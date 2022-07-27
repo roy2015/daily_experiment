@@ -9,6 +9,7 @@ import cn.hutool.core.text.UnicodeUtil;
 import sun.nio.cs.UnicodeEncoder;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.roy.miscellaneous.*;
 import com.roy.miscellaneous.arithmetic.TestBase64Codec;
@@ -965,14 +966,28 @@ public class MainTest {
 
     @Test
     public void testRandomNumber() {
+        String[] splits = "123".split(",");
+
         logger.info("randomAlphabetic: {}",RandomStringUtils.randomAlphabetic(16));
         logger.info("randomAlphanumeric: {}",RandomStringUtils.randomAlphanumeric(16));
+
     }
 
     @Test
+    /**
+     * 测试
+     */
     public void testFastJsonArray() {
-//        logger.info(JSON.toJSONString(new int[]{1,2,3}));
-//        logger.info(JSON.("[1,2,3]"));
+        logger.info(JSON.toJSONString(new int[]{1,2,3}));
+        Object obj = JSONArray.parse("[1,2,3]");
+        logger.info("{}", obj);
+    }
+
+    @Test
+    public void testListToArray() {
+        Collection<Integer> list = Arrays.asList(1).stream().collect(Collectors.toSet());
+        Object[] array = list.toArray();
+        logger.info("{}", array);
     }
 
 
