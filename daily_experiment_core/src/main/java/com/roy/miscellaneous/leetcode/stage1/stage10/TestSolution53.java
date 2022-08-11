@@ -56,9 +56,9 @@ public class TestSolution53 {
                 if (num > maxVal) {
                     maxVal = num;
                 }
-                //no pick
+                //no pick 本次不取的话求上次取和不取的最大值
                 int currentNoPick = Math.max(preNoPick, prePick);
-                //pick
+                //pick 本次取的话求上次取和取i的最大值
                 int currentPick = Math.max(num, prePick + num);
                 preNoPick = currentNoPick;
                 prePick = currentPick;
