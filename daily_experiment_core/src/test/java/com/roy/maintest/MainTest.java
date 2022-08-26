@@ -3,9 +3,13 @@ package com.roy.maintest;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.text.UnicodeUtil;
+import cn.hutool.crypto.Mode;
+import cn.hutool.crypto.Padding;
+import cn.hutool.crypto.symmetric.SM4;
 import sun.nio.cs.UnicodeEncoder;
 
 import com.alibaba.fastjson.JSON;
@@ -46,6 +50,7 @@ import com.roy.miscellaneous.yaml.TestReadYaml;
 //import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.SimpleTypeConverter;
 import org.springframework.beans.factory.config.BeanExpressionContext;
@@ -72,7 +77,9 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -95,6 +102,10 @@ import static java.lang.Math.*;
 public class MainTest {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainTest.class);
+
+    /*static{
+        Security.addProvider(new BouncyCastleProvider());
+    }*/
 
     // 公式中的经纬度均用弧度表示，计算两点距离
     double algorithm(double longitude1, double latitude1, double longitude2, double latitude2) {
@@ -988,6 +999,20 @@ public class MainTest {
         Collection<Integer> list = Arrays.asList(1).stream().collect(Collectors.toSet());
         Object[] array = list.toArray();
         logger.info("{}", array);
+    }
+
+    @Test
+    public void testSm4() {
+        SM4 sm4 = new SM4(Mode.CBC, Padding.PKCS5Padding,
+            "07136231227kjlmk".getBytes(StandardCharsets.UTF_8),
+            "1234123412341234".getBytes(StandardCharsets.UTF_8));
+
+        String cipherText = sm4.encryptBase64("guojun");//CPgfKEIDRVY+Z0e9gFZ5hQ==
+        logger.info("{}", cipherText);
+        String plainText = sm4.decryptStr(Base64.decode(cipherText.getBytes(StandardCharsets.UTF_8)));
+        logger.info("{}", plainText);
+
+
     }
 
 
