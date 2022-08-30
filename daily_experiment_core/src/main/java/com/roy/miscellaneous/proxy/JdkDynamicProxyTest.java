@@ -93,6 +93,9 @@ public class JdkDynamicProxyTest {
     static class BaseInvocationHandler implements InvocationHandler {
         protected Warship warship;
 
+        public BaseInvocationHandler() {
+        }
+
         public BaseInvocationHandler(Warship warship) {
             this.warship = warship;
         }
