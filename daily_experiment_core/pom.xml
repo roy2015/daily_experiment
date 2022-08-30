@@ -347,10 +347,18 @@
             <plugin>
                 <groupId>org.roy</groupId>
                 <artifactId>demo-roy-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
                 <configuration>
                     <fileName>/Users/apple/guojun/es操作记录.txt</fileName>
                 </configuration>
-                <version>1.0-SNAPSHOT</version>
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>roy-demo</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>compile</phase>-->
+<!--                    </execution>-->
+<!--                </executions>-->
             </plugin>
 
             <plugin>
