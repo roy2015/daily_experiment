@@ -1,4 +1,4 @@
-package com.roy.miscellaneous.jdk.future;
+package com.roy.miscellaneous.future;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
