@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>daily_experiment_core</module>
+        <module>daily_experiment_core_new</module>
     </modules>
     <name>daily_experiment</name>
 
