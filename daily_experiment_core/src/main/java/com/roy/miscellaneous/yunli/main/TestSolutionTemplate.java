@@ -15,13 +15,19 @@ public class TestSolutionTemplate {
 
 
     static class Solution {
-
+        public  void testDecodeString() {
+            String base64Str = "ASi1L/0gdS0DAEQFeyJwbGFuTmFtZSI6IuWtpueUn+i6q+mrmOagh+etvuS9nOS4mijli7/liqgpIiwicHJvY2Vzc1R5cDEiLCJyZWxUYWdGcmllbmRseWhlaWdodCJ9BQA5MwQtcMQAmpBBqaX2";
+            byte[] bytes = Base64.decodeBase64(base64Str);
+            String s = new String(CompressionProcessorFactory.get().decompress(bytes), StandardCharsets.UTF_8);
+            logger.info("{}", s);
+        }
     }
 
     public static void main(String[] args) {
-        String base64Str = "ASi1L/0gdS0DAEQFeyJwbGFuTmFtZSI6IuWtpueUn+i6q+mrmOagh+etvuS9nOS4mijli7/liqgpIiwicHJvY2Vzc1R5cDEiLCJyZWxUYWdGcmllbmRseWhlaWdodCJ9BQA5MwQtcMQAmpBBqaX2";
-        byte[] bytes = Base64.decodeBase64(base64Str);
-        String s = new String(CompressionProcessorFactory.get().decompress(bytes), StandardCharsets.UTF_8);
-        logger.info("{}", s);
+        Solution solution = new Solution();
+        solution.testDecodeString();
+
+
+
     }
 }

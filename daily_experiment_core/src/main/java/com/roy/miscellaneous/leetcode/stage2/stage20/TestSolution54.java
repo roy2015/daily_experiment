@@ -108,32 +108,127 @@ public class TestSolution54 {
         }
     }
 
+
+    static class Solution1 {
+
+        /**
+         * 20221026
+         *
+         * 执行用时：
+         * 0 ms
+         * , 在所有 Java 提交中击败了
+         * 100.00%
+         * 的用户
+         * 内存消耗：
+         * 39.5 MB
+         * , 在所有 Java 提交中击败了
+         * 59.44%
+         * 的用户
+         * @param matrix
+         * @return
+         */
+        public List<Integer> spiralOrder(int[][] matrix) {
+            if (matrix == null || matrix.length == 0) {
+                return Collections.EMPTY_LIST;
+            }
+
+            int row = matrix.length;
+            int col = matrix[0].length;
+
+            List<Integer> storeList = new ArrayList<>();
+            //剥洋葱，每剥一次矩阵行列长度减2，开始元素行列坐标加1
+            for (int m = row,n = col, startRow=0 , startCol =0; m >= 1 && n >=1; m-=2,n-=2, startRow++, startCol++) {
+                test(matrix, m, n, startRow, startCol, storeList);
+            }
+            return storeList;
+        }
+
+
+        /**
+         *  通用方法，剥最外一层
+         * @param matrix
+         * @param row  行数 >=1
+         * @param col  列数 >=1
+         * @param idxRow 行开始index
+         * @param idxCol 列开始index
+         * @param outputList 输出数组
+         */
+        public void test(int[][] matrix, int row, int col, int idxRow, int idxCol, List<Integer> outputList) {
+            if (col < 1 || row <1) {
+                return;
+            }
+
+            int rightColIdx = idxCol + col - 1;
+            int downRowIdx = idxRow + row - 1;
+            //只有一列
+            if (col ==1) {
+                //向下结束
+                for (int i = 0; i < row; i++) {
+                    outputList.add(matrix[idxRow+i][rightColIdx]);
+                }
+                return;
+            }
+
+            //多列，向右
+            for (int i = 0; i < col; i++) {
+                outputList.add(matrix[idxRow][idxCol+i]);
+            }
+
+            //只有一列， 不用向下，结束
+            if (row == 1) {
+                return;
+            }
+
+            //向下
+            for (int i = 1; i < row; i++) {
+                outputList.add(matrix[idxRow+i][rightColIdx]);
+            }
+
+            //多行， 向左
+            for (int i = rightColIdx-1; i >= idxCol; i--) {
+                outputList.add(matrix[downRowIdx][i]);
+            }
+            //向上
+            for (int i = idxRow + row -2; i > idxRow; i--) {
+                outputList.add(matrix[i][idxCol]);
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        int[][] matrix = new int[][] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+//        int[][] matrix = new int[][] {
+//        { 1, 2 },
+//        { 3, 4 },
+//        { 5, 6 } };
 
-        /*int[][] matrix = new int[][]{
-                { 1,  2,  3,  4},
-                { 5,  6,  7,  8 },
-                { 9, 10, 11, 12 }
-        };*/
 
-        /*int[][] matrix = new int[][]{
-                { 1,   2,  3,  4},
-                { 5,   6,  7,  8 },
-                { 9,  10, 11, 12 },
-                { 13, 14, 15, 16 }
-        };*/
 
-        /*int[][] matrix = new int[][]{
-                { 1},
-                { 2}
-        };*/
+//        int[][] matrix = new int[][]{
+//                { 1,  2,  3,  4},
+//                { 5,  6,  7,  8 },
+//                { 9, 10, 11, 12 }
+//        };
 
-        /*int[][] matrix = new int[][]{
+//        int[][] matrix = new int[][]{
+//                { 1,   2,  3,  4},
+//                { 5,   6,  7,  8 },
+//                { 9,  10, 11, 12 },
+//                { 13, 14, 15, 16 }
+//        };
+
+//        int[][] matrix = new int[][]{
+//                { 1},
+//                { 2}
+//        };
+
+        int[][] matrix = new int[][]{
                 { 1,2}
-        };*/
+        };
 
-        Solution solution = new Solution();
+//        List<Integer> list = new ArrayList<>();
+//        new Solution1().test(matrix, 1,2, 0,0, list);
+
+        Solution1 solution = new Solution1();
         List<Integer> integers = solution.spiralOrder(matrix);
         logger.info(integers.toString());
     }
