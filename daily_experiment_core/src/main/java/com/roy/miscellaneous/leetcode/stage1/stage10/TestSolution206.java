@@ -26,7 +26,7 @@ public class TestSolution206 {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolution206.class);
     static  class Node {
         private String value;
-        private TestSolution206.Node next;
+        private Node next;
 
         public Node(String value) {
             this.value = value;
@@ -84,6 +84,36 @@ public class TestSolution206 {
         }
     }
 
+    static class Solution1 {
+        /**
+         *  关键点：保存b的next，易错点！！！
+         * @param head
+         * @return
+         */
+        public Node reverseList(Node head) {
+            Node nodeA, nodeB, tmp;
+            // null 'A', 就不用考虑空链表
+            nodeA = null;
+            nodeB = head;
+
+            while (nodeB != null) {
+                //保存b的next
+                tmp = nodeB.next;
+                nodeB.next= nodeA;
+                nodeA = nodeB;
+                nodeB = tmp;
+            }
+            return nodeA;
+        }
+
+        public static void print (Node node) {
+            while (node != null) {
+                logger.info("node: [{}]", node.value);
+                node = node.next;
+            }
+        }
+    }
+
 
 
     public static void main(String[] args) {
@@ -98,10 +128,10 @@ public class TestSolution206 {
         nodeA.next = nodeB;
 
         logger.info("逆序前==============================");
-        new Solution().print(nodeA);
+        new Solution1().print(nodeA);
 
         logger.info("逆序后==============================");
-        Node node = new Solution().reverseList1 (nodeA);
+        Node node = new Solution1().reverseList (nodeA);
         new Solution().print(node);
 
     }

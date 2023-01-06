@@ -92,15 +92,58 @@ public class TestSolutionInterview0806 {
 
     }
 
+    static class Solution1 {
+
+
+        /**
+         * a->b 01 a->c 02
+         * b->a 10 b->c 12
+         * c->a 20 c->b 21
+         *
+         * 两个
+         */
+        public void hanota(List<Integer> from, List<Integer> mid, List<Integer> to) {
+            doHanota(from, mid, to, 0, 2);
+        }
+
+        public void doHanota(List<Integer> from, List<Integer> mid, List<Integer> to, int fromIdx, int toIdx) {
+            if (from.size() == 0) {
+                return;
+            }
+
+            //fromIdx -> thrid
+            //from Idx -> to
+            //thrid -> to
+            int thrid = 0;
+            if (fromIdx == 0 && toIdx == 1) {
+                thrid = 2;
+            } else  if (fromIdx == 0 && toIdx == 2) {
+                thrid = 1;
+            } else  if (fromIdx == 1 && toIdx == 0) {
+                thrid = 2;
+            } else  if (fromIdx == 1 && toIdx == 2) {
+                thrid = 0;
+            } else  if (fromIdx == 2 && toIdx == 0) {
+                thrid = 1;
+            } else  if (fromIdx == 2 && toIdx == 1) {
+                thrid = 0;
+            } else {}
+            doHanota(from.subList(0, from.size()-1), new ArrayList<>(), new ArrayList<>(), fromIdx, thrid);
+            logger.info("{} -> {}", (char)('a' + fromIdx) , (char)('a' + toIdx));
+            doHanota(from.subList(0, from.size()-1), new ArrayList<>(), new ArrayList<>(), thrid, toIdx);
+
+        }
+    }
+
     public static void main(String[] args) {
         List<Integer> A = new ArrayList<>();
-        int len = 14;
+        int len = 5;
         for (int i = len; i >= 1; i--) {
             A.add(i);
         }
 
         ArrayList<Integer> recList = new ArrayList<>();
         new Solution().hanota(A, new ArrayList<Integer>(), recList);
-        logger.info("", new Solution());
+//        logger.info("", new Solution());
     }
 }

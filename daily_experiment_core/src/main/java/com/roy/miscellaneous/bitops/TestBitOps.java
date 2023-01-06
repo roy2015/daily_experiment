@@ -62,14 +62,28 @@ public class TestBitOps {
         logger.debug(Integer.valueOf((h = Integer.valueOf(a).hashCode()) ^ (h >>> 16)).toString());
     }
 
-    public static void main(String[] args) {
-//        new TestBitOps().test2();
+    public void test3() {
+        //抑或
         logger.debug(Integer.toBinaryString(1 ^ 1));
         logger.debug(Integer.toBinaryString(0 ^ 0));
         logger.debug(Integer.toBinaryString(1 ^ 0));
-
+        //与
         logger.debug(Integer.toBinaryString(1 & 1));
         logger.debug(Integer.toBinaryString(1 & 0));
+    }
+
+    public void test4() {
+        String negativeOne = Integer.toBinaryString(-1);
+        logger.debug("len: {}, {}", negativeOne.length(), negativeOne);
+        String shiftLeft = Integer.toBinaryString(-1 << 3);
+        logger.debug("len: {}, {}", shiftLeft.length(), shiftLeft);
+        shiftLeft = Integer.toBinaryString(~(-1 << 3));
+        logger.debug("len: {}, {}", shiftLeft.length(), shiftLeft);
+    }
+
+    public static void main(String[] args) {
+//      new TestBitOps().test3();
+        new TestBitOps().test4();
 
     }
 }

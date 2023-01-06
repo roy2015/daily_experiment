@@ -10,6 +10,7 @@ import cn.hutool.core.text.UnicodeUtil;
 import cn.hutool.crypto.Mode;
 import cn.hutool.crypto.Padding;
 import cn.hutool.crypto.symmetric.SM4;
+import org.springframework.beans.BeanUtils;
 import sun.nio.cs.UnicodeEncoder;
 
 import com.alibaba.fastjson.JSON;
@@ -1013,6 +1014,11 @@ public class MainTest {
         logger.info("{}", plainText);
 
 
+    }
+
+    @Test
+    public void testSpringPrimaryType() {
+        logger.info("{}", BeanUtils.isSimpleProperty(int[].class));
     }
 
 

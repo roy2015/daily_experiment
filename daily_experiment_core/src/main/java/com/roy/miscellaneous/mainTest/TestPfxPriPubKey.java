@@ -19,6 +19,22 @@ import lombok.extern.slf4j.Slf4j;
  * 1.演示pfx文件生成和提取公私钥加密解密
  * 2.中台的用户密码存储和登录密码校验
  *
+ *  中台的登录和密码加密
+ *
+ *  0. 公私钥生成
+ *    1）openssl生成pfx文件
+ *    2）KeyStore读取pfx文件即可获的priKey, pubKey
+ *
+ * 1. 验证
+ *    1) 如果password长度为344(base encode后344)，  私钥解密（baseDecode（password）), 赋值给password
+ *    2) password长度不为64，SHA-256加密成64长度（messageDigest.digest 256后Hex.encodeHexString(hash)成64）
+ *    3）把库里的密码，进行第一步操作解密， 结果和第二步比较即可
+ *
+ * 2. 生成密码
+ *    1) 如果password长度为344(base encode后344)，  私钥解密（baseDecode（password）), 赋值给password
+ *    2）password长度不为64，“数字，字母，下划线”校验，通过后 SHA-256加密成64长度（messageDigest.digest后  256Hex.encodeHexString(hash)成64）
+ *    3） 把64位 password 公钥加密结果baseEncode, 赋值给password,长度即为344
+ *
  * @author guojun
  * @date 2022/8/17 16:30
  */
@@ -111,29 +127,31 @@ public class TestPfxPriPubKey {
   public static void main(String[] args) {
 
     //新增用户传入的密码
-    log.info("64位：{}", "1e6e63275ce0660d49ccfaeb01f3cb2b6733a843729c1a38ddd96eaffe71b7bf".length());
     Solution solution = new Solution();
     solution.initPriPubKey();
-    String plainText = "1e6e63275ce0660d49ccfaeb01f3cb2b6733a843729c1a38ddd96eaffe71b7bf";
-    log.info("明文：{}", plainText);
+    String plainText = "c8f4ad0417cf3cdba06f2cbd6a1a9904850c648be06b9cb90c21bfaeb92d4769";
+    log.info("中间明文64：len:{} {}", plainText.length(), plainText);
     String cipherText = solution.encrypt(plainText);
-    //密文每次执行会变化
-    log.info("加密后密文base64：len:{}  {}\n", cipherText.length(), cipherText);
+    //密文每次执行会变化,但解密后对应同一个明文
+    log.info("中间明文加密后base64：len:{}  {}\n", cipherText.length(), cipherText);
+    log.info("===================================================================================================");
 
-    //不同密文对应同一个明文
-    cipherText = "wSQWpPO2COfyvVGCantI/XeNh1NBK0y7rMhNkQIT6ewpkVMtipZUHSFUpRDMYaoxyvnvomr3XcCRFpq1ePKn8JsjGEz+EzigFihpiNrpOBYMr+ewtRzIVBGzoMitQ7megFkiqrYSXLtZ88oe34NvxDNAqO1ZgqsQohEP/U9rUtNWfPbH8bW8x/JZLoD8SjbIsNDrV4Cu26dw5dQDLSd+3R+dy/TBiAATTqAfkPqex0wL6cebE34oICRPMemm02J1BCKVSMMI4EkSyLuRVudErKigOo2uu7X4FvmNxLiYytoz5OHDi+xakBPywlYZ8CwfkkrbG54Bp9R/I6bFwuArAA==";
-    log.info("密文base64：len:{}  {}", cipherText.length(), cipherText);
+    //库里秘文
+    cipherText = "kg3xsfOdA86K1TUVwiCOzW0Obc2YaZO1s2rGSLJ0Uva8WEw1LvWOSIusPEQ72CgkbfC2XDCSjzFDBIiNcqMYcGwZF8p7GPHJDj3p0wO7WScR1G+OmPhxjrlc1Igl6JA3lbk61+/mFaxsKs66B1dpu9QIRhYdMbTGiye+OIRYWSaKG4TneP3LJC+tZACIAe/vl7XKvnAgibm39QZJtr7JAXVRehc+JlYuCXBOTEbN9eIWYoI+YafIYxEimQhpY+MFmpQQLlz6IKQD+WpUzCTctsKVq7vi5FJFvc0SA04M1tU/jmr5gjISXn+aEVtPRUC9r+zMnLdBIeBufNouDBlryA==";
+    log.info("db密文base64：len:{}  {}", cipherText.length(), cipherText);
     plainText = solution.decrypt(cipherText);
-    log.info("解密后明文：{}\n", plainText);
+    log.info("db解密后64位明文： len:{}  {}\n", plainText.length() ,plainText);
 
-    //登录时传入的密码，可变，利用不同密文对应同一个明文
-    cipherText = "TctBplZSYmHV/EzW/3r+Mwts/cLM61EfkJL+fbZJbPpTyVSseZCwd9T2uMF81g6Z3ExmoiAeis2xhpfZ0W0oW2FRMih8woZHaZ76PxHO6oOrcZ0Rxy+cu1a6vejF2ZhXKhBMItx4zxNZh+mYtPolm4g4hzcYlHjeKgFfZa9lEIfo2iQuqpMEogX0ZiQtt/qdiD179vLvIGBrDuaGm8cyPHTYSURPhNsVqP5lprgbYFveuat9O8FhuRWZsSa/dgGvO+LyETBq5UzhpGxZdc10k1AZUJ2aoRFmd1GWSiSokRfmiVUMdi+y4JCBRhyY12D3C6Y17SSUNXlwK3JTzR/iAw==";
-    log.info("密文base64：len:{}  {}", cipherText.length(), cipherText);
+    //登录时传入的密码(公钥加密过的)，可变，利用不同密文对应同一个明文
+    cipherText = "UpcGaha83Dfe1jlDf/34q4dvdd9X9BQIFnzzh2Rg+RcY/tHnD+lckYX4tj4bkd0+tGFY/vVueWcxd5cplxEsuRrAeofO+R4rP4MunMW0sFNBGU6R4y10C+WUCoZ+X8A8KRZ5zezBGLj80caqCwjI8kwTGM5FOKn0fbaF2eabyS1DqSR6QhQ162ura7v3lvaYqXixfBPXGgi6Z3un+UcXPCkDmZF5LrXSO32GxmYkF484sYBOkFAJK7RxqIQ8KHvloRrGEgey1jP1uY0fPILrKKE22fD1GDS3DDgvzEiWK0ZFa1os4hRzWjoEzDYlAtwf6ZcnY9+rrgb2lyu3DrheQQ==";
+    log.info("登录密文base64：len:{}  {}", cipherText.length(), cipherText);
     plainText = solution.decrypt(cipherText);
-    log.info("明文：{}\n", plainText);
+    log.info("登录明文：len:{} {}\n",plainText.length(), plainText);
 
-    //中间明文
-    String midClipherText = solution.getSHA256String(plainText);
-    log.info("中间明文：{}", midClipherText);
+    plainText = "P@ssw0rd01!";
+    log.info("彻底的明文：{}", plainText);
+    log.info("输入框明文后转64位：len:{} {}", solution.getSHA256String(plainText).length(), solution.getSHA256String(plainText));
+
+
   }
 }
