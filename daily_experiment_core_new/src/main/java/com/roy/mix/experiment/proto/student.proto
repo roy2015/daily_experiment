@@ -1,0 +1,14 @@
+syntax="proto2";
+
+//生成文件所在包名
+package com.roy.example.proto.dto;
+//option java_package = "com.roy.example.proto.dto";
+option java_outer_classname = "StudentProto";
+
+message Student {
+  required int32 sid = 1;
+  required string sName = 2;
+  required bool sex = 3;
+  required int32 age = 4;
+  optional string phoneNumber = 5;
+}

@@ -1,7 +1,5 @@
 package com.roy.maintest;
 
-import cn.hutool.captcha.CaptchaUtil;
-import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.date.DateUtil;
@@ -11,47 +9,45 @@ import cn.hutool.crypto.Mode;
 import cn.hutool.crypto.Padding;
 import cn.hutool.crypto.symmetric.SM4;
 import org.springframework.beans.BeanUtils;
-import sun.nio.cs.UnicodeEncoder;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.roy.miscellaneous.*;
-import com.roy.miscellaneous.arithmetic.TestBase64Codec;
-import com.roy.miscellaneous.arithmetic.TestInsertiionSort;
-import com.roy.miscellaneous.arithmetic.TestMergeSort;
-import com.roy.miscellaneous.arithmetic.cipher.TestDES3;
-import com.roy.miscellaneous.arithmetic.cipher.TestMac;
-import com.roy.miscellaneous.arithmetic.cipher.TestRSAEncrypt;
-import com.roy.miscellaneous.arithmetic.cipher.TestRsaSignature;
-import com.roy.miscellaneous.bitops.TestBitOps;
-import com.roy.miscellaneous.executors.TestScheduledThreadPoolExecutor;
-import com.roy.miscellaneous.interview.TestInsertionSortWithAyyayList;
-import com.roy.miscellaneous.io.TestJdkIOs;
-import com.roy.miscellaneous.io.TestObjectSerializeFile;
-import com.roy.miscellaneous.juc.multiThread.TestOddEvenPrint;
-import com.roy.miscellaneous.javassist.TestJavassist;
-import com.roy.miscellaneous.juc.*;
-import com.roy.miscellaneous.mainTest.TestRegex;
-import com.roy.miscellaneous.pattern.factory.CpuType;
-import com.roy.miscellaneous.pattern.factory.MainBoardType;
-import com.roy.miscellaneous.pattern.factory.abstractFactory.CaliforniaFactory;
-import com.roy.miscellaneous.pattern.factory.ComputerEngineer;
-import com.roy.miscellaneous.pattern.factory.abstractFactory.NewYorkFactory;
-import com.roy.miscellaneous.pattern.factory.simpleFactory.SimpleFactory;
-import com.roy.miscellaneous.spi.TestJdkSpi;
-import com.roy.miscellaneous.targetObject.TestString;
-import com.roy.miscellaneous.targetObject.TestVO;
-import com.roy.miscellaneous.targetObject.TplBeanVO;
-import com.roy.miscellaneous.targetObject.User1VO;
-import com.roy.miscellaneous.targetObject.UserVO;
-import com.roy.miscellaneous.util.JacksonUtil;
-import com.roy.miscellaneous.yaml.TestReadYaml;
+import com.roy.research.*;
+import com.roy.research.arithmetic.TestBase64Codec;
+import com.roy.research.arithmetic.TestInsertiionSort;
+import com.roy.research.arithmetic.TestMergeSort;
+import com.roy.research.arithmetic.cipher.TestDES3;
+import com.roy.research.arithmetic.cipher.TestMac;
+import com.roy.research.arithmetic.cipher.TestRSAEncrypt;
+import com.roy.research.arithmetic.cipher.TestRsaSignature;
+import com.roy.research.bitops.TestBitOps;
+import com.roy.research.executors.TestScheduledThreadPoolExecutor;
+import com.roy.research.interview.TestInsertionSortWithAyyayList;
+import com.roy.research.io.TestJdkIOs;
+import com.roy.research.io.TestObjectSerializeFile;
+import com.roy.research.juc.multiThread.TestOddEvenPrint;
+import com.roy.research.javassist.TestJavassist;
+import com.roy.research.juc.*;
+import com.roy.research.mainTest.TestRegex;
+import com.roy.research.pattern.factory.CpuType;
+import com.roy.research.pattern.factory.MainBoardType;
+import com.roy.research.pattern.factory.abstractFactory.CaliforniaFactory;
+import com.roy.research.pattern.factory.ComputerEngineer;
+import com.roy.research.pattern.factory.abstractFactory.NewYorkFactory;
+import com.roy.research.pattern.factory.simpleFactory.SimpleFactory;
+import com.roy.research.spi.TestJdkSpi;
+import com.roy.research.targetObject.TestString;
+import com.roy.research.targetObject.TestVO;
+import com.roy.research.targetObject.TplBeanVO;
+import com.roy.research.targetObject.User1VO;
+import com.roy.research.targetObject.UserVO;
+import com.roy.research.util.JacksonUtil;
+import com.roy.research.yaml.TestReadYaml;
 //import com.sun.image.codec.jpeg.JPEGCodec;
 //import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.SimpleTypeConverter;
 import org.springframework.beans.factory.config.BeanExpressionContext;
@@ -69,10 +65,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.testng.annotations.Test;
 
 import javax.naming.OperationNotSupportedException;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -80,17 +73,14 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
-import java.security.Security;
 import java.text.MessageFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -1012,8 +1002,6 @@ public class MainTest {
         logger.info("{}", cipherText);
         String plainText = sm4.decryptStr(Base64.decode(cipherText.getBytes(StandardCharsets.UTF_8)));
         logger.info("{}", plainText);
-
-
     }
 
     @Test
@@ -1021,5 +1009,49 @@ public class MainTest {
         logger.info("{}", BeanUtils.isSimpleProperty(int[].class));
     }
 
+    /**
+     * map的null key
+     */
+    @Test
+    public void testNullKey() {
+        Map<String, String> map = new HashMap<String, String>() {
+            {put(null, "12");}
+            {put(null, "122");}
+        };
+        int i =2;
+    }
+
+    public <K, V> void printMap(Map<K, V> map) {
+        for (K k : map.keySet()) {
+            logger.info("key: {} value: {}", k, map.get(k));
+        }
+    }
+
+    /**
+     * 测试HashMap/LinkedHashMap/TreeMap 的访问顺序
+     */
+    @Test
+    public void testAccessOrder() {
+        Map<Integer, String> hashMap = new HashMap<Integer, String>() {
+            {put(322, "12");}
+            {put(22, "12");}
+            {put(122, "122");}
+        };
+        printMap(hashMap);
+
+        Map<Integer, String> linkedHashMap = new LinkedHashMap<Integer, String>() {
+            {put(322, "12");}
+            {put(22, "12");}
+            {put(122, "122");}
+        };
+        printMap(linkedHashMap);
+
+        Map<Integer, String> treeMap = new TreeMap<Integer, String>() {
+            {put(322, "12");}
+            {put(22, "12");}
+            {put(122, "122");}
+        };
+        printMap(treeMap);
+    }
 
 }

@@ -15,6 +15,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <dep.okhttp.version>3.14.9</dep.okhttp.version>
+        <protobuf.version>3.5.1</protobuf.version>
     </properties>
 
 
@@ -68,18 +69,44 @@
             <version>${jackson-core.version}</version>
         </dependency>
 
-
+        <!--protobuf相关start-->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java-util -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
+            <version>${protobuf.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.grpc/grpc-all -->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-all</artifactId>
+            <version>1.11.0</version>
+        </dependency>
+        <!--protobuf相关end-->
     </dependencies>
 
     <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.5.0.Final</version>
+            </extension>
+        </extensions>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <plugins>
 
+        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -96,6 +123,32 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
+            </plugin>
+
+            <!--protobuf生成代码plugin -->
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.5.0</version>
+                <configuration>
+                    <!-- 工具版本 -->
+                    <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+                    <!--默认值，proto源文件路径-->
+                    <protoSourceRoot>${project.basedir}/src/main/java/com/roy/mix/experiment/proto/</protoSourceRoot>
+                    <!--默认值，proto目标java文件路径-->
+                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <!--设置是否在生成java文件之前清空outputDirectory的文件，默认值为true，设置为false时也会覆盖同名文件-->
+                    <clearOutputDirectory>false</clearOutputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <!--生成Grpc类-->
+<!--                            <goal>compile-custom</goal>-->
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
