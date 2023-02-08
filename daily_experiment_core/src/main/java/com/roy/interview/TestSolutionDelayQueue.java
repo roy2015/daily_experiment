@@ -1,4 +1,4 @@
-package com.roy.research.interview;
+package com.roy.interview;
 
 import cn.hutool.core.date.DateUtil;
 import lombok.Data;

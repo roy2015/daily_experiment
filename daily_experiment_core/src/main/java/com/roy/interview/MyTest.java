@@ -1,4 +1,4 @@
-package com.roy.research.interview;
+package com.roy.interview;
 
 /**
  * @author guojun

@@ -1,4 +1,4 @@
-package com.roy.research.interview;
+package com.roy.interview;
 
 import lombok.Data;
 import org.slf4j.LoggerFactory;
