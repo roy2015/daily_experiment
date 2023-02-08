@@ -1,4 +1,4 @@
-package com.roy.research.mainTest;
+package com.roy.testing;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

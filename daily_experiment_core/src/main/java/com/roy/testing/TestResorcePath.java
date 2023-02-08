@@ -1,4 +1,4 @@
-package com.roy.research;
+package com.roy.testing;
 
 import org.slf4j.LoggerFactory;
 
@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
  * @author guojun
  * @date 2021/6/11
  */
-public class TestSolutionTemplate {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionTemplate.class);
+public class TestResorcePath {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestResorcePath.class);
 
 
     static class Solution {
@@ -15,6 +15,7 @@ public class TestSolutionTemplate {
     }
 
     public static void main(String[] args) {
+
         logger.info("{}", new Solution());
     }
 }

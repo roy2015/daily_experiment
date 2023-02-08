@@ -1,4 +1,4 @@
-package com.roy.research.mainTest;
+package com.roy.testing;
 
 import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
