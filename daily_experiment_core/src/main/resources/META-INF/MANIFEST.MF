@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Main-Class: com.roy.leetcode.TestBeibao
+Main-Class: com.guo.roy.research.leetcode.TestBeibao
 Class-Path: libs/log4j-1.2.16.jar libs/log4j-api-2.11.1.jar libs/log4j-c
  ore-2.11.1.jar libs/log4j-slf4j-impl-2.11.1.jar libs/lombok-1.16.22.jar
   libs/slf4j-api-1.7.21.jar

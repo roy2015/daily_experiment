@@ -13,6 +13,6 @@ public class TestBitOps {
 
     @Test
     public void test2() {
-        new com.roy.research.bitops.TestBitOps().test2();
+        new com.guo.roy.research.misc.bitops.TestBitOps().test2();
     }
 }
