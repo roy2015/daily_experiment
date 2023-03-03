@@ -155,7 +155,7 @@ public class TestPfxPriPubKey {
         cipherText = "S7vul9My0MVTFt6LKOvcOi9JutCf+lMOsxVxR4O6Y9HLzKUCcYy+BeJfGDBMzubiRjcm0FdqSrL9KDRAtyMM8Lsmyw/nQCipGSygaFqq7DOFtlk4BZlneazckVNpjNVgUEQvXImq9CppDex6k+Qrh50xoB2H0GQLqysYbgZKYyI3FTiFippN/J4y9Ri3ma2XJkdSqh12RrdFznS64SDCws6d5WtuzJwJFf5PJMTrvSDwopejn1h+xn8Lvs/wWBDclqNKZYmqwt3S2RI07m4yoCtVpn6rMnbVSaOxmUSJv7+YRXqts722DbTtTkbEMhHseLRYiCzGaTSJkF1B+Zs63g==";
         log.info("登录密文base64：len:{}  {}", cipherText.length(), cipherText);
         //登录的密文解密成中间明文
-        plainText = solution.decrypt(cipherText);
+        plainText = solution.decrypt(cipherText );
         log.info("登录明文：len:{} {}\n", plainText.length(), plainText);
         log.info("===================================================================================================");
 
