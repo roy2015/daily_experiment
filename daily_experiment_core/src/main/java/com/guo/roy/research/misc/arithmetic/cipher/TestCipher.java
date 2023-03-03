@@ -32,18 +32,18 @@ public class TestCipher {
         } );
 
         if (null != providers) {
-            logger.info("所有的Cipher列表");
+//            logger.info("所有的Cipher列表");
             for (Provider provider : providers) {
                 Set<Service> services = provider.getServices();
 
                 serviceTreeSet.addAll(services);
-                for (Service service : services) {
-                    if ("Cipher".equals(service.getType())) {
-                        logger.info("[type]:{},[algorithm]:{},[provider]:{}", StringUtils.rightPad(service.getType(), 20, " "),
-                                StringUtils.rightPad(service.getAlgorithm(), 30, " "),
-                                StringUtils.rightPad(service.getProvider().toString(), 30, " "));
-                    }
-                }
+//                for (Service service : services) {
+//                    if ("Cipher".equals(service.getType())) {
+//                        logger.info("[type]:{},[algorithm]:{},[provider]:{}", StringUtils.rightPad(service.getType(), 20, " "),
+//                                StringUtils.rightPad(service.getAlgorithm(), 30, " "),
+//                                StringUtils.rightPad(service.getProvider().toString(), 30, " "));
+//                    }
+//                }
             }
 
             logger.info("所有的service列表");
