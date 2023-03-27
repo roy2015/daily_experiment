@@ -106,14 +106,91 @@ public class TestSolution5 {
             }
             return s.substring(retStartIndex, retEndIndex + 1);
         }
+
+        /**
+         * 20230314 动态规划
+         *
+         * 执行结果：
+         * 通过
+         * 显示详情
+         * 查看示例代码
+         * 添加备注
+         *
+         * 执行用时：
+         * 1296 ms
+         * , 在所有 Java 提交中击败了
+         * 5.01%
+         * 的用户
+         * 内存消耗：
+         * 50.7 MB
+         * , 在所有 Java 提交中击败了
+         * 5.01%
+         * 的用户
+         * @param s
+         * @return
+         */
+        public String longestPalindrome1(String s) {
+            int length = s.length();
+            int idxS = 0, idxE = 0, finLongest = 1;
+            char[] chars = s.toCharArray();
+            int[][] dp = new int[length][length];
+            for (int i = 0; i < length; i++) {
+                for (int j = 0; j < length; j++) {
+                    int maxlen = 0;
+                    if (i == j) {
+                        dp[i][j] = 1;
+                        dp[j][i] = 1;
+                        maxlen = 1;
+                    } else if (Math.abs(i - j) == 1 && (chars[i] == chars[j])) {
+                        dp[i][j] = 1;
+                        dp[j][i] = 1;
+                        maxlen = 2;
+                    } else if (Math.abs(i - j) > 1 && chars[i] == chars[j]) {
+                        int m = Math.min(i, j);
+                        int n = Math.max(i, j);
+
+                        maxlen = 2;
+                        int f = m + 1, e = n - 1;
+                        while (f < e) {
+                            if (chars[f] != chars[e]) {
+                                break;
+                            }
+                            maxlen += 2;
+                            f++;
+                            e--;
+                        }
+                        if (f >= e) {
+                            dp[i][j] = 1;
+                            dp[j][i] = 1;
+                            if (f == e) {
+                                maxlen++;
+                            }
+                        } else {
+                            dp[i][j] = 0;
+                            dp[j][i] = 0;
+                            maxlen =0;
+                        }
+                    } else {
+                        dp[i][j] = 0;
+                        dp[j][i] = 0;
+                    }
+                    if (maxlen > finLongest) {
+                        idxS = i;
+                        idxE = j;
+                        finLongest = maxlen;
+                    }
+                }
+            }
+            return s.substring(Math.min(idxS, idxE), Math.max(idxS, idxE)+1);
+        }
     }
 
     public static void main(String[] args) {
-        logger.info(new Solution().longestPalindrome("bacdca"));//acdca
-        logger.info(new Solution().longestPalindrome("bbbb"));//bbbb
-        logger.info(new Solution().longestPalindrome("babad"));//bab  aba
-        logger.info(new Solution().longestPalindrome("cbbd"));//bb
-        logger.info(new Solution().longestPalindrome("abacab"));//"bacab"
+        logger.info(new Solution().longestPalindrome1("bacdca"));//acdca
+        logger.info(new Solution().longestPalindrome1("bbbb"));//bbbb
+        logger.info(new Solution().longestPalindrome1("babad"));//bab  aba
+        logger.info(new Solution().longestPalindrome1("cbbd"));//bb
+        logger.info(new Solution().longestPalindrome1("abacab"));//"bacab"
 
     }
 
