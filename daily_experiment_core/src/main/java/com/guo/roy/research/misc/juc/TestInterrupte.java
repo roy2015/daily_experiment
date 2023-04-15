@@ -55,7 +55,7 @@ public class TestInterrupte {
                 try {
                     LOGGER.info("线程中断1状态{}", Thread.currentThread().isInterrupted());
                     TimeUnit.SECONDS.sleep(10);
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     LOGGER.info("线程中断2状态{}", Thread.currentThread().isInterrupted());
                     LOGGER.error("{} 发生中断了...", threadName);
                 }

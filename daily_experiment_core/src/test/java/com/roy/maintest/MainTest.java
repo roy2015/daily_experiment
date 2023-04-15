@@ -302,7 +302,7 @@ public class MainTest {
      * @throws Exception
      */
     @Test
-    public void testLockSleepInterrupt() throws Exception {
+    public void testSleepInterrupt() throws Exception {
         TestInterrupte.testSleepInterrupt();
     }
 
