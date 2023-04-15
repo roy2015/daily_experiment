@@ -279,7 +279,7 @@ public class MainTest {
     }
 
     /**
-     * 测试下 LockSupport.unpark
+     * 测试下 LockSupport.unpark是否算中断
      *
      * @throws Exception
      */
@@ -289,7 +289,7 @@ public class MainTest {
     }
 
     /**
-     * lockSupport park后 Thread.interrupt
+     * lockSupport park后 Thread.interrupt是否算中断
      * @throws Exception
      */
     @Test
@@ -297,11 +297,19 @@ public class MainTest {
         TestInterrupte.testLockSupportInterrupt();
     }
 
+    /**
+     * 测试线程sleep时，被main线程interrupt是否算中断
+     * @throws Exception
+     */
     @Test
     public void testLockSleepInterrupt() throws Exception {
         TestInterrupte.testSleepInterrupt();
     }
 
+    /**
+     * 测试线程无限循环时，被main线程interrupt是否算中断
+     * @throws Exception
+     */
     @Test
     public void testLoopInterrupt() throws Exception {
         TestInterrupte.testLoopInterrupt();

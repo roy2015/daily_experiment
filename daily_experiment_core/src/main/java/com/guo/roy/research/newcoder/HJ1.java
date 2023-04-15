@@ -1,4 +1,4 @@
-package com.guo.roy.research.nowcoder;
+package com.guo.roy.research.newcoder;
 
 import java.util.Scanner;
 

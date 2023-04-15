@@ -30,9 +30,9 @@ public class TestInterrupte {
             @Override
             public void run() {
                 LOGGER.debug("{}", threadName);
-                LOGGER.info("线程中断状态{}", Thread.currentThread().isInterrupted());
+                LOGGER.info("线程中断状态1{}", Thread.currentThread().isInterrupted());
                 LockSupport.park(this);
-                LOGGER.info("线程中断状态{}", Thread.currentThread().isInterrupted());
+                LOGGER.info("线程中断状态2{}", Thread.currentThread().isInterrupted());
                 LOGGER.debug("{}: i am awake", threadName);
             }
         });
@@ -53,10 +53,10 @@ public class TestInterrupte {
             public void run() {
                 LOGGER.debug("{}", threadName);
                 try {
-                    LOGGER.info("线程中断状态{}", Thread.currentThread().isInterrupted());
+                    LOGGER.info("线程中断1状态{}", Thread.currentThread().isInterrupted());
                     TimeUnit.SECONDS.sleep(10);
                 } catch (InterruptedException e) {
-                    LOGGER.info("线程中断状态{}", Thread.currentThread().isInterrupted());
+                    LOGGER.info("线程中断2状态{}", Thread.currentThread().isInterrupted());
                     LOGGER.error("{} 发生中断了...", threadName);
                 }
             }
@@ -95,7 +95,7 @@ public class TestInterrupte {
         LOGGER.debug("main thread sleep.....");
         TimeUnit.SECONDS.sleep(3);
         thread1.interrupt();
-        System.in.read();
+        TimeUnit.SECONDS.sleep(3);
     }
 
     /**
@@ -111,7 +111,7 @@ public class TestInterrupte {
         LOGGER.debug("main thread sleep.....");
         TimeUnit.SECONDS.sleep(3);
         thread1.interrupt();
-        System.in.read();
+        TimeUnit.SECONDS.sleep(3);
     }
 
     /**
@@ -126,7 +126,7 @@ public class TestInterrupte {
         LOGGER.debug("main thread sleep.....");
         TimeUnit.SECONDS.sleep(3);
         thread1.interrupt();
-        System.in.read();
+        TimeUnit.SECONDS.sleep(3);
     }
 
     /**
@@ -142,6 +142,6 @@ public class TestInterrupte {
         TimeUnit.SECONDS.sleep(3);
         LockSupport.unpark(thread1);
         LOGGER.debug("going done.....");
-        System.in.read();
+        TimeUnit.SECONDS.sleep(3);
     }
 }
