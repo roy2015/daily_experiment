@@ -1061,4 +1061,10 @@ public class MainTest {
         printMap(treeMap);
     }
 
+
+    @Test
+    public  void testInt() {
+        Integer a=127,b=127,c=128,d=128;
+        logger.info("{}, {}", a==b, c==d);
+    }
 }
