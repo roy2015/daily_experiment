@@ -16,6 +16,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <dep.okhttp.version>3.14.9</dep.okhttp.version>
         <protobuf.version>3.5.1</protobuf.version>
+        <seata-spring-boot-starter.version>1.0.0</seata-spring-boot-starter.version>
     </properties>
 
 
@@ -24,6 +25,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.22</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-spring-boot-starter</artifactId>
+            <version>${seata-spring-boot-starter.version}</version>
         </dependency>
 
         <!-- log4j2-->

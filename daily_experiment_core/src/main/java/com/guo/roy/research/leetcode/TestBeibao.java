@@ -96,10 +96,29 @@ public class TestBeibao {
 
         }
 
+        public int test20230515(int[] weights, int[] values, int target) {
+            int weightLength = weights.length;
+            int[][] dp = new int[weightLength + 1][target + 1];
+//            dp[0] = new int[]{};
+            for (int i = 1; i <= weightLength; i++) {
+                for (int j = 1; j <= target ; j++) {
+                    if (weights[i-1] > j) {
+                        dp[i][j] =  dp[i-1][j];
+                    } else {
+                        dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weights[i - 1]] + values[i - 1]);
+                    }
+                }
+            }
+            return dp[weightLength][target];
+        }
+
     }
 
     public static void main(String[] args) {
         logger.info("{}", new Solution().test1(new int[]{2,1,1,4,12}, new int[]{2,2,1,10,4}, 6));
         logger.info("{}", new Solution().test20221020(new int[]{2,1,1,4,12}, new int[]{2,2,1,10,4}, 6));
+        logger.info("{}", new Solution().test20230515(new int[]{2,1,1,4,12}, new int[]{2,2,1,10,4}, 6));
+
+        logger.info("{}", new Solution().test20230515(new int[]{5,25,30,45,50}, new int[]{50,200,180,225,200}, 100));
     }
 }

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  *  10个线程6块令牌
  */
 public class TestSemaphore implements Runnable {
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(TestSemaphore.class);
+//    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(TestSemaphore.class);
     private Semaphore semaphore;
     private String threadName;
 
@@ -27,19 +27,20 @@ public class TestSemaphore implements Runnable {
     public void run() {
         try {
             semaphore.acquire();
-            LOGGER.info("{}获取到信号量。", threadName);
-            TimeUnit.SECONDS.sleep(3);
+            System.out.println(String.format("%s 获取到信号量", threadName));
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
-            LOGGER.error(e.getMessage(), e);
+            System.out.println(e.getMessage());
+//            LOGGER.error(e.getMessage(), e);
         } finally {
             semaphore.release();
         }
     }
 
     public static void main(String[] args) throws IOException {
-        Semaphore semaphore = new Semaphore(6);
+        Semaphore semaphore = new Semaphore(2);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             TestSemaphore testSemaphore = new TestSemaphore(semaphore, String.format("thread-%s", (i+1)));
             new Thread(testSemaphore).start();
         }

@@ -119,6 +119,34 @@ public class TestSolution141 {
             }
         }
 
+        //20230519
+        public boolean hasCycle2(ListNode head) {
+            //空
+            if (head== null) {
+                return false;
+            }
+            //step1:走一步， step2:走两步
+            ListNode step1 = head.next;
+            if (step1 == null) {
+                return false;
+            }
+
+            ListNode step2 = head.next.next;
+            //step2为空时step1必然为Null
+            while (step2 != null ) {
+                if (step1 == step2) {
+                    return true;
+                }
+                step1 = step1.next;
+                if (step2.next == null) {
+                    return false;
+                } else {
+                    step2 = step2.next.next;
+                }
+            }
+            return false;
+        }
+
     }
 
     public static void main(String[] args) {
@@ -144,13 +172,13 @@ public class TestSolution141 {
         listNode9.next = listNode10;
         listNode10.next = listNode3;
 
-        logger.info("{}", new Solution().hasCycle1(listNode1));//true
+        logger.info("{}", new Solution().hasCycle2(listNode1));//true
         listNode1 = new ListNode(1);
-        logger.info("{}", new Solution().hasCycle1(listNode1));//false
+        logger.info("{}", new Solution().hasCycle2(listNode1));//false
         listNode1 = new ListNode(1);
         listNode1.next = listNode2;
         listNode2.next = null;
-        logger.info("{}", new Solution().hasCycle1(listNode1));//false
+        logger.info("{}", new Solution().hasCycle2(listNode1));//false
 
     }
 }
