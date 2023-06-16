@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2016 the original author or authors.
+ *    Copyright 2009-2015 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -13,28 +13,30 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package com.guo.roy.research.misc.proxy.plugin.frame;
+package com.guo.roy.research.misc.proxy.pluginproxy.frame;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.apache.ibatis.exceptions.PersistenceException;
 
 /**
  * @author Clinton Begin
- *
- * type: 需要拦截的类
- * methld: 需要拦截的方法
- * args: 方法的参数
- *
  */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target({})
-public @interface MySignature {
-  Class<?> type();
+public class MyPluginException extends PersistenceException {
 
-  String method();
+  private static final long serialVersionUID = 8548771664564998595L;
 
-  Class<?>[] args();
+  public MyPluginException() {
+    super();
+  }
+
+  public MyPluginException(String message) {
+    super(message);
+  }
+
+  public MyPluginException(String message, Throwable cause) {
+    super(message, cause);
+  }
+
+  public MyPluginException(Throwable cause) {
+    super(cause);
+  }
 }

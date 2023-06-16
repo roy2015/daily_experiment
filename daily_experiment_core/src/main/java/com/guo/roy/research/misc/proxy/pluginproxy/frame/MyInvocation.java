@@ -13,39 +13,42 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package com.guo.roy.research.misc.proxy.plugin.frame;
+package com.guo.roy.research.misc.proxy.pluginproxy.frame;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * @author Clinton Begin
  *
- * 构建拦截器链
+ * 方法调用需要的对象，方法，参数
  */
-public class MyInterceptorChain {
+public class MyInvocation {
 
-  private final List<MyInterceptor> myInterceptors = new ArrayList<MyInterceptor>();
+  private Object target;
+  private Method method;
+  private Object[] args;
 
-    /**
-     * 层层代理
-     * @param target
-     * @return
-     */
-  public Object pluginAll(Object target) {
-    for (MyInterceptor myInterceptor : myInterceptors) {
-      target = myInterceptor.plugin(target);
-    }
+  public MyInvocation(Object target, Method method, Object[] args) {
+    this.target = target;
+    this.method = method;
+    this.args = args;
+  }
+
+  public Object getTarget() {
     return target;
   }
 
-  public void addInterceptor(MyInterceptor myInterceptor) {
-    myInterceptors.add(myInterceptor);
+  public Method getMethod() {
+    return method;
   }
-  
-  public List<MyInterceptor> getMyInterceptors() {
-    return Collections.unmodifiableList(myInterceptors);
+
+  public Object[] getArgs() {
+    return args;
+  }
+
+  public Object proceed() throws InvocationTargetException, IllegalAccessException {
+    return method.invoke(target, args);
   }
 
 }

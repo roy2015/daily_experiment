@@ -1,4 +1,4 @@
-package com.guo.roy.research.misc.proxy.plugin;
+package com.guo.roy.research.misc.proxy.pluginproxy;
 
 import java.util.List;
 import java.util.Properties;
@@ -6,7 +6,7 @@ import java.util.Properties;
 import org.slf4j.LoggerFactory;
 
 import com.guo.roy.research.misc.proxy.Warship;
-import com.guo.roy.research.misc.proxy.plugin.frame.*;
+import com.guo.roy.research.misc.proxy.pluginproxy.frame.*;
 
 /**
  * @author guojun

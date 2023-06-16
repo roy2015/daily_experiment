@@ -13,23 +13,28 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package com.guo.roy.research.misc.proxy.plugin.frame;
+package com.guo.roy.research.misc.proxy.pluginproxy.frame;
 
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
  * @author Clinton Begin
- * Signature数组，表示拦截器可以拦多个类/方法
+ *
+ * type: 需要拦截的类
+ * methld: 需要拦截的方法
+ * args: 方法的参数
  *
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface MyIntercepts {
-  MySignature[] value();
-}
+@Target({})
+public @interface MySignature {
+  Class<?> type();
 
+  String method();
+
+  Class<?>[] args();
+}

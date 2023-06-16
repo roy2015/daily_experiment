@@ -13,30 +13,19 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package com.guo.roy.research.misc.proxy.plugin.frame;
+package com.guo.roy.research.misc.proxy.pluginproxy.frame;
 
-import org.apache.ibatis.exceptions.PersistenceException;
+import java.util.Properties;
 
 /**
  * @author Clinton Begin
  */
-public class MyPluginException extends PersistenceException {
+public interface MyInterceptor {
 
-  private static final long serialVersionUID = 8548771664564998595L;
+  Object intercept(MyInvocation myInvocation) throws Throwable;
 
-  public MyPluginException() {
-    super();
-  }
+  Object plugin(Object target);
 
-  public MyPluginException(String message) {
-    super(message);
-  }
+  void setProperties(Properties properties);
 
-  public MyPluginException(String message, Throwable cause) {
-    super(message, cause);
-  }
-
-  public MyPluginException(Throwable cause) {
-    super(cause);
-  }
 }

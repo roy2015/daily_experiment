@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2015 the original author or authors.
+ *    Copyright 2009-2016 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -13,19 +13,23 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package com.guo.roy.research.misc.proxy.plugin.frame;
+package com.guo.roy.research.misc.proxy.pluginproxy.frame;
 
-import java.util.Properties;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Clinton Begin
+ * Signature数组，表示拦截器可以拦多个类/方法
+ *
  */
-public interface MyInterceptor {
-
-  Object intercept(MyInvocation myInvocation) throws Throwable;
-
-  Object plugin(Object target);
-
-  void setProperties(Properties properties);
-
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface MyIntercepts {
+  MySignature[] value();
 }
+

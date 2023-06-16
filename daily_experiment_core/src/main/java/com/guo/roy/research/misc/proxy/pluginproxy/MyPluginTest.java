@@ -1,8 +1,11 @@
-package com.guo.roy.research.misc.proxy;
+package com.guo.roy.research.misc.proxy.pluginproxy;
 
-import com.guo.roy.research.misc.proxy.plugin.SeawayMyInterceptor;
-import com.guo.roy.research.misc.proxy.plugin.WarFireMyInterceptor;
-import com.guo.roy.research.misc.proxy.plugin.frame.MyInterceptorChain;
+import com.guo.roy.research.misc.proxy.AircraftCarrier;
+import com.guo.roy.research.misc.proxy.Destroyer;
+import com.guo.roy.research.misc.proxy.Warship;
+import com.guo.roy.research.misc.proxy.pluginproxy.SeawayMyInterceptor;
+import com.guo.roy.research.misc.proxy.pluginproxy.WarFireMyInterceptor;
+import com.guo.roy.research.misc.proxy.pluginproxy.frame.MyInterceptorChain;
 
 /**
  *
@@ -15,13 +18,15 @@ public class MyPluginTest {
 
     static class Solution {
         public void testMyPlugin() {
+            //拦截器chain
             MyInterceptorChain chain = new MyInterceptorChain();
+            //新增两个拦截器
             chain.addInterceptor(new SeawayMyInterceptor(27));
             chain.addInterceptor(new WarFireMyInterceptor(1));
 
             Warship warship1 = new AircraftCarrier("山东舰");
             Warship warship2 = new Destroyer("055");
-
+            //代理目标对象
             warship1 = (Warship) chain.pluginAll(warship1);
             warship2 = (Warship) chain.pluginAll(warship2);
 

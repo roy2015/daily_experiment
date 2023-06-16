@@ -34,54 +34,7 @@ public class JdkDynamicProxyTest {
                 new Class[]{Warship.class}, handler);
     }
 
-    /**
-     * 获取代理中invocationHandler里的属性
-     */
-    public void test2() {
-        Warship warship = JdkDynamicProxyTest.newProxyInstance(new BaseInvocationHandler(new AircraftCarrier("辽宁舰")));
-        //获取proxy所使用的InvocationHandler
-        BaseInvocationHandler warProxy = (BaseInvocationHandler)Proxy.getInvocationHandler(warship);
-        try  {
-            Field warship1 = warProxy.getClass().getDeclaredField("warship");
-            warship1.setAccessible(true);
-            Object o = warship1.get(warProxy);
-            logger.info("{}", o);
 
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void test1() {
-        Warship warship = JdkDynamicProxyTest.newProxyInstance(new BaseInvocationHandler(new AircraftCarrier("辽宁舰")));
-        logger.info("{}",AopUtils.isAopProxy(warship));
-
-        warship.fire(1);
-
-        Warship warship1 = JdkDynamicProxyTest.newProxyInstance(new BaseInvocationHandler(new Destroyer("055")));
-        warship1.fire(2);
-    }
-
-    public void test3 () {
-        SeawayAlarmer.SeawayAlarmerBuilder seawayBuilder1 = new SeawayAlarmer.SeawayAlarmerBuilder().methodName("seaway").limitSpeed(27);
-        SeawayAlarmer.SeawayAlarmerBuilder seawayBuilder2 = new SeawayAlarmer.SeawayAlarmerBuilder().methodName("seaway").limitSpeed(27);
-        Warship warship1 = JdkDynamicProxyTest.newProxyInstance(seawayBuilder1.warship(new AircraftCarrier("辽宁舰") ).build());
-        Warship warship2 = JdkDynamicProxyTest.newProxyInstance(seawayBuilder2.warship(new Destroyer("055")).build());
-        for (int i = 1; i < 10; i++) {
-            warship1.seaway(20 + i);
-            warship2.seaway(25 + i);
-        }
-        warship1.fire(1);
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        JdkDynamicProxyTest jdkDynamicProxyTest = new JdkDynamicProxyTest();
-        jdkDynamicProxyTest.test1();
-//        jdkDynamicProxyTest.test2();
-//        jdkDynamicProxyTest.test3();
-    }
 
 
     /**
@@ -165,5 +118,54 @@ public class JdkDynamicProxyTest {
 
         }
 
+    }
+
+    /**
+     * 获取代理中invocationHandler里的属性
+     */
+    public void test2() {
+        Warship warship = JdkDynamicProxyTest.newProxyInstance(new BaseInvocationHandler(new AircraftCarrier("辽宁舰")));
+        //获取proxy所使用的InvocationHandler
+        BaseInvocationHandler warProxy = (BaseInvocationHandler)Proxy.getInvocationHandler(warship);
+        try  {
+            Field warship1 = warProxy.getClass().getDeclaredField("warship");
+            warship1.setAccessible(true);
+            Object o = warship1.get(warProxy);
+            logger.info("{}", o);
+
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void test1() {
+        Warship warship = JdkDynamicProxyTest.newProxyInstance(new BaseInvocationHandler(new AircraftCarrier("辽宁舰")));
+        logger.info("{}",AopUtils.isAopProxy(warship));
+
+        warship.fire(1);
+
+        Warship warship1 = JdkDynamicProxyTest.newProxyInstance(new BaseInvocationHandler(new Destroyer("055")));
+        warship1.fire(2);
+    }
+
+    public void test3 () {
+        SeawayAlarmer.SeawayAlarmerBuilder seawayBuilder1 = new SeawayAlarmer.SeawayAlarmerBuilder().methodName("seaway").limitSpeed(27);
+        SeawayAlarmer.SeawayAlarmerBuilder seawayBuilder2 = new SeawayAlarmer.SeawayAlarmerBuilder().methodName("seaway").limitSpeed(27);
+        Warship warship1 = JdkDynamicProxyTest.newProxyInstance(seawayBuilder1.warship(new AircraftCarrier("辽宁舰") ).build());
+        Warship warship2 = JdkDynamicProxyTest.newProxyInstance(seawayBuilder2.warship(new Destroyer("055")).build());
+        for (int i = 1; i < 10; i++) {
+            warship1.seaway(20 + i);
+            warship2.seaway(25 + i);
+        }
+        warship1.fire(1);
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        JdkDynamicProxyTest jdkDynamicProxyTest = new JdkDynamicProxyTest();
+        jdkDynamicProxyTest.test1();
+//        jdkDynamicProxyTest.test2();
+//        jdkDynamicProxyTest.test3();
     }
 }
