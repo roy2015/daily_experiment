@@ -1,0 +1,9 @@
+FROM registry.cn-zhangjiakou.aliyuncs.com/yunli_mid_platform/amazoncorretto:11-alpine
+ARG JAVA_OPTS
+
+ENV TZ=Asia/Shanghai JAVA_OPTS=$JAVA_OPTS
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+COPY target/daily_experiment_core-1.0-SNAPSHOT-jar-with-dependencies.jar /home
+ENTRYPOINT [ "sh", "-c", "java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom  -jar /home/daily_experiment_core-1.0-SNAPSHOT-jar-with-dependencies.jar" ]

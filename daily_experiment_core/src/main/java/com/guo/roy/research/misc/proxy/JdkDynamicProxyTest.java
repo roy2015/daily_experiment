@@ -142,6 +142,11 @@ public class JdkDynamicProxyTest {
 
     public void test1() {
         Warship warship = JdkDynamicProxyTest.newProxyInstance(new BaseInvocationHandler(new AircraftCarrier("辽宁舰")));
+        if (warship instanceof AircraftCarrier) {
+            logger.info("yes");
+        } else {
+            logger.info("false");
+        }
         logger.info("{}",AopUtils.isAopProxy(warship));
 
         warship.fire(1);
