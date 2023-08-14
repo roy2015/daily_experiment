@@ -1,12 +1,8 @@
-package com.guo.roy.research.misc.arithmetic.cipher;
+package com.guo.roy.research.misc.yunli.dataplatform;
 
 import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
-import java.security.KeyStore;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
 
 import javax.crypto.Cipher;
 
@@ -39,7 +35,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2022/8/17 16:30
  */
 @Slf4j
-public class TestPfxPriPubKey {
+public class TestGenPfxAuthentication {
     /**
      * 生成pfx证书步骤：
      * 1.生成key文件 openssl genrsa -out openssl.key 2048
@@ -103,22 +99,27 @@ public class TestPfxPriPubKey {
             try {
                 Cipher cipher = Cipher.getInstance("RSA");
                 cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-                byte[] bytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+                byte[] bytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));//256 bytes,2048 bits
                 // encode base64
-                return Base64.encodeBase64String(bytes);
+                return Base64.encodeBase64String(bytes);//344 bytes
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
                 return null;
             }
         }
 
+        /**
+         * SHA-256散列
+         * @param string
+         * @return
+         */
         public String getSHA256String(String string) {
             MessageDigest messageDigest;
             String temp = "";
             try {
                 messageDigest = MessageDigest.getInstance("SHA-256");
-                byte[] hash = messageDigest.digest(string.getBytes(StandardCharsets.UTF_8));
-                temp = Hex.encodeHexString(hash);
+                byte[] hash = messageDigest.digest(string.getBytes(StandardCharsets.UTF_8));//32 bytes, 256 bits
+                temp = Hex.encodeHexString(hash);//length of temp is 64
             } catch (NoSuchAlgorithmException e) {
                 log.error(e.getMessage(), e);
             }

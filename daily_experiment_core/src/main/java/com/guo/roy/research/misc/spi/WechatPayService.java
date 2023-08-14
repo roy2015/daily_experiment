@@ -1,5 +1,6 @@
 package com.guo.roy.research.misc.spi;
 
+import com.alibaba.dubbo.common.URL;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -13,4 +14,11 @@ public class WechatPayService implements PayService {
     public void pay() {
         logger.debug("微信支付");
     }
+
+    @Override
+    public void adpPay(URL url) {
+        logger.debug("adaptive微信支付");
+    }
+
+
 }

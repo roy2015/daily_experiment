@@ -1,5 +1,6 @@
 package com.guo.roy.research.misc.spi;
 
+import com.alibaba.dubbo.common.URL;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -12,5 +13,10 @@ public class AlipayService implements PayService {
     @Override
     public void pay() {
         logger.debug("支付宝支付");
+    }
+
+    @Override
+    public void adpPay(URL url) {
+        logger.debug("adaptive支付宝支付");
     }
 }

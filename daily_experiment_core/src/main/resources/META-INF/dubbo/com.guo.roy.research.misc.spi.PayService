@@ -1,0 +1,2 @@
+alipay=com.guo.roy.research.misc.spi.AlipayService
+wechat=com.guo.roy.research.misc.spi.WechatPayService

@@ -25,6 +25,7 @@
         <jackson-databind.version>2.9.10.8</jackson-databind.version>
         <jackson-annotations.version>2.9.0</jackson-annotations.version>
         <jackson-core.version>2.9.6</jackson-core.version>
+        <jwt.version>0.9.1</jwt.version>
     </properties>
 
     <dependencyManagement>

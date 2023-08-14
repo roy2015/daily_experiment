@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
  * a b c d null     d c b a null
  * 面试题 链表 A B C D 转换成 逆序 链表  D C B A
  *
- * 反转一个单链表。
+ * 反转一个单链表。链表逆序输出
 
  示例:
 

@@ -8,6 +8,28 @@ import org.slf4j.LoggerFactory;
  * Created by apple on 2019/1/29.
  *
  * 位运算测试
+ * java位运算有：
+ *
+ * 与运算（&）：对两个操作数的每一位执行与操作，结果中的每一位都是两个操作数对应位的与结果。
+ * 示例：int result = num1 & num2;
+ *
+ * 或运算（|）：对两个操作数的每一位执行或操作，结果中的每一位都是两个操作数对应位的或结果。
+ * 示例：int result = num1 | num2;
+ *
+ * 异或运算（^）：对两个操作数的每一位执行异或操作，结果中的每一位都是两个操作数对应位的异或结果。
+ * 示例：int result = num1 ^ num2;
+ *
+ * 取反运算（~）：对操作数的每一位执行取反操作，即0变成1，1变成0。
+ * 示例：int result = ~num;
+ *
+ * 左移运算（<<）：将操作数的二进制表示向左移动指定的位数，空位用0填充。
+ * 示例：int result = num << 2;
+ *
+ * 右移运算（>>）：将操作数的二进制表示向右移动指定的位数，正数高位用0填充，负数高位用1填充。
+ * 示例：int result = num >> 2;
+ *
+ * 无符号右移运算（>>>）：将操作数的二进制表示向右移动指定的位数，高位用0填充。
+ * 示例：int result = num >>> 2;
  *
  */
 public class TestBitOps {
@@ -93,10 +115,33 @@ public class TestBitOps {
 
     }
 
+    /**
+     * 无符号右移
+     */
+    public void test6() {
+        int h;
+        Integer a = 3;
+        logger.debug(String.format("hashMap的hash运算: (h = Integer.valueOf(a).hashCode()) ^ (h >>> 16))=\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t %s" ,
+                StringUtils.leftPad(Integer.toBinaryString( (h = Integer.valueOf(a).hashCode()) ^ (h >>> 16)), 32, "0")));
+
+        logger.debug(" MIN_VALUE:{}", getPrettyBinaryString(Integer.MIN_VALUE));
+        logger.debug("-3:        {}", getPrettyBinaryString(-3));
+        logger.debug("-3 >>> 16: {}", getPrettyBinaryString((-3) >>> 16));
+    }
+
+    /**
+     * 给定int的二进制pretty表示
+     * @param origin
+     * @return
+     */
+    public String getPrettyBinaryString(int origin) {
+        return StringUtils.leftPad( Integer.toBinaryString(origin), 32, "0");
+    }
+
     public static void main(String[] args) {
 //      new TestBitOps().test3();
 //        new TestBitOps().test4();
-        new TestBitOps().test5();
+        new TestBitOps().test6();
 
     }
 }

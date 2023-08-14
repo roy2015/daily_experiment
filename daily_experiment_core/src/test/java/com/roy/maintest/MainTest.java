@@ -78,6 +78,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -549,8 +550,12 @@ public class MainTest {
         userVOS.add(userVO4);
 
         // 抛异常，map.merge（）的 value不为空
-        Map<Integer, String> userMap = userVOS.stream().collect(Collectors.toMap(userVO -> userVO.getUserId(),
-                userVO -> userVO.getUserName()));
+        Map<Integer, String> userMap = userVOS.stream()
+                .collect(
+                        Collectors.toMap(
+                                userVO -> userVO.getUserId(),
+                                userVO -> userVO.getUserName())
+                );
         int k = 3;
 
     }
@@ -562,7 +567,7 @@ public class MainTest {
     public void testCollectorToMap2() {
         UserVO userVO1 = new UserVO(1, "guo", "f");
         UserVO userVO2 = new UserVO(2, "g", "f");
-        UserVO userVO3 = new UserVO(2, "j", "f");
+        UserVO userVO3 = new UserVO(2, "null", "f");
         UserVO userVO4 = new UserVO(3, "guo", "f");
         UserVO userVO5 = new UserVO(4, null, "f");
 
@@ -572,19 +577,27 @@ public class MainTest {
         userVOS.add(userVO3);
         userVOS.add(userVO4);
         userVOS.add(userVO5);
-        Map<Integer, String> map = userVOS.stream().collect(Collectors.toMap(UserVO::getUserId, item -> item.getUserName(), (v1, v2) -> v2));
+        Map<Integer, String> map = userVOS
+                .stream()
+                .collect(
+                        Collectors.toMap(
+                        UserVO::getUserId,
+                        item -> item.getUserName(),
+                        (v1, v2) -> v2)
+                );
         logger.info("{}", map);
     }
 
 
     /**
      * 测试jdk8 stream toMap  唯一正确写法
+     * toMap 重复的key会覆盖
      */
     @Test
     public void testCollectorToMap() {
         UserVO userVO1 = new UserVO(1, "guo", "f");
         UserVO userVO2 = new UserVO(2, "guo", "f");
-        UserVO userVO3 = new UserVO(2, null, "f");
+        UserVO userVO3 = new UserVO(2, "null", "f");
         UserVO userVO4 = new UserVO(3, "guo", "f");
 
         List<UserVO> userVOS = new ArrayList<>();
@@ -601,6 +614,46 @@ public class MainTest {
 
     }
 
+    /**
+     * merge时value不能为NULL
+     */
+    @Test
+    public void testHashMapMerge() {
+        Map<Integer, String> userIdNameMap = new HashMap<>();
+        userIdNameMap.put(1, "1");
+        userIdNameMap.merge(1, null, (v1, v2) -> v2);
+        int i =1;
+    }
+
+    /**
+     * putAll可以merge value为NULL的数据
+     */
+    @Test
+    public void testHashMapPutAll() {
+        Map<Integer, String> userIdNameMap1 = new HashMap<>();
+        userIdNameMap1.put(1, "1");
+
+        Map<Integer, String> userIdNameMap2 = new HashMap<>();
+        userIdNameMap2.put(1, null);
+        userIdNameMap1.putAll(userIdNameMap2);
+        int i =1;
+    }
+
+    /**
+     * hashMap key 和value都可以为空
+     * concurrentHashMap 都不许为空
+     */
+    @Test
+    public void testHashMapKeyValNull() {
+        Map<Integer, String> userIdNameMap1 = new HashMap<>();
+        userIdNameMap1.put(null, "1");
+        userIdNameMap1.put(null, null);
+        int i =1;
+
+        Map<Integer, String> concurrentHashMap = new ConcurrentHashMap<>();
+        concurrentHashMap.put(null, "1");
+        concurrentHashMap.put(1, null);
+    }
 
 
 
@@ -1066,5 +1119,21 @@ public class MainTest {
     public  void testInt() {
         Integer a=127,b=127,c=128,d=128;
         logger.info("{}, {}", a==b, c==d);
+    }
+
+    /**
+     * 找离给定数字的最小的2的幂
+     */
+    @Test
+    public void testResize() {
+        int n = 65538;
+        int MAXIMUM_CAPACITY = 1 << 30;
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        int size = ( (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1 );
+        logger.info("{}",size);
     }
 }

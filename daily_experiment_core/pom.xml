@@ -383,6 +383,11 @@
             <version>3.6.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
