@@ -2,7 +2,6 @@ package com.guo.roy.research.interview;
 
 import lombok.SneakyThrows;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -12,13 +11,13 @@ import java.util.concurrent.locks.ReentrantLock;
  * 面试题目 两个线程A,B  A负责12,34,56  B负责ABC..Z
  *  * 交替输出 12A34B56C78D910E....5152Z
  *
- *  采用ReentrantLock Condition
+ *  采用ReentrantLock 和两个Condition
  *
  *
  * @author guojun
  * @date 2023/7/15 11:03
  */
-public class ShowmeBug {
+public class TestPrint12A5152z_1 {
     private ReentrantLock lock = new ReentrantLock();
     private Condition conditionA = lock.newCondition();
     private Condition conditionB = lock.newCondition();
@@ -100,6 +99,6 @@ public class ShowmeBug {
 
 
     public static void main(String[] args) throws InterruptedException {
-        new ShowmeBug().main();
+        new TestPrint12A5152z_1().main();
     }
 }

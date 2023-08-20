@@ -1,4 +1,4 @@
-package com.guo.roy.research.misc.arithmetic.cipher;
+package com.guo.roy.research.misc.cryptography.cipher;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * Created by apple on 2019/9/26.
  *
- * Cipher的工具类， 列举providers的所以service
+ * Cipher的工具类， 列举providers的所有service
  */
 public class TestCipher {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestDES3.class);

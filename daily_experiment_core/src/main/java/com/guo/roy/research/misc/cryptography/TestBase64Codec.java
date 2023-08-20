@@ -1,4 +1,4 @@
-package com.guo.roy.research.misc.arithmetic;
+package com.guo.roy.research.misc.cryptography;
 
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.LoggerFactory;

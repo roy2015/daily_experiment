@@ -9,8 +9,10 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @author guojun
  * @date 2023/7/15 11:03
+ *
+ * synchronized + wait + notify
  */
-public class ShowmeBug1 {
+public class TestPrint12A5152z_0 {
     private ReentrantLock lock = new ReentrantLock();
 
     private static volatile StringBuffer output = new StringBuffer();
@@ -48,16 +50,16 @@ public class ShowmeBug1 {
     }
 
     public void main() throws InterruptedException {
-        ShowmeBug1 showmeBug1 = new ShowmeBug1();
-        new Thread(() -> showmeBug1.printA()).start();
+        TestPrint12A5152z_0 testPrint12A5152z0 = new TestPrint12A5152z_0();
+        new Thread(() -> testPrint12A5152z0.printA()).start();
         TimeUnit.MILLISECONDS.sleep(10);//让第一个线程先执行
-        new Thread(() -> showmeBug1.printB()).start();
+        new Thread(() -> testPrint12A5152z0.printB()).start();
         TimeUnit.SECONDS.sleep(3);//等待三秒获取输出结果
-        System.out.println(ShowmeBug1.output.toString());
+        System.out.println(TestPrint12A5152z_0.output.toString());
     }
 
     public static void main(String[] args) throws InterruptedException {
-        new ShowmeBug1().main();
+        new TestPrint12A5152z_0().main();
 
     }
 }
