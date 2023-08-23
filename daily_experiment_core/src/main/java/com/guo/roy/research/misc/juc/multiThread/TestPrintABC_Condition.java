@@ -18,8 +18,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author guojun
  * @date 2023/3/27
  */
-public class TestCondition4PrintABC {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestCondition4PrintABC.class);
+public class TestPrintABC_Condition {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestPrintABC_Condition.class);
 
 
     public Lock lock = new ReentrantLock();
@@ -139,7 +139,7 @@ public class TestCondition4PrintABC {
 
 
     public static void main(String[] args) throws InterruptedException {
-        new TestCondition4PrintABC().test();
+        new TestPrintABC_Condition().test();
         TimeUnit.SECONDS.sleep(10);
     }
 }

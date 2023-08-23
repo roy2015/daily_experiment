@@ -270,11 +270,6 @@ public class MainTest {
     }
 
     @Test
-    public void testOddEvenPrint() throws IOException {
-        new TestOddEvenPrint(10).testOddEvenPrin();
-    }
-
-    @Test
     public void testSemaphore() throws IOException {
         TestSemaphore.main(null);
     }

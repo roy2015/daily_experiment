@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 交替输出奇偶
+ * 交替输出奇偶 ,两个线程不限定谁输出奇，谁输出偶，只要求交替即可
  *
  */
 public class TestOddEvenPrint {
@@ -22,23 +22,6 @@ public class TestOddEvenPrint {
 
     public TestOddEvenPrint(int limit) {
         this.limit = limit;
-    }
-
-    /**
-     * 第一个线程把活儿全干了
-     * @param threadName
-     * @throws InterruptedException
-     */
-    public void printOddEven_1(String threadName) throws InterruptedException {
-        logger.info("{}进入",threadName);
-        try {
-            MY_LOCK.lock();
-            while (printVar < limit) {
-                logger.debug("{}：{}", threadName,  ++ printVar);
-            }
-        } finally {
-            MY_LOCK.unlock();
-        }
     }
 
     /**
@@ -60,7 +43,7 @@ public class TestOddEvenPrint {
         }
     }
 
-    public void testOddEvenPrin() throws IOException {
+    public void testOddEvenPrin() throws IOException, InterruptedException {
         TestOddEvenPrint oddEvenPrint = new TestOddEvenPrint(10);
 
         Thread thread1 = new Thread(new Runnable() {
@@ -89,7 +72,12 @@ public class TestOddEvenPrint {
         thread1.start();
         thread2.start();
 
-        System.in.read();
+        thread1.join();
+        thread2.join();
+    }
+
+    public static void main(String[] args) throws Exception {
+        new TestOddEvenPrint(10).testOddEvenPrin();
     }
 
 }

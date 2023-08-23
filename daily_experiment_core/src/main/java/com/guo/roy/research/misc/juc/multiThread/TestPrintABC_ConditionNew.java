@@ -17,8 +17,8 @@ import lombok.Data;
  * @author guojun
  * @date 2023/3/27
  */
-public class TestCondition4PrintABCNew {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestCondition4PrintABCNew.class);
+public class TestPrintABC_ConditionNew {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestPrintABC_ConditionNew.class);
 
 
     public Lock lock = new ReentrantLock();
@@ -139,7 +139,7 @@ public class TestCondition4PrintABCNew {
 
 
     public static void main(String[] args) throws InterruptedException {
-        new TestCondition4PrintABCNew().test();
+        new TestPrintABC_ConditionNew().test();
         TimeUnit.SECONDS.sleep(5);
     }
 }

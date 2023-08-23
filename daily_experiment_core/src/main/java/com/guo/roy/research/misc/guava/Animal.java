@@ -1,4 +1,4 @@
-package com.guo.roy.research.misc.guava.event;
+package com.guo.roy.research.misc.guava;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
