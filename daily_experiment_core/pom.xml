@@ -433,7 +433,7 @@
                 </configuration>
             </plugin>
 
-            <!-- 测试打包jar并指定MainClass start -->
+            <!-- 测试打包jar并指定MainClass start 给docker 打镜像用 -->
             <!--<plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
