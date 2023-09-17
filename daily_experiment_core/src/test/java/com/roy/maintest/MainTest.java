@@ -672,6 +672,24 @@ public class MainTest {
 
     }
 
+    /**
+     * 统计两行句子里字符出现的次数
+     */
+    @Test
+    public void testGroupingByCount() {
+        String[] strArray = {"guo jun is a man", "you are a man"};
+
+        Map<Character, Long> frequencyMap = Arrays.stream(strArray)
+                .flatMapToInt(String::chars)
+                .mapToObj(x -> (char) x)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        for (Map.Entry<Character, Long> entry : frequencyMap.entrySet()) {
+            logger.info("{}, {}", entry.getKey(), entry.getValue());
+        }
+
+    }
+
     @Test
     public void testMapNullKey() {
         HashMap<String, String> map = new HashMap<>();
