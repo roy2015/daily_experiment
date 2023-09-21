@@ -94,13 +94,30 @@ public class TestSolution198 {
 
         }
 
+        public int rob20230921(int[] nums) {
+            int lastRobbedNum = 0;
+            int lastNoRobbedNum = 0;
+            int noRobbedNum = 0;
+            int robbedNum = 0;
+
+            for (int num : nums) {
+                noRobbedNum = Math.max(lastNoRobbedNum, lastRobbedNum);
+                robbedNum = lastNoRobbedNum + num;
+                lastNoRobbedNum = noRobbedNum;
+                lastRobbedNum = robbedNum;
+            }
+
+            return Math.max(noRobbedNum, robbedNum);
+
+        }
+
     }
 
     public static void main(String[] args) {
-        logger.info("{}", new Solution().rob20120109(new int[]{2}));//2
-        logger.info("{}", new Solution().rob20120109(new int[]{1,2}));//2
-        logger.info("{}", new Solution().rob20120109(new int[]{2,1,1,2}));//4
-        logger.info("{}", new Solution().rob20120109(new int[]{1,2,3,1}));//4
-        logger.info("{}", new Solution().rob20120109(new int[]{2,7,9,3,1}));//12
+        logger.info("{}", new Solution().rob20230921(new int[]{2}));//2
+        logger.info("{}", new Solution().rob20230921(new int[]{1,2}));//2
+        logger.info("{}", new Solution().rob20230921(new int[]{2,1,1,2}));//4
+        logger.info("{}", new Solution().rob20230921(new int[]{1,2,3,1}));//4
+        logger.info("{}", new Solution().rob20230921(new int[]{2,7,9,3,1}));//12
     }
 }
