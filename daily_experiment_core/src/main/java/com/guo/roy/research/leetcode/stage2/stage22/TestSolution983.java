@@ -2,6 +2,9 @@ package com.guo.roy.research.leetcode.stage2.stage22;
 
 import org.slf4j.LoggerFactory;
 
+import java.util.BitSet;
+import java.util.HashMap;
+
 /**
  * @author guojun
  * @date 2020/8/12
@@ -104,18 +107,71 @@ public class TestSolution983 {
             }
             return dp[minDay];
         }
+
+        /**
+         *
+         * 从前往后dp，和上面的相反
+         * dp[i]表示旅游到i天需要的最少票价
+         * @param days
+         * @param costs
+         * @return
+         */
+        public int mincostTickets20230923 (int[] days, int[] costs) {
+            int[] dp = new int[days.length + 1];
+
+            BitSet bitSet = new BitSet(365);
+            HashMap<Integer, Integer> hashMap = new HashMap<>();
+            hashMap.put(0,0);
+            for (int i = 0; i < days.length; i++) {
+                bitSet.set(days[i]);
+                hashMap.put(days[i],i +1);
+            }
+
+            for (int i = 1; i < dp.length; i++) {
+                int day = days[i-1];
+                int oneDay, weekDay,monthDay;
+                oneDay = dp[findNearestSmallEl(bitSet, day, hashMap)] + costs[0];//一天
+                if ((day - 6) < 0) {
+                    weekDay = dp[0] + costs[1];
+                } else {
+                    weekDay = dp[findNearestSmallEl(bitSet, day - 6, hashMap)] + costs[1];
+                }
+
+                if ((day - 29) < 0) {
+                    monthDay = dp[0] + costs[2];
+                } else {
+                    monthDay = dp[findNearestSmallEl(bitSet, day - 29, hashMap)] + costs[2];
+                }
+                dp[i] = Math.min(Math.min(oneDay,weekDay), monthDay);
+            }
+            return dp[days.length];
+
+        }
+
+        //返回最近的小于target且存在在bitset里的元素
+        public int findNearestSmallEl(BitSet bitSet, int target, HashMap<Integer,Integer> map) {
+            if (target <= 1) {
+                return 0;
+            }
+            for (int i = target -1; i > 0 ; i--) {
+                if (bitSet.get(i)) {
+                    return map.get(i);
+                }
+            }
+            return 0;
+        }
     }
 
     public static void main(String[] args) {
-        logger.info("{}", new Solution().mincostTickets(
+        logger.info("{}", new Solution().mincostTickets20230923(
                 new int[]{6,8,9,18,20,21,23,25},
                 new  int[]{2,10,41}));//16
 
-        logger.info("{}", new Solution().mincostTickets(
+        logger.info("{}", new Solution().mincostTickets20230923(
                 new int[]{1,4,6,7,8,20},
                 new  int[]{2,7,15}));//11
 
-        logger.info("{}", new Solution().mincostTickets(
+        logger.info("{}", new Solution().mincostTickets20230923(
                 new int[]{1,2,3,4,5,6,7,8,9,10,30,31},
                 new  int[]{2,7,15}));//17
     }

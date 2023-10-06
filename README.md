@@ -7,3 +7,6 @@
 3. 目前用的是testNG
 4. 引入第三方包是注意不要级联引入一堆的包！
 
+玩贪吃蛇游戏
+cd /Users/apple/guojun/code/github/exercise/daily_experiment/daily_experiment_core
+mvn exec:java -Dexec.mainClass="com.guo.roy.research.game.Main"
