@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
  * @author guojun
  * @date 2021/6/11
  */
-public class TestSolutionTemplate {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestSolutionTemplate.class);
+public class TestTemplate {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestTemplate.class);
 
 
     static class Solution {
