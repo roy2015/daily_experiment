@@ -42,7 +42,6 @@ public class TestReturnCatchFinally {
                 return testVO;
             } finally {
                 testVO.setField1("11");
-                return new TestVO();
             }
 
         }

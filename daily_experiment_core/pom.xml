@@ -93,25 +93,19 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.0</version>
         </dependency>
+        <!-- logback -->
         <!--<dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>1.1.7</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.1.7</version>
-            <scope>test</scope>
         </dependency>-->
 
         <!-- log4j2 start -->
-        <!--<dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.21</version>
-        </dependency>-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -394,6 +388,13 @@
             <artifactId>squirrel-foundation</artifactId>
             <version>0.3.10</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>2.14.0</version> <!-- 请根据您的需求更新版本号 -->
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -440,32 +441,32 @@
             </plugin>
 
             <!-- 测试打包jar并指定MainClass start 给docker 打镜像用 -->
-            <!--<plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.guo.roy.research.testing.DeadlockDemo</mainClass>
-                        </manifest>
-                    </archive>
+<!--            <plugin>-->
+<!--                <artifactId>maven-assembly-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--                            <mainClass>com.guo.roy.research.testing.DeadlockDemo</mainClass>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
 
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
+<!--                    <descriptorRefs>-->
+<!--                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
+<!--                    </descriptorRefs>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>make-assembly</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>single</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <!-- 测试打包jar并指定MainClass end-->
 
-<!--            &lt;!&ndash; 测试javaagent 不用时去掉 &ndash;&gt;-->
+            <!-- 测试javaagent 不用时去掉 -->
 <!--            <plugin>-->
 <!--                <artifactId>maven-assembly-plugin</artifactId>-->
 <!--                <configuration>-->
@@ -503,7 +504,7 @@
 <!--                    </archive>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
-<!--            &lt;!&ndash; end agent &ndash;&gt;-->
+            <!-- end agent -->
 
         </plugins>
     </build>
